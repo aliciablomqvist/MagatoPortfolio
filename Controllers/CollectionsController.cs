@@ -3,6 +3,7 @@ using MagatoBackend.Models;
 using MagatoBackend.Data;
 using Microsoft.EntityFrameworkCore;
 
+//Testing controller
 [ApiController]
 [Route("api/[controller]")]
 public class CollectionsController : ControllerBase

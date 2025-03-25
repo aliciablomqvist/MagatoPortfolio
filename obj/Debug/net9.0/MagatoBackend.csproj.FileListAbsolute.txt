@@ -163,3 +163,4 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\refin
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\MagatoBackend.pdb
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\MagatoBackend.genruntimeconfig.cache
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\ref\MagatoBackend.dll
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\MagatoBackend.sourcelink.json

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MagatoBackend.Models; 
 
+//Model for Collection
 public class Collection
 {
     public int Id { get; set; }
