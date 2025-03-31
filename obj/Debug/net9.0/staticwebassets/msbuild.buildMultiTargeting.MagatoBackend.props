@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\build\MagatoBackend.props" />
+  <Import Project="..\build\Magato.Api.props" />
 </Project>

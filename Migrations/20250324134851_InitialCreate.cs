@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MagatoBackend.Migrations
+namespace Magato.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

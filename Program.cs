@@ -1,6 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
-using MagatoBackend.Data;
+using Magato.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

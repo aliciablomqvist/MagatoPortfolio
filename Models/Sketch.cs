@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
-namespace MagatoBackend.Models; 
+namespace Magato.Api.Models;
 
 public class Sketch
 {

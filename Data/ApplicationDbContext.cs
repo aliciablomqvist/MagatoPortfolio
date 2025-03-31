@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MagatoBackend.Models;
+using Magato.Api.Models;
 
-namespace MagatoBackend.Data;
+namespace Magato.Api.Data;
 
 public class ApplicationDbContext : DbContext
 {

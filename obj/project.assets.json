@@ -75,9 +75,7 @@
             "related": ".xml"
           }
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       },
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
         "type": "package",
@@ -4781,9 +4779,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\MagatoBackend.csproj",
-      "projectName": "MagatoBackend",
-      "projectPath": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\MagatoBackend.csproj",
+      "projectUniqueName": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\Magato.Api.csproj",
+      "projectName": "Magato.Api",
+      "projectPath": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\Magato.Api.csproj",
       "packagesPath": "C:\\Users\\Stefan\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\obj\\",
       "projectStyle": "PackageReference",
@@ -4795,9 +4793,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
-      "originalTargetFrameworks": [
-        "net9.0"
-      ],
+      "originalTargetFrameworks": ["net9.0"],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
@@ -4809,9 +4805,7 @@
         }
       },
       "warningProperties": {
-        "warnAsError": [
-          "NU1605"
-        ]
+        "warnAsError": ["NU1605"]
       },
       "restoreAuditProperties": {
         "enableAudit": "true",

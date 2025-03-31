@@ -1,7 +1,7 @@
-using ApiTest.DTO;
-using ApiTest.Models;
+using Magato.Api..DTO;
+using Magato.Api..Models;
 
-namespace ApiTest.Services
+namespace Magato.Api..Services
 {
     public interface ICollectionService
     {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MagatoBackend.Migrations
+namespace Magato.Api.Migrations
 {
     /// <inheritdoc />
     public partial class EnvForDb : Migration

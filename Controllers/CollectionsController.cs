@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using MagatoBackend.Models;
-using MagatoBackend.Data;
+using Magato.Api.Models;
+using Magato.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
 //Testing controller
@@ -11,9 +11,9 @@ public class CollectionsController : ControllerBase
     private readonly ApplicationDbContext _context;
     public CollectionsController(ApplicationDbContext context) => _context = context;
 
-[HttpGet]
-     public async Task<ActionResult<IEnumerable<Collection>>> Get() =>
-         await _context.Collections.ToListAsync();
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Collection>>> Get() =>
+             await _context.Collections.ToListAsync();
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Collection>> Get(int id)

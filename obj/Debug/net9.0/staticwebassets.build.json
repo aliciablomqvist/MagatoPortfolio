@@ -1,8 +1,8 @@
 {
   "Version": 1,
   "Hash": "XI7iwwrAycsHguEonos+tQ29gi59sb5dHlI3ED51kfo=",
-  "Source": "MagatoBackend",
-  "BasePath": "_content/MagatoBackend",
+  "Source": "Magato.Api",
+  "BasePath": "_content/Magato.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

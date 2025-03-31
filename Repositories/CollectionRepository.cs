@@ -1,8 +1,8 @@
-using ApiTest.Data;
-using ApiTest.Models;
+using Magato.Api..Data;
+using Magato.Api..Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiTest.Repositories
+namespace Magato.Api.Repositories
 {
     public class CollectionRepository : ICollectionRepository
     {
@@ -61,3 +61,5 @@ namespace ApiTest.Repositories
         }
 
     }
+
+}

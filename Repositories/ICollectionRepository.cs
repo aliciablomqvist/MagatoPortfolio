@@ -1,6 +1,6 @@
-using ApiTest.Models;
+using Magato.Api..Models;
 
-namespace ApiTest.Repositories
+namespace Magato.Api..Repositories
 {
     public interface ICollectionRepository
     {
@@ -12,3 +12,4 @@ namespace ApiTest.Repositories
         Task<bool> CollectionsExistsAsync(int id);
 
     }
+}

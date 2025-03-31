@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace MagatoBackend.Models; 
+namespace Magato.Api.Models;
 
 //Model for Collection
 public class Collection
