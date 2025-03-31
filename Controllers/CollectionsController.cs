@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Magato.Api.Models;
 using Magato.Api.Data;
+using Magato.Api.Services;
+using Magato.Api.DTO;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
@@ -8,8 +10,12 @@ using Microsoft.EntityFrameworkCore;
 public class CollectionsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-    public CollectionsController(ApplicationDbContext context) => _context = context;
-
+    private readonly ICollectionService _service;
+    public CollectionsController(ApplicationDbContext context, ICollectionService service)
+    {
+        _context = context;
+        _service = service;
+    }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Collection>>> Get() =>
              await _context.Collections.ToListAsync();
@@ -70,7 +76,7 @@ public class CollectionsController : ControllerBase
     }
 
     [HttpPut("colors/{colorId}")]
-    public async Task<IActionResult> UpdateColor(int colorId, [FromBody] ColorOptionDto dto)
+    public async Task<IActionResult> UpdateColor(int colorId, [FromBody] ColorDto dto)
     {
         var success = await _service.UpdateColorAsync(colorId, dto);
         return success ? Ok() : NotFound();
