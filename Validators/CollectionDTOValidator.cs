@@ -1,13 +1,14 @@
 using FluentValidation;
-using Magato.Api..DTO;
+using Magato.Api.DTO;
+using FluentValidation.AspNetCore;
 
-namespace Magato.Api..Validators
+namespace Magato.Api.Validators
 {
     public class CollectionDtoValidator : AbstractValidator<CollectionDto>
     {
         public CollectionDtoValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Namn på kollektion krävs.");
+            RuleFor(x => x.CollectionTitle).NotEmpty().WithMessage("Du måste fylla i namn på kollektionen.");
         }
     }
 }

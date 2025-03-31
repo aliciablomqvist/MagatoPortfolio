@@ -1,14 +1,15 @@
-using Magato.Api..Data;
-using Magato.Api..Models;
+
+using Magato.Api.Models;
+using Magato.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Magato.Api.Repositories
 {
     public class CollectionRepository : ICollectionRepository
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CollectionRepository(AppDbContext context)
+        public CollectionRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -18,7 +19,7 @@ namespace Magato.Api.Repositories
             return await _context.Collections
                 .Include(c => c.Colors)
                 .Include(c => c.Materials)
-                .Include(c => c.Images)
+                //.Include(c => c.Images) Hur hantera lookbook och bilder?
                 .Include(c => c.Sketches)
                 .ToListAsync();
         }
@@ -28,7 +29,7 @@ namespace Magato.Api.Repositories
             return await _context.Collections
                 .Include(c => c.Colors)
                 .Include(c => c.Materials)
-                .Include(c => c.Images)
+               // .Include(c => c.Images)
                 .Include(c => c.Sketches)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
@@ -59,6 +60,7 @@ namespace Magato.Api.Repositories
         {
             return await _context.Collections.AnyAsync(c => c.Id == id);
         }
+
 
     }
 

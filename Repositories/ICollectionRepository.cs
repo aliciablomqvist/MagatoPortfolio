@@ -1,6 +1,6 @@
-using Magato.Api..Models;
+using Magato.Api.Models;
 
-namespace Magato.Api..Repositories
+namespace Magato.Api.Repositories
 {
     public interface ICollectionRepository
     {
@@ -9,7 +9,7 @@ namespace Magato.Api..Repositories
         Task AddCollectionAsync(Collection collection);
         Task UpdateCollectionAsync(Collection collection);
         Task DeleteCollectionAsync(int id);
-        Task<bool> CollectionsExistsAsync(int id);
-
+        Task<bool> CollectionExistsAsync(int id);
     }
+
 }

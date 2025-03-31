@@ -1,8 +1,8 @@
-using Magato.Api..DTO;
-using Magato.Api..Models;
-using Magato.Api..Repositories;
+using Magato.Api.DTO;
+using Magato.Api.Models;
+using Magato.Api.Repositories;
 
-namespace Magato.Api..Services
+namespace Magato.Api.Services
 {
     public class CollectionService : ICollectionService
     {
@@ -25,7 +25,7 @@ namespace Magato.Api..Services
 
         public async Task AddCollectionAsync(CollectionDto dto)
         {
-            var collection = new Collection { Name = dto.Name };
+            var collection = new Collection { CollectionTitle = dto.CollectionTitle };
             await _repo.AddCollectionAsync(collection);
         }
 
@@ -34,7 +34,7 @@ namespace Magato.Api..Services
             var existing = await _repo.GetCollectionByIdAsync(id);
             if (existing == null) return false;
 
-            existing.Name = dto.Name;
+            existing.CollectionTitle = dto.CollectionTitle;
             await _repo.UpdateCollectionAsync(existing);
             return true;
         }
@@ -48,4 +48,11 @@ namespace Magato.Api..Services
             return true;
 
         }
+
+        public async Task<bool> CollectionExistsAsync(int id)
+        {
+            return await _repo.CollectionExistsAsync(id);
+        }
+
     }
+}

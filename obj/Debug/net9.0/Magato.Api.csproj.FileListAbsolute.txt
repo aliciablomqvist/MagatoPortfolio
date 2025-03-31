@@ -1,0 +1,8 @@
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.csproj.AssemblyReference.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.AssemblyInfoInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.AssemblyInfo.cs
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.sourcelink.json
