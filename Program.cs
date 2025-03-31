@@ -7,6 +7,11 @@ using Magato.Api.DTO;
 using Magato.Api.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+
 
 
 
@@ -34,9 +39,24 @@ builder.Services.AddScoped<ICollectionService, CollectionService>();
 // Validators
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CollectionDtoValidator>();
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+//Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magato API", Version = "v1" });
+});
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 
 // Configure the HTTP request pipeline.

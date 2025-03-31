@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "PDUQ6bGZ7waR06kHbZdpooY9cHJtOc+GskZwtheB9rI=",
+  "Source": "Magato.Api",
+  "BasePath": "_content/Magato.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

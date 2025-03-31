@@ -54,5 +54,113 @@ namespace Magato.Api.Services
             return await _repo.CollectionExistsAsync(id);
         }
 
+        public async Task<bool> AddSketchAsync(int collectionId, SketchDto dto)
+        {
+            var collection = await _repo.GetCollectionByIdAsync(collectionId);
+            if (collection == null) return false;
+
+            collection.Sketches.Add(new Sketch
+            {
+                Url = dto.Url,
+                CollectionId = collectionId
+            });
+
+            await _repo.UpdateCollectionAsync(collection);
+            return true;
+        }
+
+        public async Task<bool> AddMaterialAsync(int collectionId, MaterialDto dto)
+        {
+            var collection = await _repo.GetCollectionByIdAsync(collectionId);
+            if (collection == null) return false;
+
+            collection.Materials.Add(new Material
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                CollectionId = collectionId
+            });
+
+            await _repo.UpdateCollectionAsync(collection);
+            return true;
+        }
+
+        public async Task<bool> AddColorAsync(int collectionId, ColorDto dto)
+        {
+            var collection = await _repo.GetCollectionByIdAsync(collectionId);
+            if (collection == null) return false;
+
+            collection.Colors.Add(new ColorOption
+            {
+                Name = dto.Name,
+                Hex = dto.Hex,
+                CollectionId = collectionId
+            });
+
+            await _repo.UpdateCollectionAsync(collection);
+            return true;
+        }
+        public async Task<bool> UpdateColorAsync(int colorId, ColorDto dto)
+        {
+            var color = await _repo.GetColorByIdAsync(colorId);
+            if (color == null) return false;
+
+            color.Name = dto.Name;
+            color.Hex = dto.Hex;
+
+            await _repo.UpdateColorAsync(color);
+            return true;
+        }
+
+        public async Task<bool> DeleteColorAsync(int colorId)
+        {
+            var color = await _repo.GetColorByIdAsync(colorId);
+            if (color == null) return false;
+
+            await _repo.DeleteColorAsync(colorId);
+            return true;
+        }
+
+        public async Task<bool> UpdateMaterialAsync(int materialId, MaterialDto dto)
+        {
+            var material = await _repo.GetMaterialAsync(materialId);
+            if (material == null) return false;
+
+            material.Name = dto.Name;
+            material.Description = dto.Description;
+
+            await _repo.UpdateMaterialAsync(material);
+            return true;
+        }
+
+        public async Task<bool> DeleteMaterialAsync(int materialId)
+        {
+            var material = await _repo.GetMaterialAsync(materialId);
+            if (material == null) return false;
+
+            await _repo.DeleteMaterialAsync(materialId);
+            return true;
+        }
+
+        public async Task<bool> UpdateSketchAsync(int sketchId, SketchDto dto)
+        {
+            var sketch = await _repo.GetSketchAsync(sketchId);
+            if (sketch == null) return false;
+
+            sketch.Url = dto.Url;
+
+            await _repo.UpdateSketchAsync(sketch);
+            return true;
+        }
+
+        public async Task<bool> DeleteSketchAsync(int sketchId)
+        {
+            var sketch = await _repo.GetSketchAsync(sketchId);
+            if (sketch == null) return false;
+
+            await _repo.DeleteSketchAsync(sketchId);
+            return true;
+        }
+
     }
 }

@@ -12,8 +12,20 @@ namespace Magato.Api.Services
         Task<bool> DeleteCollectionAsync(int id);
 
         Task<bool> CollectionExistsAsync(int id);
-        
 
-        //Likadant för materal, sketch, osv
+
+        //Lookbook? Bilder?
+
+
+        Task<bool> AddSketchAsync(int collectionId, SketchDto dto);
+        Task<bool> AddMaterialAsync(int collectionId, MaterialDto dto);
+        Task<bool> AddColorAsync(int collectionId, ColorDto dto);
+
+        Task<bool> UpdateColorAsync(int colorId, ColorDto dto);
+        Task<bool> DeleteColorAsync(int colorId);
+        Task<bool> UpdateMaterialAsync(int materialId, MaterialDto dto);
+        Task<bool> DeleteMaterialAsync(int materialId);
+        Task<bool> UpdateSketchAsync(int sketchId, SketchDto dto);
+        Task<bool> DeleteSketchAsync(int sketchId);
     }
 }

@@ -30,20 +30,136 @@ namespace Magato.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
+                    b.Property<string>("CollectionDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollectionTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Title")
+                    b.HasKey("Id");
+
+                    b.ToTable("Collections");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.ColorOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Hex")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Collections");
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.Material", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("Materials");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("Sketches");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.ColorOption", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Collection", "Collection")
+                        .WithMany("Colors")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.Material", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Collection", "Collection")
+                        .WithMany("Materials")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Collection", "Collection")
+                        .WithMany("Sketches")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.Collection", b =>
+                {
+                    b.Navigation("Colors");
+
+                    b.Navigation("Materials");
+
+                    b.Navigation("Sketches");
                 });
 #pragma warning restore 612, 618
         }

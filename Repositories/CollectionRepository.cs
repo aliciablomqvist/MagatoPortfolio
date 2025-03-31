@@ -62,6 +62,72 @@ namespace Magato.Api.Repositories
         }
 
 
-    }
+        // Colors
+        public async Task<ColorOption?> GetColorByIdAsync(int id)
+        {
+            return await _context.Colors.FindAsync(id);
+        }
 
+        public async Task UpdateColorAsync(ColorOption color)
+        {
+            _context.Colors.Update(color);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteColorAsync(int id)
+        {
+            var color = await _context.Colors.FindAsync(id);
+            if (color != null)
+            {
+                _context.Colors.Remove(color);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+
+        //Material
+        public async Task<Material?> GetMaterialAsync(int materialId)
+        {
+            return await _context.Materials.FindAsync(materialId);
+        }
+
+        public async Task UpdateMaterialAsync(Material material)
+        {
+            _context.Materials.Update(material);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteMaterialAsync(int materialId)
+        {
+            var material = await _context.Materials.FindAsync(materialId);
+            if (material != null)
+            {
+                _context.Materials.Remove(material);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        //Sketch
+        public async Task<Sketch?> GetSketchAsync(int sketchId)
+        {
+            return await _context.Sketches.FindAsync(sketchId);
+        }
+
+        public async Task UpdateSketchAsync(Sketch sketch)
+        {
+            _context.Sketches.Update(sketch);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteSketchAsync(int sketchId)
+        {
+            var sketch = await _context.Sketches.FindAsync(sketchId);
+            if (sketch != null)
+            {
+                _context.Sketches.Remove(sketch);
+                await _context.SaveChangesAsync();
+
+            }
+        }
+    }
 }
