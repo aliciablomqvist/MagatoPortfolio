@@ -1,0 +1,5 @@
+@Magato.Api_HostAddress = http://localhost:5085
+
+Accept: application/json
+
+###
