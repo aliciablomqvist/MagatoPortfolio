@@ -27,5 +27,14 @@ namespace Magato.Api.Repositories
         Task UpdateSketchAsync(Sketch sketch);
         Task DeleteSketchAsync(int sketchId);
 
+
+        //Lookbook och bilder
+        Task AddLookbookImageAsync(int collectionId, LookbookImage image);
+        Task<LookbookImage?> GetLookbookImageAsync(int imageId);
+        Task UpdateLookbookImageAsync(LookbookImage image);
+        Task DeleteLookbookImageAsync(int imageId);
+
+
+
     }
 }

@@ -1,4 +1,3 @@
-
 using Magato.Api.Models;
 using Magato.Api.Data;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +18,8 @@ namespace Magato.Api.Repositories
             return await _context.Collections
                 .Include(c => c.Colors)
                 .Include(c => c.Materials)
-                //.Include(c => c.Images) Hur hantera lookbook och bilder?
                 .Include(c => c.Sketches)
+                .Include(c => c.LookbookImages)
                 .ToListAsync();
         }
 
@@ -29,8 +28,8 @@ namespace Magato.Api.Repositories
             return await _context.Collections
                 .Include(c => c.Colors)
                 .Include(c => c.Materials)
-               // .Include(c => c.Images)
                 .Include(c => c.Sketches)
+                .Include(c => c.LookbookImages)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
@@ -61,8 +60,7 @@ namespace Magato.Api.Repositories
             return await _context.Collections.AnyAsync(c => c.Id == id);
         }
 
-
-        // Colors
+        // Color
         public async Task<ColorOption?> GetColorByIdAsync(int id)
         {
             return await _context.Colors.FindAsync(id);
@@ -84,8 +82,7 @@ namespace Magato.Api.Repositories
             }
         }
 
-
-        //Material
+        // Material
         public async Task<Material?> GetMaterialAsync(int materialId)
         {
             return await _context.Materials.FindAsync(materialId);
@@ -107,7 +104,7 @@ namespace Magato.Api.Repositories
             }
         }
 
-        //Sketch
+        // Sketch
         public async Task<Sketch?> GetSketchAsync(int sketchId)
         {
             return await _context.Sketches.FindAsync(sketchId);
@@ -126,8 +123,37 @@ namespace Magato.Api.Repositories
             {
                 _context.Sketches.Remove(sketch);
                 await _context.SaveChangesAsync();
+            }
+        }
 
+        // LookbookImage
+        public async Task<LookbookImage?> GetLookbookImageAsync(int imageId)
+        {
+            return await _context.LookbookImages.FindAsync(imageId);
+        }
+
+        public async Task AddLookbookImageAsync(int collectionId, LookbookImage image)
+        {
+            image.CollectionId = collectionId;
+            _context.LookbookImages.Add(image);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateLookbookImageAsync(LookbookImage image)
+        {
+            _context.LookbookImages.Update(image);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteLookbookImageAsync(int imageId)
+        {
+            var image = await _context.LookbookImages.FindAsync(imageId);
+            if (image != null)
+            {
+                _context.LookbookImages.Remove(image);
+                await _context.SaveChangesAsync();
             }
         }
     }
 }
+

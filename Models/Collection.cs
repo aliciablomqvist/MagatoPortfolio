@@ -11,6 +11,7 @@ public class Collection
     public DateTime ReleaseDate { get; set; }
 
     //Image? Lookbook?
+    public List<LookbookImage> LookbookImages { get; set; } = new();
 
     public List<ColorOption> Colors { get; set; } = new();
     public List<Material> Materials { get; set; } = new();

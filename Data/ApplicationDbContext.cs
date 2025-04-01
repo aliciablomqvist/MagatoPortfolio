@@ -11,5 +11,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<ColorOption> Colors { get; set; }
     public DbSet<Material> Materials { get; set; }
     public DbSet<Sketch> Sketches { get; set; }
+    public DbSet<LookbookImage> LookbookImages { get; set; }
 
 }

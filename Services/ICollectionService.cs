@@ -14,8 +14,10 @@ namespace Magato.Api.Services
 
         Task<bool> CollectionExistsAsync(int id);
 
-
         //Lookbook? Bilder?
+        Task<bool> AddLookbookImageAsync(int collectionId, LookbookImageDto dto);
+        Task<bool> UpdateLookbookImageAsync(int imageId, LookbookImageDto dto);
+        Task<bool> DeleteLookbookImageAsync(int imageId);
 
 
         Task<bool> AddSketchAsync(int collectionId, SketchDto dto);

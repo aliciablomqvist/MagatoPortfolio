@@ -72,6 +72,32 @@ namespace Magato.Api.Migrations
                     b.ToTable("Colors");
                 });
 
+            modelBuilder.Entity("Magato.Api.Models.LookbookImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("LookbookImages");
+                });
+
             modelBuilder.Entity("Magato.Api.Models.Material", b =>
                 {
                     b.Property<int>("Id")
@@ -131,6 +157,17 @@ namespace Magato.Api.Migrations
                     b.Navigation("Collection");
                 });
 
+            modelBuilder.Entity("Magato.Api.Models.LookbookImage", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Collection", "Collection")
+                        .WithMany("LookbookImages")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+                });
+
             modelBuilder.Entity("Magato.Api.Models.Material", b =>
                 {
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
@@ -156,6 +193,8 @@ namespace Magato.Api.Migrations
             modelBuilder.Entity("Magato.Api.Models.Collection", b =>
                 {
                     b.Navigation("Colors");
+
+                    b.Navigation("LookbookImages");
 
                     b.Navigation("Materials");
 

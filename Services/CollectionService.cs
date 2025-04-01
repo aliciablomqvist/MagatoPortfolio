@@ -192,5 +192,42 @@ namespace Magato.Api.Services
             return true;
         }
 
+        public async Task<bool> AddLookbookImageAsync(int collectionId, LookbookImageDto dto)
+        {
+            var collection = await _repo.GetCollectionByIdAsync(collectionId);
+            if (collection == null) return false;
+
+            var image = new LookbookImage
+            {
+                Url = dto.Url,
+                Description = dto.Description,
+                CollectionId = collectionId
+            };
+
+            await _repo.AddLookbookImageAsync(collectionId, image);
+            return true;
+        }
+
+        public async Task<bool> UpdateLookbookImageAsync(int imageId, LookbookImageDto dto)
+        {
+            var existing = await _repo.GetLookbookImageAsync(imageId);
+            if (existing == null) return false;
+
+            existing.Url = dto.Url;
+            existing.Description = dto.Description;
+
+            await _repo.UpdateLookbookImageAsync(existing);
+            return true;
+        }
+
+        public async Task<bool> DeleteLookbookImageAsync(int imageId)
+        {
+            var existing = await _repo.GetLookbookImageAsync(imageId);
+            if (existing == null) return false;
+
+            await _repo.DeleteLookbookImageAsync(imageId);
+            return true;
+        }
+
     }
 }

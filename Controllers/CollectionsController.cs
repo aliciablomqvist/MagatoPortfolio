@@ -118,4 +118,26 @@ public class CollectionsController : ControllerBase
         var success = await _service.DeleteSketchAsync(sketchId);
         return success ? Ok() : NotFound();
     }
+
+    [HttpPost("{id}/lookbook")]
+    public async Task<IActionResult> AddLookbookImage(int id, [FromBody] LookbookImageDto dto)
+    {
+        var success = await _service.AddLookbookImageAsync(id, dto);
+        return success ? Ok() : NotFound();
+    }
+
+    [HttpPut("lookbook/{imageId}")]
+    public async Task<IActionResult> UpdateLookbookImage(int imageId, [FromBody] LookbookImageDto dto)
+    {
+        var success = await _service.UpdateLookbookImageAsync(imageId, dto);
+        return success ? Ok() : NotFound();
+    }
+
+    [HttpDelete("lookbook/{imageId}")]
+    public async Task<IActionResult> DeleteLookbookImage(int imageId)
+    {
+        var success = await _service.DeleteLookbookImageAsync(imageId);
+        return success ? Ok() : NotFound();
+    }
+
 }
