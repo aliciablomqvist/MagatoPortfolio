@@ -23,11 +23,33 @@ namespace Magato.Api.Services
             return await _repo.GetCollectionByIdAsync(id);
         }
 
-        public async Task AddCollectionAsync(CollectionDto dto)
+        public async Task<Collection> AddCollectionAsync(CollectionDto dto)
         {
-            var collection = new Collection { CollectionTitle = dto.CollectionTitle };
+            var collection = new Collection
+            {
+                CollectionTitle = dto.CollectionTitle,
+                CollectionDescription = dto.CollectionDescription,
+                ReleaseDate = dto.ReleaseDate,
+                Colors = dto.Colors.Select(c => new ColorOption
+                {
+                    Name = c.Name,
+                    Hex = c.Hex
+                }).ToList(),
+                Materials = dto.Materials.Select(m => new Material
+                {
+                    Name = m.Name,
+                    Description = m.Description
+                }).ToList(),
+                Sketches = dto.Sketches.Select(s => new Sketch
+                {
+                    Url = s.Url
+                }).ToList()
+            };
+
             await _repo.AddCollectionAsync(collection);
+            return collection;
         }
+
 
         public async Task<bool> UpdateCollectionAsync(int id, CollectionDto dto)
         {
@@ -35,9 +57,17 @@ namespace Magato.Api.Services
             if (existing == null) return false;
 
             existing.CollectionTitle = dto.CollectionTitle;
+            existing.CollectionDescription = dto.CollectionDescription;
+            existing.ReleaseDate = dto.ReleaseDate;
+
+            existing.Colors = dto.Colors.Select(c => new ColorOption { Name = c.Name, Hex = c.Hex }).ToList();
+            existing.Materials = dto.Materials.Select(m => new Material { Name = m.Name, Description = m.Description }).ToList();
+            existing.Sketches = dto.Sketches.Select(s => new Sketch { Url = s.Url }).ToList();
+
             await _repo.UpdateCollectionAsync(existing);
             return true;
         }
+
 
         public async Task<bool> DeleteCollectionAsync(int id)
         {

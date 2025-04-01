@@ -1,73 +1,59 @@
 using Microsoft.AspNetCore.Mvc;
-using Magato.Api.Models;
-using Magato.Api.Data;
-using Magato.Api.Services;
 using Magato.Api.DTO;
-using Microsoft.EntityFrameworkCore;
+using Magato.Api.Models;
+using Magato.Api.Services;
+
+namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class CollectionsController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
     private readonly ICollectionService _service;
-    public CollectionsController(ApplicationDbContext context, ICollectionService service)
+
+    public CollectionsController(ICollectionService service)
     {
-        _context = context;
         _service = service;
     }
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Collection>>> Get() =>
-             await _context.Collections.ToListAsync();
+    public async Task<ActionResult<IEnumerable<Collection>>> GetAll()
+    {
+        var collections = await _service.GetAllCollectionsAsync();
+        return Ok(collections);
+    }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Collection>> Get(int id)
+    public async Task<ActionResult<Collection>> GetById(int id)
     {
-        var collection = await _context.Collections.FindAsync(id);
+        var collection = await _service.GetCollectionByIdAsync(id);
         return collection == null ? NotFound() : Ok(collection);
     }
-
+    
     [HttpPost]
-    public async Task<ActionResult<Collection>> Post(Collection collection)
+    public async Task<IActionResult> Create([FromBody] CollectionDto dto)
     {
-        _context.Collections.Add(collection);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(Get), new { id = collection.Id }, collection);
+        var collection = await _service.AddCollectionAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = collection.Id }, collection);
     }
+
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, Collection collection)
+    public async Task<IActionResult> Update(int id, [FromBody] CollectionDto dto)
     {
-        if (id != collection.Id) return BadRequest();
-        _context.Entry(collection).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return NoContent();
+        var updated = await _service.UpdateCollectionAsync(id, dto);
+        return updated ? Ok() : NotFound();
     }
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var collection = await _context.Collections.FindAsync(id);
-        if (collection == null) return NotFound();
-        _context.Collections.Remove(collection);
-        await _context.SaveChangesAsync();
-        return NoContent();
+        var success = await _service.DeleteCollectionAsync(id);
+        return success ? NoContent() : NotFound();
     }
 
-    [HttpPost("{id}/sketches")]
-    public async Task<IActionResult> AddSketch(int id, [FromBody] SketchDto dto)
-    {
-        var success = await _service.AddSketchAsync(id, dto);
-        return success ? Ok() : NotFound();
-    }
-
-    [HttpPost("{id}/materials")]
-    public async Task<IActionResult> AddMaterial(int id, [FromBody] MaterialDto dto)
-    {
-        var success = await _service.AddMaterialAsync(id, dto);
-        return success ? Ok() : NotFound();
-    }
-
+    //Colors
     [HttpPost("{id}/colors")]
     public async Task<IActionResult> AddColor(int id, [FromBody] ColorDto dto)
     {
@@ -89,6 +75,14 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    //Materials
+    [HttpPost("{id}/materials")]
+    public async Task<IActionResult> AddMaterial(int id, [FromBody] MaterialDto dto)
+    {
+        var success = await _service.AddMaterialAsync(id, dto);
+        return success ? Ok() : NotFound();
+    }
+
     [HttpPut("materials/{materialId}")]
     public async Task<IActionResult> UpdateMaterial(int materialId, [FromBody] MaterialDto dto)
     {
@@ -100,6 +94,14 @@ public class CollectionsController : ControllerBase
     public async Task<IActionResult> DeleteMaterial(int materialId)
     {
         var success = await _service.DeleteMaterialAsync(materialId);
+        return success ? Ok() : NotFound();
+    }
+
+    // Sketches
+    [HttpPost("{id}/sketches")]
+    public async Task<IActionResult> AddSketch(int id, [FromBody] SketchDto dto)
+    {
+        var success = await _service.AddSketchAsync(id, dto);
         return success ? Ok() : NotFound();
     }
 
@@ -116,5 +118,4 @@ public class CollectionsController : ControllerBase
         var success = await _service.DeleteSketchAsync(sketchId);
         return success ? Ok() : NotFound();
     }
-
 }
