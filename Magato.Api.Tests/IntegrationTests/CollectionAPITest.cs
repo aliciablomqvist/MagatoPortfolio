@@ -7,6 +7,12 @@ using Magato.Api.Controllers;
 using Magato.Api.Services;
 using Moq;
 using Xunit;
+using Magato.Api;
+using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net.Http.Json;
+using System.Net;
+using FluentAssertions;
+
 
 namespace Magato.Tests.IntegrationTests
 {
