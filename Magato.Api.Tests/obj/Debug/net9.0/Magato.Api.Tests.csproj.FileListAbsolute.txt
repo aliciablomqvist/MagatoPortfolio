@@ -1,0 +1,8 @@
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.csproj.AssemblyReference.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\MvcTestingAppManifest.json
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.AssemblyInfoInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.AssemblyInfo.cs
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_Magato.Api.Tests
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_Magato.Api.Tests
