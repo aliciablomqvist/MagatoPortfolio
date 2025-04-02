@@ -16,44 +16,62 @@ public class CollectionsController : ControllerBase
         _service = service;
     }
 
+    // ----------------------
+    // COLLECTIONS
+    // ----------------------
+
+    /// <summary>Gets all collections with related data.</summary>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Collection>>> GetAll()
     {
         var collections = await _service.GetAllCollectionsAsync();
         return Ok(collections);
     }
 
+    /// <summary>Gets a specific collection by ID.</summary>
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Collection>> GetById(int id)
     {
         var collection = await _service.GetCollectionByIdAsync(id);
         return collection == null ? NotFound() : Ok(collection);
     }
-    
+
+    /// <summary>Creates a new collection.</summary>
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CollectionDto dto)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public async Task<IActionResult> Create([FromBody] CollectionCreateDto dto)
     {
         var collection = await _service.AddCollectionAsync(dto);
         return CreatedAtAction(nameof(GetById), new { id = collection.Id }, collection);
     }
 
-
+    /// <summary>Updates a collection by ID.</summary>
     [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(int id, [FromBody] CollectionDto dto)
     {
         var updated = await _service.UpdateCollectionAsync(id, dto);
         return updated ? Ok() : NotFound();
     }
 
-
+    /// <summary>Deletes a collection by ID.</summary>
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
         var success = await _service.DeleteCollectionAsync(id);
         return success ? NoContent() : NotFound();
     }
 
-    //Colors
+    // ----------------------
+    // COLORS
+    // ----------------------
+
     [HttpPost("{id}/colors")]
     public async Task<IActionResult> AddColor(int id, [FromBody] ColorDto dto)
     {
@@ -75,7 +93,10 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
-    //Materials
+    // ----------------------
+    // MATERIALS
+    // ----------------------
+
     [HttpPost("{id}/materials")]
     public async Task<IActionResult> AddMaterial(int id, [FromBody] MaterialDto dto)
     {
@@ -97,7 +118,10 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
-    // Sketches
+    // ----------------------
+    // SKETCHES
+    // ----------------------
+
     [HttpPost("{id}/sketches")]
     public async Task<IActionResult> AddSketch(int id, [FromBody] SketchDto dto)
     {
@@ -119,6 +143,10 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    // ----------------------
+    // LOOKBOOK
+    // ----------------------
+
     [HttpPost("{id}/lookbook")]
     public async Task<IActionResult> AddLookbookImage(int id, [FromBody] LookbookImageDto dto)
     {
@@ -139,5 +167,4 @@ public class CollectionsController : ControllerBase
         var success = await _service.DeleteLookbookImageAsync(imageId);
         return success ? Ok() : NotFound();
     }
-
 }

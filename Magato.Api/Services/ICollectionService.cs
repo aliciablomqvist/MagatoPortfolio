@@ -7,7 +7,7 @@ namespace Magato.Api.Services
     {
         Task<IEnumerable<Collection>> GetAllCollectionsAsync();
         Task<Collection?> GetCollectionByIdAsync(int id);
-        Task<Collection> AddCollectionAsync(CollectionDto dto);
+        Task<Collection> AddCollectionAsync(CollectionCreateDto dto);
 
         Task<bool> UpdateCollectionAsync(int id, CollectionDto dto);
         Task<bool> DeleteCollectionAsync(int id);

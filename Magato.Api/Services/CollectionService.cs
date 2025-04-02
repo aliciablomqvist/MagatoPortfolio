@@ -23,7 +23,7 @@ namespace Magato.Api.Services
             return await _repo.GetCollectionByIdAsync(id);
         }
 
-        public async Task<Collection> AddCollectionAsync(CollectionDto dto)
+        public async Task<Collection> AddCollectionAsync(CollectionCreateDto dto)
         {
             var collection = new Collection
             {
