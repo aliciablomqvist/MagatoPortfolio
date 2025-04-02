@@ -6,8 +6,8 @@ namespace Magato.Api.Models;
 public class ColorOption
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Hex { get; set; }
+    public required string Name { get; set; }
+    public required string Hex { get; set; }
     public int CollectionId { get; set; }
 
     //Koppling till collection

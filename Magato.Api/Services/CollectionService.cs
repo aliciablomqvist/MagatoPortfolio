@@ -4,6 +4,9 @@ using Magato.Api.Repositories;
 
 namespace Magato.Api.Services
 {
+    /// <summary>
+    /// Service layer that handles business logic for collections and their related entities.
+    /// </summary>
     public class CollectionService : ICollectionService
     {
         private readonly ICollectionRepository _repo;
@@ -23,7 +26,7 @@ namespace Magato.Api.Services
             return await _repo.GetCollectionByIdAsync(id);
         }
 
-        public async Task<Collection> AddCollectionAsync(CollectionDto dto)
+        public async Task<Collection> AddCollectionAsync(CollectionCreateDto dto)
         {
             var collection = new Collection
             {
@@ -49,7 +52,6 @@ namespace Magato.Api.Services
             await _repo.AddCollectionAsync(collection);
             return collection;
         }
-
 
         public async Task<bool> UpdateCollectionAsync(int id, CollectionDto dto)
         {
