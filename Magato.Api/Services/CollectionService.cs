@@ -4,6 +4,9 @@ using Magato.Api.Repositories;
 
 namespace Magato.Api.Services
 {
+    /// <summary>
+    /// Service layer that handles business logic for collections and their related entities.
+    /// </summary>
     public class CollectionService : ICollectionService
     {
         private readonly ICollectionRepository _repo;
