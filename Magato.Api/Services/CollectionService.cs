@@ -53,7 +53,6 @@ namespace Magato.Api.Services
             return collection;
         }
 
-
         public async Task<bool> UpdateCollectionAsync(int id, CollectionDto dto)
         {
             var existing = await _repo.GetCollectionByIdAsync(id);
