@@ -52,5 +52,48 @@ namespace Magato.Tests.UnitTests.Services
 
             result.Should().BeFalse();
         }
+
+        [Fact]
+        public async Task AddCollectionAsync_ShouldAddCollectionWithDetails()
+        {
+            // Arrange
+            var dto = new CollectionDto
+            {
+                CollectionTitle = "Sommar 2025",
+                CollectionDescription = "Ljusa färger",
+                ReleaseDate = DateTime.UtcNow,
+                Colors = new List<ColorDto> { new ColorDto { Name = "White", Hex = "#FFFFFF" } },
+                Materials = new List<MaterialDto> { new MaterialDto { Name = "Bomull", Description = "Lent!" } },
+                Sketches = new List<SketchDto> { new SketchDto { Url = "http://example.com/sketch.png" } }
+            };
+
+            var mockRepo = new Mock<ICollectionRepository>();
+            var service = new CollectionService(mockRepo.Object);
+
+            // Act
+            var result = await service.AddCollectionAsync(dto);
+
+            // Assert
+            result.CollectionTitle.Should().Be("Sommar 2025");
+            result.Colors.Should().ContainSingle();
+            result.Materials.Should().ContainSingle();
+            result.Sketches.Should().ContainSingle();
+            mockRepo.Verify(r => r.AddCollectionAsync(It.IsAny<Collection>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task UpdateCollectionAsync_ShouldReturnFalse_WhenCollectionNotFound()
+        {
+            var mockRepo = new Mock<ICollectionRepository>();
+            mockRepo.Setup(r => r.GetCollectionByIdAsync(It.IsAny<int>()))
+                    .ReturnsAsync((Collection?)null);
+
+            var service = new CollectionService(mockRepo.Object);
+
+            var dto = new CollectionDto { CollectionTitle = "Uppdaterad" };
+            var result = await service.UpdateCollectionAsync(99, dto);
+            result.Should().BeFalse();
+        }
+
     }
 }
