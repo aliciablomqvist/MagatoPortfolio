@@ -24,4 +24,16 @@ public class ContactRepository : IContactRepository
             .OrderByDescending(m => m.CreatedAt)
             .ToListAsync();
     }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var message = await _context.ContactMessages.FindAsync(id);
+        if (message == null)
+            return false;
+
+        _context.ContactMessages.Remove(message);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
 }

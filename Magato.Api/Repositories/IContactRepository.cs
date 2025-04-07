@@ -7,4 +7,6 @@ public interface IContactRepository
 {
     Task AddAsync(ContactMessage message);
     Task<IEnumerable<ContactMessage>> GetAllAsync();
+    Task<bool> DeleteAsync(int id);
+
 }

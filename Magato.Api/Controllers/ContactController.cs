@@ -35,8 +35,6 @@ public class ContactController : ControllerBase
             Console.WriteLine(" HÄR BLIR DET FEL: " + ex.Message);
             return StatusCode(500, "Internal Server Error");
         }
-
-
     }
 
     [HttpGet("messages")]
@@ -45,6 +43,17 @@ public class ContactController : ControllerBase
     {
         var messages = await _contactService.GetAllMessagesAsync();
         return Ok(messages);
+    }
+
+    [HttpDelete("{id}")]
+    // [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var success = await _contactService.DeleteMessageAsync(id);
+        if (!success)
+            return NotFound(new { error = "Meddelandet hittades inte." });
+
+        return NoContent();
     }
 
 }

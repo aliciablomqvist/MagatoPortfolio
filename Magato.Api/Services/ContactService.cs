@@ -43,4 +43,9 @@ public class ContactService : IContactService
         return await _repo.GetAllAsync(); // Du har troligen detta redan
     }
 
+    public async Task<bool> DeleteMessageAsync(int id)
+    {
+        return await _repo.DeleteAsync(id);
+    }
+
 }

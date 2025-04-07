@@ -10,4 +10,7 @@ public interface IContactService
 
     Task<IEnumerable<ContactMessage>> GetAllMessagesAsync();
 
+
+    Task<bool> DeleteMessageAsync(int id);
+
 }
