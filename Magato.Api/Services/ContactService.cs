@@ -8,14 +8,14 @@ namespace Magato.Api.Services;
 public class ContactService : IContactService
 {
     private readonly IContactRepository _repo;
-    private readonly IEmailService _emailService;
+   // private readonly IEmailService _emailService;
     private readonly ContactMessageValidator _validator;
 
-    public ContactService(IContactRepository repo, IEmailService emailService)
+    public ContactService(IContactRepository repo /*IEmailService emailService*/)
     {
         _repo = repo;
-        _emailService = emailService;
-        _validator = new ContactMessageValidator(); // alt. DI om du föredrar
+      //  _emailService = emailService;
+        _validator = new ContactMessageValidator();
     }
 
     public async Task<Result> HandleContactAsync(ContactMessageDto dto)
@@ -33,7 +33,7 @@ public class ContactService : IContactService
         };
 
         await _repo.AddAsync(message);
-        await _emailService.SendContactNotificationAsync(dto);
+        //await _emailService.SendContactNotificationAsync(dto);
 
         return Result.Success();
     }
