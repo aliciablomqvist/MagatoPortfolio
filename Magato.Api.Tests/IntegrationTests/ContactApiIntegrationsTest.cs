@@ -12,6 +12,12 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
 using System.Net;
 using FluentAssertions;
+using System.Text;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Magato.Api.Data;
+using Microsoft.Extensions.DependencyInjection;
+
 
 
 namespace Magato.Tests.IntegrationTests;
@@ -26,15 +32,26 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
         {
             builder.ConfigureServices(services =>
             {
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                if (descriptor != null)
+                var dbContextDescriptors = services
+                    .Where(d =>
+                        d.ServiceType.FullName?.Contains("ApplicationDbContext") == true ||
+                        d.ImplementationType?.FullName?.Contains("SqlServer") == true)
+                    .ToList();
+
+                foreach (var descriptor in dbContextDescriptors)
+                {
                     services.Remove(descriptor);
+                }
 
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseInMemoryDatabase("TestDb"));
+
+                var emailMock = new Mock<IEmailService>();
+                emailMock.Setup(e => e.SendContactNotificationAsync(It.IsAny<ContactMessageDto>()))
+                         .Returns(Task.CompletedTask);
+                services.AddSingleton(emailMock.Object);
             });
-        }).CreateClient();
+        }).CreateClient(); // <-- detta avslutar .WithWebHostBuilder()
     }
 
     [Fact]

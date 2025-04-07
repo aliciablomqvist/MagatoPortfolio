@@ -34,6 +34,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Dependency injection
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 
 // Validators

@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
 using System.Net;
 using FluentAssertions;
+using System.Text;
+using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Magato.Tests.UnitTests.Services;

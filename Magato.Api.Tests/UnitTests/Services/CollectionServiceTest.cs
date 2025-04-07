@@ -29,7 +29,7 @@ namespace Magato.Tests.UnitTests.Services
         [Fact]
         public async Task AddCollectionAsync_ShouldAddCollection()
         {
-            var dto = new CollectionDto
+            var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Höst 2025",
                 CollectionDescription = "Snygga jackor",
@@ -56,7 +56,8 @@ namespace Magato.Tests.UnitTests.Services
         [Fact]
         public async Task AddCollectionAsync_ShouldAddCollectionWithDetails()
         {
-            var dto = new CollectionDto
+            // Arrange
+            var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Sommar 2025",
                 CollectionDescription = "Ljusa färger",
@@ -68,12 +69,18 @@ namespace Magato.Tests.UnitTests.Services
 
             var mockRepo = new Mock<ICollectionRepository>();
             var service = new CollectionService(mockRepo.Object);
-            var result = await service.AddCollectionAsync(dto);
-            result.CollectionTitle.Should().Be("Sommar 2025");
-            result.Colors.Should().ContainSingle();
-            result.Materials.Should().ContainSingle();
-            result.Sketches.Should().ContainSingle();
-            mockRepo.Verify(r => r.AddCollectionAsync(It.IsAny<Collection>()), Times.Once);
+
+            await service.AddCollectionAsync(dto);
+            mockRepo.Verify(r => r.AddCollectionAsync(It.Is<Collection>(c =>
+                c.CollectionTitle == dto.CollectionTitle &&
+                c.CollectionDescription == dto.CollectionDescription &&
+                c.Colors.Count == 1 &&
+                c.Colors.First().Name == "White" &&
+                c.Materials.Count == 1 &&
+                c.Materials.First().Name == "Bomull" &&
+                c.Sketches.Count == 1 &&
+                c.Sketches.First().Url == "http://example.com/sketch.png"
+            )), Times.Once);
         }
 
         [Fact]
@@ -85,8 +92,9 @@ namespace Magato.Tests.UnitTests.Services
 
             var service = new CollectionService(mockRepo.Object);
 
-            var dto = new CollectionDto { CollectionTitle = "Uppdaterad" };
+            var dto = new CollectionDto { Id = 99, CollectionTitle = "Uppdaterad" };
             var result = await service.UpdateCollectionAsync(99, dto);
+
             result.Should().BeFalse();
         }
 
