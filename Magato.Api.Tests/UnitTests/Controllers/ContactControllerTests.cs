@@ -15,52 +15,48 @@ using System.Net;
 using FluentAssertions;
 
 namespace Magato.Tests.UnitTests.Controllers;
-    public class ContactControllerTests
+public class ContactControllerTests
 {
-    private readonly ApplicationDbContext _context;
+    private readonly Mock<IContactService> _serviceMock = new();
     private readonly ContactController _controller;
 
     public ContactControllerTests()
     {
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-            .Options;
-
-        _context = new ApplicationDbContext(options);
-        _controller = new ContactController(_context);
+        _controller = new ContactController(_serviceMock.Object);
     }
 
     [Fact]
-    public async Task SendMessage_ReturnsOk_ForValidInput()
+    public async Task Send_ReturnsOk_WhenServiceReturnsSuccess()
     {
-
         var dto = new ContactMessageDto
         {
-            Name = "Testperson",
+            Name = "Test",
             Email = "test@mail.com",
             Message = "Hejsvejs!"
         };
 
+        _serviceMock.Setup(s => s.HandleContactAsync(dto))
+            .ReturnsAsync(Result.Success());
 
-        var result = await _controller.SendMessage(dto);
-
+        var result = await _controller.Send(dto);
 
         Assert.IsType<OkObjectResult>(result);
-        Assert.Equal(1, _context.ContactMessages.Count());
     }
 
     [Fact]
-    public async Task SendMessage_ReturnsBadRequest_ForMissingName()
+    public async Task Send_ReturnsBadRequest_WhenServiceFails()
     {
         var dto = new ContactMessageDto
         {
+            Name = "",
             Email = "test@mail.com",
-            Message = "Hejsvejs!"
+            Message = ""
         };
 
-        _controller.ModelState.AddModelError("Name", "Required");
+        _serviceMock.Setup(s => s.HandleContactAsync(dto))
+            .ReturnsAsync(Result.Failure(new List<string> { "Fel" }));
 
-        var result = await _controller.SendMessage(dto);
+        var result = await _controller.Send(dto);
 
         Assert.IsType<BadRequestObjectResult>(result);
     }

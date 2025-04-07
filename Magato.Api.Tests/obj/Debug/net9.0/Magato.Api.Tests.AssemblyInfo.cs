@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Magato.Api.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ce0742b9945a56e38062c69fbb0f25f6927990b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d555406d785a7eae7182a26168d3b871c832b0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Magato.Api.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Magato.Api.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
