@@ -56,7 +56,6 @@ namespace Magato.Tests.UnitTests.Services
         [Fact]
         public async Task AddCollectionAsync_ShouldAddCollectionWithDetails()
         {
-            // Arrange
             var dto = new CollectionDto
             {
                 CollectionTitle = "Sommar 2025",
@@ -69,11 +68,7 @@ namespace Magato.Tests.UnitTests.Services
 
             var mockRepo = new Mock<ICollectionRepository>();
             var service = new CollectionService(mockRepo.Object);
-
-            // Act
             var result = await service.AddCollectionAsync(dto);
-
-            // Assert
             result.CollectionTitle.Should().Be("Sommar 2025");
             result.Colors.Should().ContainSingle();
             result.Materials.Should().ContainSingle();
