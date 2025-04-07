@@ -7,4 +7,7 @@ namespace Magato.Api.Services;
 public interface IContactService
 {
     Task<Result> HandleContactAsync(ContactMessageDto dto);
+
+    Task<IEnumerable<ContactMessage>> GetAllMessagesAsync();
+
 }

@@ -35,5 +35,16 @@ public class ContactController : ControllerBase
             Console.WriteLine(" HÄR BLIR DET FEL: " + ex.Message);
             return StatusCode(500, "Internal Server Error");
         }
+
+
     }
+
+    [HttpGet("messages")]
+    // [Authorize(Roles = "Admin")] senare
+    public async Task<IActionResult> GetMessages()
+    {
+        var messages = await _contactService.GetAllMessagesAsync();
+        return Ok(messages);
+    }
+
 }

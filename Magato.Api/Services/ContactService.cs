@@ -37,4 +37,10 @@ public class ContactService : IContactService
 
         return Result.Success();
     }
+
+    public async Task<IEnumerable<ContactMessage>> GetAllMessagesAsync()
+    {
+        return await _repo.GetAllAsync(); // Du har troligen detta redan
+    }
+
 }
