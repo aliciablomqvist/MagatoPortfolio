@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
 using System.Net;
 using FluentAssertions;
+using System.Net.Http.Headers;
 
 
 namespace Magato.Tests.IntegrationTests
@@ -29,6 +30,14 @@ namespace Magato.Tests.IntegrationTests
         [Fact]
         public async Task CreateCollection_ShouldReturn201()
         {
+            var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
+            var loginResp = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
+            loginResp.EnsureSuccessStatusCode();
+
+            var loginResult = await loginResp.Content.ReadFromJsonAsync<LoginResponseDto>();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResult!.Token);
+
+
             var dto = new
             {
                 collectionTitle = "Vår 2025",
