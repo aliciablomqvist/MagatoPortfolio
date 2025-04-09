@@ -3,11 +3,11 @@ using Magato.Api.DTO;
 using FluentValidation.AspNetCore;
 
 namespace Magato.Api.Validators;
-public class UserLoginValidator : AbstractValidator<UserLoginDto>
+public class UserRegisterValidator : AbstractValidator<UserRegisterDto>
 {
-    public UserLoginValidator()
+    public UserRegisterValidator()
     {
         RuleFor(x => x.Username).NotEmpty();
-        RuleFor(x => x.Password).NotEmpty();
+        RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
     }
 }

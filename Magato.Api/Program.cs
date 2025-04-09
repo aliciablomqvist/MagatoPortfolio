@@ -31,11 +31,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Dependency injection
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();
-
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Validators
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CollectionDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UserLoginValidator>();
 
 
 builder.Services.AddControllers();

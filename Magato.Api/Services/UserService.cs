@@ -1,5 +1,6 @@
 using Magato.Api.DTO;
 using Magato.Api.Models;
+using Magato.Api.Validators;
 using Magato.Api.Repositories;
 using System.Security.Cryptography;
 using System.Text;
@@ -17,8 +18,6 @@ public class UserService : IUserService
 
     public User RegisterAdmin(UserRegisterDto dto)
     {
-        if (!UserRegisterValidator.IsValid(dto))
-            throw new ArgumentException("Ogiltiga uppgifter");
 
         if (_repo.AdminExists())
             throw new InvalidOperationException("Admin finns redan");
@@ -36,8 +35,6 @@ public class UserService : IUserService
 
     public User Authenticate(UserLoginDto dto)
     {
-        if (!UserLoginValidator.IsValid(dto))
-            throw new ArgumentException("Ogiltiga uppgifter");
 
         var user = _repo.GetByUsername(dto.Username);
         if (user == null || user.PasswordHash != Hash(dto.Password))
@@ -45,6 +42,7 @@ public class UserService : IUserService
 
         return user;
     }
+
 
     private string Hash(string password)
     {
