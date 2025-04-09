@@ -1,17 +1,16 @@
-using System.Collections.Generic;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Magato.Api;
 using Magato.Api.DTO;
-using Magato.Api.Controllers;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
-using Moq;
-using Xunit;
-using Magato.Api;
 using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http.Json;
-using System.Net;
-using FluentAssertions;
+using Xunit;
+
 public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
@@ -36,22 +35,54 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
         }
         else
         {
-            registerResponse.EnsureSuccessStatusCode(); 
+            registerResponse.EnsureSuccessStatusCode();
         }
 
         var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
         var loginResponse = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
         loginResponse.EnsureSuccessStatusCode();
 
-        var loginContent = await loginResponse.Content.ReadAsStringAsync();
-        Console.WriteLine("Login success: " + loginContent);
+        var loginResult = await loginResponse.Content.ReadFromJsonAsync<LoginResponseDto>();
+        loginResult.Should().NotBeNull();
+
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResult!.Token);
+
+        var adminResponse = await _client.GetAsync("/api/auth/admin-only");
+        adminResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var content = await adminResponse.Content.ReadAsStringAsync();
+        Console.WriteLine("Admin route says: " + content);
+    }
+
+    [Fact]
+    public async Task Admin_Only_Endpoint_Should_Return_401_When_Unauthorized()
+    {
+        _client.DefaultRequestHeaders.Authorization = null;
+
+        var response = await _client.GetAsync("/api/auth/admin-only");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+
+        var content = await response.Content.ReadAsStringAsync();
+        Console.WriteLine("Unauthorized access response: " + content);
+    }
+
+    [Fact]
+    public async Task Admin_Only_Endpoint_Should_Return_401_When_Token_Is_Invalid()
+    {
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "invalid.token.value");
+
+        var response = await _client.GetAsync("/api/auth/admin-only");
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+
+        var content = await response.Content.ReadAsStringAsync();
+        Console.WriteLine("Invalid token response: " + content);
     }
 
     [Theory]
     [InlineData("", "password123")]
     [InlineData("admin", "")]
     [InlineData("", "")]
-    [InlineData("user", "123")] // kort lösenord
+    [InlineData("user", "123")]
     public async Task Register_Fails_With_Invalid_Input(string username, string password)
     {
         var dto = new UserRegisterDto { Username = username, Password = password };
@@ -65,7 +96,6 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
         content.Should().Contain("errors");
     }
 
-
     [Fact]
     public async Task Second_Admin_Registration_Should_Fail()
     {
@@ -77,4 +107,11 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
         Assert.False(secondResponse.IsSuccessStatusCode);
     }
+}
+
+public class LoginResponseDto
+{
+    public string Token { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public bool IsAdmin { get; set; }
 }
