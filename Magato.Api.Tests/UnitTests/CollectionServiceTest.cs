@@ -14,7 +14,7 @@ using System.Net;
 using FluentAssertions;
 
 
-namespace Magato.Tests.UnitTests.Services
+namespace Magato.Tests.UnitTests
 {
     public class CollectionServiceTests
     {

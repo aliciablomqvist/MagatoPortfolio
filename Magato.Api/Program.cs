@@ -12,9 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // To read environment variables
@@ -69,3 +66,5 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 app.Run();
+
+public partial class Program { }
