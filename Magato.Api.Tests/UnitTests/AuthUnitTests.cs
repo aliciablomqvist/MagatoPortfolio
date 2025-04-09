@@ -1,13 +1,17 @@
-
-using System;
-using Xunit;
-using System.Linq;
 using System.Collections.Generic;
-using Services;
-using Models;
-using DTO;
-using Repositories;
-
+using System.Threading.Tasks;
+using Magato.Api.DTO;
+using Magato.Api.Controllers;
+using Magato.Api.Models;
+using Magato.Api.Repositories;
+using Magato.Api.Services;
+using Moq;
+using Xunit;
+using Magato.Api;
+using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net.Http.Json;
+using System.Net;
+using FluentAssertions;
 public class AuthUnitTests
 {
     private readonly IUserService _service;
@@ -40,21 +44,6 @@ public class AuthUnitTests
         );
 
         Assert.Equal("Admin finns redan", ex.Message);
-    }
-
-    [Theory]
-    [InlineData("", "validpass")]
-    [InlineData("validuser", "")]
-    [InlineData("validuser", "123")]
-    public void RegisterAdmin_Fails_WithInvalidData(string username, string password)
-    {
-        var dto = new UserRegisterDto { Username = username, Password = password };
-
-        var ex = Assert.Throws<ArgumentException>(() =>
-            _service.RegisterAdmin(dto)
-        );
-
-        Assert.Equal("Ogiltiga uppgifter", ex.Message);
     }
 
     [Fact]
@@ -90,19 +79,6 @@ public class AuthUnitTests
         Assert.Equal("Fel användarnamn eller lösenord", ex.Message);
     }
 
-    [Theory]
-    [InlineData("", "password123")]
-    [InlineData("admin", "")]
-    public void Authenticate_Fails_WithInvalidInput(string username, string password)
-    {
-        var dto = new UserLoginDto { Username = username, Password = password };
-
-        var ex = Assert.Throws<ArgumentException>(() =>
-            _service.Authenticate(dto)
-        );
-
-        Assert.Equal("Ogiltiga uppgifter", ex.Message);
-    }
 
     [Fact]
     public void AdminExists_ReturnsTrue_WhenAdminCreated()

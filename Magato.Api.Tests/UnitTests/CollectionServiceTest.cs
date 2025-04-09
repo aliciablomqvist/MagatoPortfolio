@@ -29,7 +29,7 @@ namespace Magato.Tests.UnitTests
         [Fact]
         public async Task AddCollectionAsync_ShouldAddCollection()
         {
-            var dto = new CollectionDto
+            var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Höst 2025",
                 CollectionDescription = "Snygga jackor",
@@ -57,7 +57,7 @@ namespace Magato.Tests.UnitTests
         public async Task AddCollectionAsync_ShouldAddCollectionWithDetails()
         {
             // Arrange
-            var dto = new CollectionDto
+            var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Sommar 2025",
                 CollectionDescription = "Ljusa färger",
