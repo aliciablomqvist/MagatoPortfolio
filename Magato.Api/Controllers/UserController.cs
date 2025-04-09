@@ -5,7 +5,7 @@ using Magato.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace Magato.Api.Controllers;
+namespace Magato.Api.Controllers; 
 
 [ApiController]
 [Route("api/[controller]")]
