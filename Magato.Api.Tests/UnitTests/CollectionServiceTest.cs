@@ -14,7 +14,7 @@ using System.Net;
 using FluentAssertions;
 
 
-namespace Magato.Tests.UnitTests.Services
+namespace Magato.Tests.UnitTests
 {
     public class CollectionServiceTests
     {
@@ -29,7 +29,7 @@ namespace Magato.Tests.UnitTests.Services
         [Fact]
         public async Task AddCollectionAsync_ShouldAddCollection()
         {
-            var dto = new CollectionDto
+            var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Höst 2025",
                 CollectionDescription = "Snygga jackor",
@@ -57,7 +57,7 @@ namespace Magato.Tests.UnitTests.Services
         public async Task AddCollectionAsync_ShouldAddCollectionWithDetails()
         {
             // Arrange
-            var dto = new CollectionDto
+            var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Sommar 2025",
                 CollectionDescription = "Ljusa färger",

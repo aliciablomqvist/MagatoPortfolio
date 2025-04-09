@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magato.Api.Controllers;
 
@@ -40,6 +41,7 @@ public class CollectionsController : ControllerBase
     }
 
     /// <summary>Creates a new collection.</summary>
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CollectionCreateDto dto)
@@ -49,6 +51,7 @@ public class CollectionsController : ControllerBase
     }
 
     /// <summary>Updates a collection by ID.</summary>
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -59,6 +62,7 @@ public class CollectionsController : ControllerBase
     }
 
     /// <summary>Deletes a collection by ID.</summary>
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -71,7 +75,7 @@ public class CollectionsController : ControllerBase
     // ----------------------
     // COLORS
     // ----------------------
-
+    [Authorize(Roles = "Admin")]
     [HttpPost("{id}/colors")]
     public async Task<IActionResult> AddColor(int id, [FromBody] ColorDto dto)
     {
@@ -79,6 +83,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("colors/{colorId}")]
     public async Task<IActionResult> UpdateColor(int colorId, [FromBody] ColorDto dto)
     {
@@ -86,6 +91,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("colors/{colorId}")]
     public async Task<IActionResult> DeleteColor(int colorId)
     {
@@ -97,6 +103,7 @@ public class CollectionsController : ControllerBase
     // MATERIALS
     // ----------------------
 
+    [Authorize(Roles = "Admin")]
     [HttpPost("{id}/materials")]
     public async Task<IActionResult> AddMaterial(int id, [FromBody] MaterialDto dto)
     {
@@ -104,6 +111,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("materials/{materialId}")]
     public async Task<IActionResult> UpdateMaterial(int materialId, [FromBody] MaterialDto dto)
     {
@@ -111,6 +119,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("materials/{materialId}")]
     public async Task<IActionResult> DeleteMaterial(int materialId)
     {
@@ -122,6 +131,7 @@ public class CollectionsController : ControllerBase
     // SKETCHES
     // ----------------------
 
+    [Authorize(Roles = "Admin")]
     [HttpPost("{id}/sketches")]
     public async Task<IActionResult> AddSketch(int id, [FromBody] SketchDto dto)
     {
@@ -129,6 +139,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("sketches/{sketchId}")]
     public async Task<IActionResult> UpdateSketch(int sketchId, [FromBody] SketchDto dto)
     {
@@ -136,6 +147,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("sketches/{sketchId}")]
     public async Task<IActionResult> DeleteSketch(int sketchId)
     {
@@ -147,6 +159,7 @@ public class CollectionsController : ControllerBase
     // LOOKBOOK
     // ----------------------
 
+    [Authorize(Roles = "Admin")]
     [HttpPost("{id}/lookbook")]
     public async Task<IActionResult> AddLookbookImage(int id, [FromBody] LookbookImageDto dto)
     {
@@ -154,6 +167,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("lookbook/{imageId}")]
     public async Task<IActionResult> UpdateLookbookImage(int imageId, [FromBody] LookbookImageDto dto)
     {
@@ -161,6 +175,7 @@ public class CollectionsController : ControllerBase
         return success ? Ok() : NotFound();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("lookbook/{imageId}")]
     public async Task<IActionResult> DeleteLookbookImage(int imageId)
     {

@@ -12,6 +12,7 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Fluen
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\FluentValidation.AspNetCore.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Humanizer.dll
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Microsoft.Build.Locator.dll
