@@ -14,5 +14,5 @@ public class ContactMessageDto
     [Required]
     public string Message { get; set; } = string.Empty;
 
-    public bool GdprConsent { get; set; } //Fundera på om detta fungerar bra?
+    public bool GdprConsent { get; set; }
 }

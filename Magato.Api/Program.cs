@@ -37,6 +37,7 @@ builder.Services.AddScoped<ICollectionService, CollectionService>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 //builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHostedService<ContactCleanupService>();
 
 
 
