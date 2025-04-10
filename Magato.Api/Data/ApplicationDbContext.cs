@@ -15,5 +15,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<ContactMessage> ContactMessages { get; set; }
 
     public DbSet<User> Users { get; set; }
+     public DbSet<PageContent> PageContents { get; set; }
 
 }
