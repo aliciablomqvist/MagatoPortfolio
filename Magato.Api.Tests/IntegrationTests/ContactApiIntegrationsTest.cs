@@ -1,24 +1,23 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Repositories;
-using Magato.Api.Controllers;
-using Magato.Api.Services;
-using Moq;
-using Xunit;
-using Magato.Api;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http.Json;
 using System.Net;
-using FluentAssertions;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+
+using FluentAssertions;
+
+using Magato.Api;
 using Magato.Api.Data;
+using Magato.Api.DTO;
+using Magato.Api.Services;
+
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+using Moq;
 
+using Xunit;
 
 namespace Magato.Tests.IntegrationTests;
 
@@ -30,19 +29,15 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
     {
         _client = factory.WithWebHostBuilder(builder =>
         {
+            builder.UseSetting("environment", "Testing");
             builder.ConfigureServices(services =>
             {
-                var dbContextDescriptors = services
-                    .Where(d =>
-                        d.ServiceType.FullName?.Contains("ApplicationDbContext") == true ||
-                        d.ImplementationType?.FullName?.Contains("SqlServer") == true)
-                    .ToList();
-
-                foreach (var descriptor in dbContextDescriptors)
+                var descriptor = services.SingleOrDefault(
+                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+                if (descriptor != null)
                 {
                     services.Remove(descriptor);
                 }
-
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseInMemoryDatabase("TestDb"));
 
@@ -50,6 +45,10 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
                 emailMock.Setup(e => e.SendContactNotificationAsync(It.IsAny<ContactMessageDto>()))
                          .Returns(Task.CompletedTask);
                 services.AddSingleton(emailMock.Object);
+                var serviceProvider = services.BuildServiceProvider();
+                using var scope = serviceProvider.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                db.Database.EnsureCreated();
             });
         }).CreateClient();
     }
@@ -68,6 +67,6 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
         var content = new StringContent(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
         var response = await _client.PostAsync("/api/contact", content);
 
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }

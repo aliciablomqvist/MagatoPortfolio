@@ -470,3 +470,4 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.genruntimeconfig.cache
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\ref\Magato.Api.Tests.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\BCrypt.Net-Next.dll

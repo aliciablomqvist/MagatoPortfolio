@@ -6,10 +6,14 @@ using FluentAssertions;
 using Magato.Api;
 using Magato.Api.DTO;
 using Magato.Api.Models;
+using Magato.Api.Data;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+
 
 public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -17,7 +21,25 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
     public AuthIntegrationTests(WebApplicationFactory<Program> factory)
     {
-        _client = factory.CreateClient();
+        _client = factory.WithWebHostBuilder(builder =>
+        {
+            builder.UseSetting("environment", "Testing");
+            builder.ConfigureServices(services =>
+            {
+                var descriptor = services.SingleOrDefault(
+                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+                if (descriptor != null)
+                    services.Remove(descriptor);
+
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseInMemoryDatabase("AuthTestDb"));
+
+                var sp = services.BuildServiceProvider();
+                using var scope = sp.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                db.Database.EnsureCreated();
+            });
+        }).CreateClient();
     }
 
     [Fact]
