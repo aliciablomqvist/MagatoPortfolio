@@ -70,15 +70,17 @@ namespace Magato.Tests.UnitTests
             var mockRepo = new Mock<ICollectionRepository>();
             var service = new CollectionService(mockRepo.Object);
 
-            // Act
-            var result = await service.AddCollectionAsync(dto);
-
-            // Assert
-            result.CollectionTitle.Should().Be("Sommar 2025");
-            result.Colors.Should().ContainSingle();
-            result.Materials.Should().ContainSingle();
-            result.Sketches.Should().ContainSingle();
-            mockRepo.Verify(r => r.AddCollectionAsync(It.IsAny<Collection>()), Times.Once);
+            await service.AddCollectionAsync(dto);
+            mockRepo.Verify(r => r.AddCollectionAsync(It.Is<Collection>(c =>
+                c.CollectionTitle == dto.CollectionTitle &&
+                c.CollectionDescription == dto.CollectionDescription &&
+                c.Colors.Count == 1 &&
+                c.Colors.First().Name == "White" &&
+                c.Materials.Count == 1 &&
+                c.Materials.First().Name == "Bomull" &&
+                c.Sketches.Count == 1 &&
+                c.Sketches.First().Url == "http://example.com/sketch.png"
+            )), Times.Once);
         }
 
         [Fact]
@@ -90,8 +92,9 @@ namespace Magato.Tests.UnitTests
 
             var service = new CollectionService(mockRepo.Object);
 
-            var dto = new CollectionDto { CollectionTitle = "Uppdaterad" };
+            var dto = new CollectionDto { Id = 99, CollectionTitle = "Uppdaterad" };
             var result = await service.UpdateCollectionAsync(99, dto);
+
             result.Should().BeFalse();
         }
 

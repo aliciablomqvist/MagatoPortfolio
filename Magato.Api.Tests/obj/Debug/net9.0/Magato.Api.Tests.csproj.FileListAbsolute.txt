@@ -1,12 +1,5 @@
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.csproj.AssemblyReference.cache
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\MvcTestingAppManifest.json
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.AssemblyInfoInputs.cache
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.AssemblyInfo.cs
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.csproj.CoreCompileInputs.cache
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_Magato.Api.Tests
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_Magato.Api.Tests
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.sourcelink.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\testhost.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Magato.Api.deps.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Magato.Api.runtimeconfig.json
@@ -463,6 +456,13 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Magato.Api.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Magato.Api.pdb
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.csproj.AssemblyReference.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\MvcTestingAppManifest.json
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.AssemblyInfoInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.AssemblyInfo.cs
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.sourcelink.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.A.7D39AE7E.Up2Date
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\refint\Magato.Api.Tests.dll

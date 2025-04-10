@@ -12,6 +12,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Material> Materials { get; set; }
     public DbSet<Sketch> Sketches { get; set; }
     public DbSet<LookbookImage> LookbookImages { get; set; }
+    public DbSet<ContactMessage> ContactMessages { get; set; }
 
     public DbSet<User> Users { get; set; }
 
