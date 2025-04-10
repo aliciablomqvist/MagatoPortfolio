@@ -18,7 +18,7 @@ public class GdprController : ControllerBase
     public IActionResult GetContactGdprText()
     {
         var text = _config["Gdpr:ContactFormText"] ??
-                   "Ingen GDPR-text är definierad.";
+                   "No GDPR text found";
         return Ok(new { text });
     }
 }
