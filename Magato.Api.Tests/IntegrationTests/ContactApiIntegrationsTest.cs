@@ -51,7 +51,7 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
                          .Returns(Task.CompletedTask);
                 services.AddSingleton(emailMock.Object);
             });
-        }).CreateClient(); // <-- detta avslutar .WithWebHostBuilder()
+        }).CreateClient();
     }
 
     [Fact]

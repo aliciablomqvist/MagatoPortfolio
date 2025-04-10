@@ -22,12 +22,11 @@ namespace Magato.Tests.UnitTests.Services;
 public class ContactServiceTests
 {
     private readonly Mock<IContactRepository> _repoMock = new();
-    private readonly Mock<IEmailService> _emailMock = new();
     private readonly ContactService _service;
 
     public ContactServiceTests()
     {
-        _service = new ContactService(_repoMock.Object, _emailMock.Object);
+        _service = new ContactService(_repoMock.Object);
     }
 
     [Fact]
@@ -45,7 +44,7 @@ public class ContactServiceTests
 
         Assert.True(result.IsSuccess);
         _repoMock.Verify(r => r.AddAsync(It.IsAny<ContactMessage>()), Times.Once);
-        _emailMock.Verify(e => e.SendContactNotificationAsync(dto), Times.Once);
+
     }
 
     [Fact]
@@ -63,6 +62,6 @@ public class ContactServiceTests
         Assert.False(result.IsSuccess);
         Assert.NotEmpty(result.Errors);
         _repoMock.Verify(r => r.AddAsync(It.IsAny<ContactMessage>()), Times.Never);
-        _emailMock.Verify(e => e.SendContactNotificationAsync(It.IsAny<ContactMessageDto>()), Times.Never);
+      
     }
 }
