@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Magato.Api.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+925d91c78ed737e6fd5aea72bf67c549bfe47bd0")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+304611d7a56dee9d090fbed995917848c6aa6e04")]
->>>>>>> feature/ContactForm
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f97d964dea742197dcab114659131a28b19e4034")]
 [assembly: System.Reflection.AssemblyProductAttribute("Magato.Api.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Magato.Api.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
