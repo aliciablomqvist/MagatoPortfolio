@@ -1,35 +1,20 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Magato.Api.DTO
 {
     public class BlogPostDto
     {
-        [Required]
+        public int Id
+        {
+            get; set;
+        }
         public string Title { get; set; } = string.Empty;
-
-        public string Slug { get; set; } = string.Empty;
-
-        [Required]
         public string Content { get; set; } = string.Empty;
-
-        public string? Summary
+        public string? Author
         {
             get; set;
         }
-
-        public bool Published
+        public DateTime PublishedAt
         {
             get; set;
         }
-
-        public DateTime? CreatedAt
-        {
-            get; set;
-        }
-        public DateTime? UpdatedAt
-        {
-            get; set;
-        }
-        public List<string> ImageUrls { get; set; } = new();
     }
 }
