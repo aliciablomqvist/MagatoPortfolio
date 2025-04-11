@@ -1,5 +1,5 @@
 using FluentValidation;
-using Magato.Api.DTOs;
+using Magato.Api.DTO;
 namespace Magato.Api.DTO.Validators
 {
     public class BlogPostValidator : AbstractValidator<BlogPostDto>

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Magato.Api.Models
-{
+namespace Magato.Api.Models;
     public class BlogPost
     {
         public int Id
@@ -10,18 +9,13 @@ namespace Magato.Api.Models
             get; set;
         }
         public string Title { get; set; } = string.Empty;
-        public string Slug { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
-        public string? Summary
+        public string? Author
         {
             get; set;
         }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? UpdatedAt
+        public DateTime PublishedAt
         {
             get; set;
         }
-        public bool Published { get; set; } = false;
-        public List<string> ImageUrls { get; set; } = new();
     }
-}

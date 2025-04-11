@@ -42,6 +42,11 @@ public class ApplicationDbContext : DbContext
         get; set;
     }
 
+    public DbSet<BlogPost> BlogPosts
+    {
+        get; set;
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
