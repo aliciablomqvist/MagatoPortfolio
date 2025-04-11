@@ -3,6 +3,7 @@ using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
 using Magato.Api.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Magato.Api.Controllers;
 
@@ -38,7 +39,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpGet("messages")]
-    // [Authorize(Roles = "Admin")] senare
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetMessages()
     {
         var messages = await _contactService.GetAllMessagesAsync();
@@ -46,7 +47,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var success = await _contactService.DeleteMessageAsync(id);

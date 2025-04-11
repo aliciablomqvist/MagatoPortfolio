@@ -46,6 +46,8 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 //builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddHostedService<ContactCleanupService>();
+builder.Services.AddScoped<IPageContentService, PageContentService>();
+builder.Services.AddScoped<IPageContentRepository, PageContentRepository>();
 
 
 
@@ -54,6 +56,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CollectionDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UserLoginValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<PageContentValidator>();
 
 
 builder.Services.AddControllers();
@@ -120,7 +123,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
