@@ -1,9 +1,6 @@
-using Xunit;
 using Microsoft.EntityFrameworkCore;
 using Magato.Api.Data;
 using Magato.Api.Models;
-using System;
-using System.Threading.Tasks;
 using FluentAssertions;
 
 namespace Magato.Tests.UnitTests.Services;

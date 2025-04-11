@@ -2,7 +2,6 @@ using System.Net.Http.Headers;
 using System.Net;
 using System.Net.Http.Json;
 using FluentAssertions;
-using Magato.Api;
 using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Services;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Xunit;
 
 namespace Magato.Tests.IntegrationTests
 {
@@ -43,7 +41,7 @@ namespace Magato.Tests.IntegrationTests
                     using var scope = provider.CreateScope();
                     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                     db.Database.EnsureCreated();
-                    db.Users.RemoveRange(db.Users); 
+                    db.Users.RemoveRange(db.Users);
                     db.SaveChanges();
                 });
             }).CreateClient();
