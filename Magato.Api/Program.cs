@@ -46,6 +46,8 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 //builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddHostedService<ContactCleanupService>();
+builder.Services.AddScoped<IPageContentService, PageContentService>();
+builder.Services.AddScoped<IPageContentRepository, PageContentRepository>();
 
 
 
@@ -120,7 +122,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 

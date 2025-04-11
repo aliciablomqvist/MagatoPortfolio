@@ -289,12 +289,14 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\refs\WindowsBase.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Azure.Core.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Azure.Identity.dll
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\BCrypt.Net-Next.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Castle.Core.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\FluentAssertions.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\FluentValidation.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\FluentValidation.AspNetCore.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\System.Net.Http.Formatting.dll
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.Testing.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.TestHost.dll
@@ -469,5 +471,3 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.pdb
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\Magato.Api.Tests.genruntimeconfig.cache
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\obj\Debug\net9.0\ref\Magato.Api.Tests.dll
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api.Tests\bin\Debug\net9.0\BCrypt.Net-Next.dll
