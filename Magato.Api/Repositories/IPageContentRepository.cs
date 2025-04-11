@@ -10,8 +10,8 @@ public interface IPageContentRepository
     void Update(PageContent content);
     void Delete(string key);
 
-    public PageContent? GetByKey(string key)
-    {
-        return Get(key);
-    }
+    /*  public PageContent? GetByKey(string key)
+      {
+          return Get(key);
+      }*/
 }

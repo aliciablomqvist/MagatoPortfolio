@@ -48,8 +48,6 @@ public class CmsController : ControllerBase
         return NoContent();
     }
 
-
-
     [Authorize(Roles = "Admin")]
     [HttpDelete("{key}")]
     public IActionResult DeleteContent(string key)
@@ -61,5 +59,4 @@ public class CmsController : ControllerBase
         _service.Delete(key);
         return NoContent();
     }
-
 }

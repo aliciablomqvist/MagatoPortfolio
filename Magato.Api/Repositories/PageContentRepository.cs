@@ -36,9 +36,16 @@ public class PageContentRepository : IPageContentRepository
         if (existing == null)
             return;
 
-        existing.Value = content.Value;
+        existing.Title = content.Title;
+        existing.MainText = content.MainText;
+        existing.ExtraText = content.ExtraText;
+        existing.MediaUrls = content.MediaUrls;
+        existing.Published = content.Published;
+        existing.LastModified = DateTime.UtcNow;
+
         _context.SaveChanges();
     }
+
 
     public void Delete(string key)
     {
