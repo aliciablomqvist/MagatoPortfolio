@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+
 namespace Magato.Api.Tests.IntegrationTests;
 
 public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
@@ -49,7 +50,16 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
                     PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
                     IsAdmin = true
                 });
-                db.PageContents.Add(new PageContent { Key = "AboutMe", Value = "Initial content" });
+                db.PageContents.Add(new PageContent
+                {
+                    Key = "AboutMe",
+                    Title = "About Me",
+                    MainText = "Initial content",
+                    ExtraText = "Extra info",
+                    MediaUrls = new List<string> { "https://example.com/image1.jpg" },
+                    Published = true,
+                    LastModified = DateTime.UtcNow
+                });
                 db.SaveChanges();
             });
         }).CreateClient();
@@ -72,7 +82,10 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
         var content = await response.Content.ReadFromJsonAsync<PageContentDto>();
         content.Should().NotBeNull();
-        content!.Value.Should().Be("Initial content");
+        content!.MainText.Should().Be("Initial content");
+        content.Title.Should().Be("About Me");
+        content.Published.Should().BeTrue();
+        content.MediaUrls.Should().Contain("https://example.com/image1.jpg");
     }
 
     [Fact]
@@ -93,7 +106,16 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        var dto = new PageContentDto { Key = "AboutMe", Value = "Updated by test" };
+        var dto = new PageContentDto
+        {
+            Key = "AboutMe",
+            Title = "Updated Title",
+            MainText = "Updated by test",
+            ExtraText = "Updated extra",
+            MediaUrls = new List<string> { "https://example.com/image2.jpg" },
+            Published = false
+        };
+
         var response = await _client.PutAsJsonAsync($"/api/cms/{dto.Key}", dto);
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
@@ -102,7 +124,14 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     [Fact]
     public async Task Update_PageContent_As_Anonymous_Returns_401()
     {
-        var dto = new PageContentDto { Key = "AboutMe", Value = "Should fail" };
+        var dto = new PageContentDto
+        {
+            Key = "AboutMe",
+            Title = "Should Fail",
+            MainText = "Anonymous attempt",
+            MediaUrls = new List<string>()
+        };
+
         var response = await _client.PutAsJsonAsync($"/api/cms/{dto.Key}", dto);
 
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
@@ -122,7 +151,16 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        var dto = new PageContentDto { Key = "NewPage", Value = "This is new" };
+        var dto = new PageContentDto
+        {
+            Key = "NewPage",
+            Title = "New Title",
+            MainText = "This is new",
+            ExtraText = "More info",
+            MediaUrls = new List<string> { "https://example.com/new.jpg" },
+            Published = true
+        };
+
         var response = await _client.PostAsJsonAsync("/api/cms", dto);
 
         response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -130,6 +168,8 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         var content = await response.Content.ReadFromJsonAsync<PageContentDto>();
         content.Should().NotBeNull();
         content!.Key.Should().Be("NewPage");
+        content.Title.Should().Be("New Title");
+        content.MediaUrls.Should().Contain("https://example.com/new.jpg");
     }
 
     [Fact]
@@ -142,18 +182,28 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
+
     [Fact]
     public async Task Create_PageContent_As_Admin_Returns_Created()
     {
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        var dto = new PageContentDto { Key = "Welcome", Value = "Hello from test" };
+        var dto = new PageContentDto
+        {
+            Key = "Welcome",
+            Title = "Welcome Page",
+            MainText = "Hello from test",
+            MediaUrls = new List<string> { "https://example.com/welcome.jpg" },
+            Published = true
+        };
+
         var response = await _client.PostAsJsonAsync("/api/cms", dto);
 
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         var created = await response.Content.ReadFromJsonAsync<PageContentDto>();
         created!.Key.Should().Be(dto.Key);
-        created.Value.Should().Be(dto.Value);
+        created.Title.Should().Be("Welcome Page");
+        created.MediaUrls.Should().Contain("https://example.com/welcome.jpg");
     }
 }
