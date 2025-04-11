@@ -16,7 +16,13 @@ namespace Magato.Api.Repositories;
 
         public BlogPost? Get(int id) => _context.BlogPosts.Find(id);
 
-        public IEnumerable<BlogPost> GetAll() => _context.BlogPosts.ToList();
+    public BlogPost? GetBySlug(string slug)
+  => _context.BlogPosts.FirstOrDefault(p => p.Slug == slug);
+
+    public IEnumerable<BlogPost> GetByTag(string tag)
+        => _context.BlogPosts.Where(p => p.Tags != null && p.Tags.Contains(tag)).ToList(); // 👈 Taggar som lista
+
+    public IEnumerable<BlogPost> GetAll() => _context.BlogPosts.ToList();
 
         public void Add(BlogPost post)
         {
@@ -34,8 +40,10 @@ namespace Magato.Api.Repositories;
             existing.Content = post.Content;
             existing.Author = post.Author;
             existing.PublishedAt = post.PublishedAt;
-
-            _context.SaveChanges();
+        existing.Slug = post.Slug;
+        existing.Tags = post.Tags;
+        existing.ImageUrls = post.ImageUrls;
+        _context.SaveChanges();
         }
 
         public void Delete(int id)

@@ -21,14 +21,14 @@ namespace Magato.Api.Controllers;
         public IActionResult GetAll()
             => Ok(_service.GetAll());
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var post = _service.Get(id);
-            return post == null ? NotFound() : Ok(post);
-        }
+    [HttpGet("{id:int}")]
+    public IActionResult Get(int id)
+    {
+        var post = _service.Get(id);
+        return post == null ? NotFound() : Ok(post);
+    }
 
-        [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(BlogPostDto dto)
         {
@@ -40,7 +40,7 @@ namespace Magato.Api.Controllers;
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public IActionResult Update(int id, BlogPostDto dto)
         {
             if (id != dto.Id)
@@ -57,5 +57,13 @@ namespace Magato.Api.Controllers;
             _service.Delete(id);
             return NoContent();
         }
+
+    [HttpGet("{slug}")]
+    public IActionResult GetBySlug(string slug)
+    {
+        var post = _service.GetBySlug(slug);
+        return post == null ? NotFound() : Ok(post);
     }
+
+}
 

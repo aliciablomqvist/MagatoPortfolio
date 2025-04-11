@@ -16,5 +16,9 @@ namespace Magato.Api.DTO
         {
             get; set;
         }
+
+        public string Slug { get; set; } = string.Empty;
+        public List<string> Tags { get; set; } = new();
+        public List<string> ImageUrls { get; set; } = new();
     }
 }
