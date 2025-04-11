@@ -48,6 +48,8 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddHostedService<ContactCleanupService>();
 builder.Services.AddScoped<IPageContentService, PageContentService>();
 builder.Services.AddScoped<IPageContentRepository, PageContentRepository>();
+builder.Services.AddScoped<IBlogPostService, BlogPostService>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
 
 
@@ -57,6 +59,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<CollectionDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UserLoginValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PageContentValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<BlogPostValidator>();
 
 
 builder.Services.AddControllers();

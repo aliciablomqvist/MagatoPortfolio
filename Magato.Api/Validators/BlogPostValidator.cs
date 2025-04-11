@@ -1,7 +1,7 @@
 using FluentValidation;
 using Magato.Api.DTO;
-namespace Magato.Api.DTO.Validators
-{
+namespace Magato.Api.Validators;
+
     public class BlogPostValidator : AbstractValidator<BlogPostDto>
     {
         public BlogPostValidator()
@@ -11,4 +11,3 @@ namespace Magato.Api.DTO.Validators
             RuleFor(x => x.PublishedAt).LessThanOrEqualTo(DateTime.UtcNow);
         }
     }
-}
