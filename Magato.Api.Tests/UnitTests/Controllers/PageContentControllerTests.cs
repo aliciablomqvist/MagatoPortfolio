@@ -1,14 +1,8 @@
 using FluentAssertions;
-
 using Magato.Api.Controllers;
-using Magato.Api.DTO;
 using Magato.Api.Services;
-
 using Microsoft.AspNetCore.Mvc;
-
 using Moq;
-
-using Xunit;
 
 namespace Magato.Api.Tests.UnitTests;
 

@@ -1,20 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Magato.Api.DTO;
-using Magato.Api.Controllers;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
 using Moq;
-using Xunit;
-using Magato.Api;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http.Json;
-using System.Net;
-using FluentAssertions;
-using System.Text;
-using System.Text.Json;
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Magato.Tests.UnitTests.Services;
@@ -62,6 +50,6 @@ public class ContactServiceTests
         Assert.False(result.IsSuccess);
         Assert.NotEmpty(result.Errors);
         _repoMock.Verify(r => r.AddAsync(It.IsAny<ContactMessage>()), Times.Never);
-      
+
     }
 }

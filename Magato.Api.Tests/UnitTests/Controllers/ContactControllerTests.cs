@@ -1,23 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Magato.Api.DTO;
 using Magato.Api.Controllers;
-using Magato.Api.Models;
-using Magato.Api.Data;
-using Magato.Api.Repositories;
 using Magato.Api.Services;
 using Moq;
-using Xunit;
-using Magato.Api;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http.Json;
-using System.Net;
-using FluentAssertions;
 using Magato.Api.Shared;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
-using System.Text.Json;
 
 
 namespace Magato.Tests.UnitTests.Controllers;

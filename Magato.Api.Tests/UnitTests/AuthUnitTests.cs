@@ -1,17 +1,5 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Magato.Api.DTO;
-using Magato.Api.Controllers;
-using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
-using Moq;
-using Xunit;
-using Magato.Api;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http.Json;
-using System.Net;
-using FluentAssertions;
 public class AuthUnitTests
 {
     private readonly IUserService _service;
