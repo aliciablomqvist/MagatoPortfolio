@@ -8,13 +8,11 @@ namespace Magato.Api.Services;
 public class ContactService : IContactService
 {
     private readonly IContactRepository _repo;
-   // private readonly IEmailService _emailService;
     private readonly ContactMessageValidator _validator;
 
-    public ContactService(IContactRepository repo /*IEmailService emailService*/)
+    public ContactService(IContactRepository repo)
     {
         _repo = repo;
-      //  _emailService = emailService;
         _validator = new ContactMessageValidator();
     }
 
@@ -33,14 +31,13 @@ public class ContactService : IContactService
         };
 
         await _repo.AddAsync(message);
-        //await _emailService.SendContactNotificationAsync(dto);
 
         return Result.Success();
     }
 
     public async Task<IEnumerable<ContactMessage>> GetAllMessagesAsync()
     {
-        return await _repo.GetAllAsync(); // Du har troligen detta redan
+        return await _repo.GetAllAsync();
     }
 
     public async Task<bool> DeleteMessageAsync(int id)
