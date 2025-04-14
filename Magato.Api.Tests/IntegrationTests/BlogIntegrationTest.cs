@@ -84,7 +84,6 @@ public class BlogIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     {
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
         var dto = new BlogPostDto
         {
             Id = 2,
@@ -95,6 +94,7 @@ public class BlogIntegrationTests : IClassFixture<WebApplicationFactory<Program>
             Tags = new List<string> { "tech", "dev" },
             ImageUrls = new List<string> { "https://img.com/1.png" }
         };
+
 
         var response = await _client.PostAsJsonAsync("/api/blog", dto);
 
@@ -113,7 +113,6 @@ public class BlogIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     {
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
         var dto = new BlogPostDto
         {
             Id = 1,
@@ -121,9 +120,11 @@ public class BlogIntegrationTests : IClassFixture<WebApplicationFactory<Program>
             Content = "Updated Content",
             Author = "Updated Author",
             PublishedAt = DateTime.UtcNow,
-            Tags = new List<string> { "update", "news" },
+            Tags = new List<string> { "update", "news" }, 
             ImageUrls = new List<string> { "https://img.com/updated.png" }
         };
+
+
 
         var response = await _client.PutAsJsonAsync("/api/blog/1", dto);
 

@@ -27,9 +27,12 @@ namespace Magato.Api.Services;
         _repo.Add(Map(dto));
     }
     public void Update(BlogPostDto dto)
-            => _repo.Update(Map(dto));
+    {
+        dto.Slug = GenerateSlug(dto.Title);
+        _repo.Update(Map(dto));
+    }
 
-        public void Delete(int id)
+    public void Delete(int id)
             => _repo.Delete(id);
 
     private static BlogPostDto Map(BlogPost post) => new()
@@ -58,15 +61,21 @@ namespace Magato.Api.Services;
 
     private static string GenerateSlug(string title)
     {
-        return title
-            .ToLower()
-            .Trim()
+        return title.ToLower()
             .Replace(" ", "-")
             .Replace("å", "a")
             .Replace("ä", "a")
             .Replace("ö", "o")
-            .Replace("--", "-");
+            .Replace(".", "")
+            .Replace(",", "")
+            .Replace("!", "")
+            .Replace("?", "")
+            .Replace(":", "")
+            .Replace(";", "")
+            .Replace("/", "-")
+            .Replace("\\", "-");
     }
+
     public BlogPostDto? GetBySlug(string slug)
     {
         var post = _repo.GetBySlug(slug);
