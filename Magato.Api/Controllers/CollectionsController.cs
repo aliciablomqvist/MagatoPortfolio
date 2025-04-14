@@ -47,7 +47,10 @@ public class CollectionsController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CollectionCreateDto dto)
     {
         var collection = await _service.AddCollectionAsync(dto);
-        return CreatedAtAction(nameof(GetById), new { id = collection.Id }, collection);
+        return CreatedAtAction(nameof(GetById), new
+        {
+            id = collection.Id
+        }, collection);
     }
 
     /// <summary>Updates a collection by ID.</summary>

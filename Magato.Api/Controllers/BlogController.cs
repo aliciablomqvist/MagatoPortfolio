@@ -1,6 +1,5 @@
 using Magato.Api.DTO;
 using Magato.Api.Services;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

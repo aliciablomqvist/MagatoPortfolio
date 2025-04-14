@@ -14,3 +14,7 @@ public class Collection
     public List<Material> Materials { get; set; } = new();
     public List<Sketch> Sketches { get; set; } = new();
 }
+
+
+
+
