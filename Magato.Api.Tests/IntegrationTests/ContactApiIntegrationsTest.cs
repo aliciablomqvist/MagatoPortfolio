@@ -33,10 +33,6 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseInMemoryDatabase("TestDb"));
 
-                var emailMock = new Mock<IEmailService>();
-                emailMock.Setup(e => e.SendContactNotificationAsync(It.IsAny<ContactMessageDto>()))
-                         .Returns(Task.CompletedTask);
-                services.AddSingleton(emailMock.Object);
                 var serviceProvider = services.BuildServiceProvider();
                 using var scope = serviceProvider.CreateScope();
                 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

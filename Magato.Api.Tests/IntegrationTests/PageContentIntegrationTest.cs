@@ -32,11 +32,6 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseInMemoryDatabase("TestCmsDb"));
 
-                var emailMock = new Mock<IEmailService>();
-                emailMock.Setup(e => e.SendContactNotificationAsync(It.IsAny<ContactMessageDto>()))
-                         .Returns(Task.CompletedTask);
-                services.AddSingleton(emailMock.Object);
-
                 var provider = services.BuildServiceProvider();
                 using var scope = provider.CreateScope();
                 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
