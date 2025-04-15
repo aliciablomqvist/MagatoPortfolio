@@ -4,6 +4,7 @@ using Magato.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Magato.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250414155929_AddedProductsToDb")]
+    partial class AddedProductsToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,35 +269,6 @@ namespace Magato.Api.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Magato.Api.Models.ProductInquiry", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("SentAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductInquiries");
-                });
-
             modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
                 {
                     b.Property<int>("Id")
@@ -374,17 +348,6 @@ namespace Magato.Api.Migrations
                     b.Navigation("Collection");
                 });
 
-            modelBuilder.Entity("Magato.Api.Models.ProductInquiry", b =>
-                {
-                    b.HasOne("Magato.Api.Models.Product", "Product")
-                        .WithMany("ProductInquiries")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
                 {
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
@@ -405,11 +368,6 @@ namespace Magato.Api.Migrations
                     b.Navigation("Materials");
 
                     b.Navigation("Sketches");
-                });
-
-            modelBuilder.Entity("Magato.Api.Models.Product", b =>
-                {
-                    b.Navigation("ProductInquiries");
                 });
 #pragma warning restore 612, 618
         }

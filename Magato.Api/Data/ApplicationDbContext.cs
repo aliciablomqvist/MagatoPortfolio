@@ -9,6 +9,31 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
+    // Content
+    public DbSet<PageContent> PageContents
+    {
+        get; set;
+    }
+    public DbSet<BlogPost> BlogPosts
+    {
+        get; set;
+    }
+    public DbSet<ContactMessage> ContactMessages
+    {
+        get; set;
+    }
+
+    // Product-related
+    public DbSet<Product> Products
+    {
+        get; set;
+    }
+    public DbSet<ProductInquiry> ProductInquiries
+    {
+        get; set;
+    }
+
+    // Collection-related
     public DbSet<Collection> Collections
     {
         get; set;
@@ -29,25 +54,9 @@ public class ApplicationDbContext : DbContext
     {
         get; set;
     }
-    public DbSet<ContactMessage> ContactMessages
-    {
-        get; set;
-    }
+
+    // Auth
     public DbSet<User> Users
-    {
-        get; set;
-    }
-    public DbSet<PageContent> PageContents
-    {
-        get; set;
-    }
-
-    public DbSet<BlogPost> BlogPosts
-    {
-        get; set;
-    }
-
-    public DbSet<Product> Products
     {
         get; set;
     }
@@ -55,9 +64,16 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ProductInquiry>()
+         .HasOne(i => i.Product)
+         .WithMany(p => p.ProductInquiries)
+         .HasForeignKey(i => i.ProductId)
+         .OnDelete(DeleteBehavior.Cascade);
+
+
         base.OnModelCreating(modelBuilder);
 
-        // ValueConverter for MediaUrls
+        // ValueConverter för MediaUrls
         var stringListConverter = new ValueConverter<List<string>, string>(
             v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
             v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null) ?? new List<string>()

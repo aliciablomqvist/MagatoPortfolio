@@ -47,7 +47,8 @@ builder.Services.AddScoped<IBlogPostService, BlogPostService>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
+builder.Services.AddScoped<IProductInquiryService, ProductInquiryService>();
+builder.Services.AddScoped<IProductInquiryRepository, ProductInquiryRepository>();
 
 // Validators
 builder.Services.AddFluentValidationAutoValidation();
@@ -57,6 +58,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<UserLoginValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PageContentValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<BlogPostValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductInquiryValidator>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

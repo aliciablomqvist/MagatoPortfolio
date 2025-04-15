@@ -12,4 +12,6 @@ public class Product
     public decimal Price { get; set; }
     public string Category { get; set; } = default!;
     public List<string> ImageUrls { get; set; } = new();
+    public ICollection<ProductInquiry> ProductInquiries { get; set; } = new List<ProductInquiry>();
+
 }
