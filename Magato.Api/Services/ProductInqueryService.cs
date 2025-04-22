@@ -7,20 +7,39 @@ namespace Magato.Api.Services;
 public class ProductInquiryService : IProductInquiryService
 {
     private readonly IProductInquiryRepository _repo;
-    public ProductInquiryService(IProductInquiryRepository repo) => _repo = repo;
+    private readonly IProductRepository _productRepo;
 
-    public int Add(ProductInquiryDto dto)
+    public ProductInquiryService(IProductInquiryRepository repo, IProductRepository productRepo)
+    {
+        _repo = repo;
+        _productRepo = productRepo;
+    }
+
+    public ProductInquiryResponseDto Add(ProductInquiryDto dto)
     {
         var inquiry = new ProductInquiry
         {
             ProductId = dto.ProductId,
             Email = dto.Email,
             Message = dto.Message,
-            SentAt = DateTime.UtcNow
+            Size = dto.Size,
+
         };
 
         _repo.Add(inquiry);
-        return inquiry.Id;
+
+        var product = _productRepo.Get(dto.ProductId);
+
+        return new ProductInquiryResponseDto //Anpassa för kund. Vad hen ska se vid bekräftelse.
+        {
+            Id = inquiry.Id,
+            ProductTitle = product?.Title ?? "Unknown",
+            Email = dto.Email,
+            Message = dto.Message,
+            Size = dto.Size,
+            SentAt = inquiry.SentAt,
+            IsHandled = false
+        };
     }
 
     public IEnumerable<ProductInquiryResponseDto> GetAll()
@@ -28,12 +47,16 @@ public class ProductInquiryService : IProductInquiryService
         return _repo.GetAll()
             .Select(i => new ProductInquiryResponseDto
             {
-                ProductTitle = i.Product.Title,
+                Id = i.Id,
+                ProductTitle = i.Product?.Title ?? "Unknown",
                 Email = i.Email,
                 Message = i.Message,
-                SentAt = i.SentAt
+                Size = i.Size,
+                SentAt = i.SentAt,
+                IsHandled = i.IsHandled
             });
     }
+
     public ProductInquiryResponseDto? GetById(int id)
     {
         var inquiry = _repo.Get(id);
@@ -42,10 +65,23 @@ public class ProductInquiryService : IProductInquiryService
 
         return new ProductInquiryResponseDto
         {
-            ProductTitle = inquiry.Product?.Title,
+            Id = inquiry.Id,
+            ProductTitle = inquiry.Product?.Title ?? "Unknown",
             Email = inquiry.Email,
             Message = inquiry.Message,
-            SentAt = inquiry.SentAt
+            Size = inquiry.Size,
+            SentAt = inquiry.SentAt,
+            IsHandled = inquiry.IsHandled
         };
+    }
+
+    public void MarkAsHandled(int id)
+    {
+        var inquiry = _repo.Get(id);
+        if (inquiry != null)
+        {
+            inquiry.IsHandled = true;
+            _repo.Update(inquiry);
+        }
     }
 }

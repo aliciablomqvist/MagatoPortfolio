@@ -19,18 +19,18 @@ public class ProductInquiryController : ControllerBase
     [HttpPost]
     public IActionResult Create(ProductInquiryDto dto)
     {
-        var createdId = _service.Add(dto); 
-        var inquiry = _service.GetById(createdId);
-
-        return CreatedAtAction(nameof(Get), new
+        var response = _service.Add(dto);
+        return Created("", new
         {
-            id = createdId
-        }, inquiry);
+            message = "Thank you for your inquiry! We will get back to you as soon as possible.",
+            inquiry = response
+        });
     }
+
 
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public IActionResult GetAll() => Ok(_service.GetAll());
+    public IActionResult GetAll() => Ok(_service.GetAll()); // Adminnotis: lista av förfrågningar
 
     [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
@@ -38,5 +38,13 @@ public class ProductInquiryController : ControllerBase
     {
         var inquiry = _service.GetById(id);
         return inquiry == null ? NotFound() : Ok(inquiry);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPatch("{id}/handle")]
+    public IActionResult MarkAsHandled(int id)
+    {
+        _service.MarkAsHandled(id);
+        return NoContent();
     }
 }

@@ -37,8 +37,7 @@ public class ProductService : IProductService
         Title = p.Title,
         Description = p.Description,
         Price = p.Price,
-        Category = p.Category,
-        ImageUrls = p.ImageUrls
+        ImageUrls = p.ProductImages.Select(i => i.ImageUrl).ToList()
     };
 
     private static Product Map(ProductDto dto) => new()
@@ -47,7 +46,6 @@ public class ProductService : IProductService
         Title = dto.Title,
         Description = dto.Description,
         Price = dto.Price,
-        Category = dto.Category,
-        ImageUrls = dto.ImageUrls
+        ProductImages = dto.ImageUrls.Select(url => new ProductImage { ImageUrl = url }).ToList()
     };
 }

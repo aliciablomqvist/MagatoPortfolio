@@ -4,8 +4,8 @@ namespace Magato.Api.Repositories;
 
 public interface IProductInquiryRepository
 {
-    void Add(ProductInquiry inquiry);
     IEnumerable<ProductInquiry> GetAll();
     ProductInquiry? Get(int id);
-
+    void Add(ProductInquiry inquiry);
+    void Update(ProductInquiry inquiry);
 }

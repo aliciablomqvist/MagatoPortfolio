@@ -33,6 +33,12 @@ public class ApplicationDbContext : DbContext
         get; set;
     }
 
+    public DbSet<ProductImage> ProductImages
+    {
+        get; set;
+    }
+
+
     // Collection-related
     public DbSet<Collection> Collections
     {
@@ -64,16 +70,33 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.ProductImages)
+            .WithOne(i => i.Product)
+            .HasForeignKey(i => i.ProductId);
+
+        modelBuilder.Entity<Product>()
+.Property(p => p.Status)
+.HasConversion<string>();
+
+
         modelBuilder.Entity<ProductInquiry>()
          .HasOne(i => i.Product)
          .WithMany(p => p.ProductInquiries)
          .HasForeignKey(i => i.ProductId)
          .OnDelete(DeleteBehavior.Cascade);
 
+      /*  modelBuilder.Entity<Product>()
+            .Property(p => p.ProductImages)
+            .HasConversion(
+                v => JsonSerializer.Serialize(v.Select(i => i.ImageUrl).ToList(), (JsonSerializerOptions)null),
+                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null)?.Select(url => new ProductImage { ImageUrl = url }).ToList() ?? new List<ProductImage>()
+            );*/
 
         base.OnModelCreating(modelBuilder);
 
-        // ValueConverter för MediaUrls
         var stringListConverter = new ValueConverter<List<string>, string>(
             v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
             v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null) ?? new List<string>()

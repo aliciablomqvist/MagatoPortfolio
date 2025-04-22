@@ -4,7 +4,12 @@ public class ProductInquiryDto
     public int ProductId
     {
         get; set;
-    } 
-    public string Email { get; set; } = null!;
-    public string Message { get; set; } = null!;
+    }
+    public string Email { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
+
+    public string? Size
+    {
+        get; set;
+    }
 }
