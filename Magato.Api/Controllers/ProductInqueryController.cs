@@ -30,7 +30,7 @@ public class ProductInquiryController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public IActionResult GetAll() => Ok(_service.GetAll()); // Adminnotis: lista av förfrågningar
+    public IActionResult GetAll() => Ok(_service.GetAll());
 
     [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]

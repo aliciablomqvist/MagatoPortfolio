@@ -26,12 +26,17 @@ public class ProductsController : ControllerBase
         _service.Get(id) is { } product ? Ok(product) : NotFound();
 
     [Authorize(Roles = "Admin")]
+
     [HttpPost]
-    public IActionResult Create(ProductDto dto)
+    public IActionResult Create([FromBody] ProductDto dto)
     {
         _service.Add(dto);
-        return CreatedAtAction(nameof(Get), new { id = dto.Id }, dto);
+        return CreatedAtAction(nameof(Get), new
+        {
+            id = dto.Id
+        }, dto);
     }
+
 
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]

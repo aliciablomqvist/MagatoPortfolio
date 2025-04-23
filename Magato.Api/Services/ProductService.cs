@@ -37,7 +37,10 @@ public class ProductService : IProductService
         Title = p.Title,
         Description = p.Description,
         Price = p.Price,
-        ImageUrls = p.ProductImages.Select(i => i.ImageUrl).ToList()
+        CategoryId = p.CategoryId,
+        CategoryName = p.Category?.Name ?? "",
+        ImageUrls = p.ProductImages.Select(i => i.ImageUrl).ToList(),
+        Status = p.Status
     };
 
     private static Product Map(ProductDto dto) => new()
@@ -46,6 +49,8 @@ public class ProductService : IProductService
         Title = dto.Title,
         Description = dto.Description,
         Price = dto.Price,
-        ProductImages = dto.ImageUrls.Select(url => new ProductImage { ImageUrl = url }).ToList()
+        CategoryId = dto.CategoryId,
+        ProductImages = dto.ImageUrls.Select(url => new ProductImage { ImageUrl = url }).ToList(),
+        Status = dto.Status
     };
 }

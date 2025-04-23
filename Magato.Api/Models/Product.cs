@@ -17,17 +17,15 @@ public class Product
 
     public ICollection<ProductInquiry> ProductInquiries { get; set; } = new List<ProductInquiry>();
 
-    public enum StockStatus
-    {
-        InStock,
-        PreOrder,
-        OutOfStock
-    }
 
-    public StockStatus Status
+    public ProductStatus Status
     {
         get; set;
     }
-
+    public int CategoryId
+    {
+        get; set;
+    }
+    public Category Category { get; set; } = default!;
 
 }

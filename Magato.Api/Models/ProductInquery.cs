@@ -23,4 +23,10 @@ public class ProductInquiry
         get; set;
     }
     public Product Product { get; set; } = null!;
+
+    public ProductStatus Status
+    {
+        get; set;
+    }
+
 }

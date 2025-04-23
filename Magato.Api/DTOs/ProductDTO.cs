@@ -1,3 +1,5 @@
+using Magato.Api.Models;
+
 namespace Magato.Api.DTO;
 public class ProductDto
 {
@@ -8,5 +10,15 @@ public class ProductDto
 
     public List<string> ImageUrls { get; set; } = new();
 
+    public int CategoryId
+    {
+        get; set;
+    }
+    public string CategoryName { get; set; } = default!;
 
+
+    public ProductStatus Status
+    {
+        get; set;
+    }
 }

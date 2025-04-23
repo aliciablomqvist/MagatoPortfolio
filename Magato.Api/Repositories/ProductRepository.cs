@@ -1,5 +1,6 @@
 using Magato.Api.Data;
 using Magato.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Magato.Api.Repositories;
 
@@ -12,9 +13,17 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public IEnumerable<Product> GetAll() => _context.Products.ToList();
+    public IEnumerable<Product> GetAll() =>
+        _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.ProductImages)
+            .ToList();
 
-    public Product? Get(int id) => _context.Products.Find(id);
+    public Product? Get(int id) =>
+        _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.ProductImages)
+            .FirstOrDefault(p => p.Id == id);
 
     public void Add(Product product)
     {

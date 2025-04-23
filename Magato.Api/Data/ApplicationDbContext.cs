@@ -38,6 +38,12 @@ public class ApplicationDbContext : DbContext
         get; set;
     }
 
+    public DbSet<Category> Categories
+    {
+        get; set;
+    }
+
+
 
     // Collection-related
     public DbSet<Collection> Collections
@@ -80,6 +86,16 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Product>()
 .Property(p => p.Status)
 .HasConversion<string>();
+
+
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.Category)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CategoryId);
+
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Status)
+            .HasConversion<string>();
 
 
         modelBuilder.Entity<ProductInquiry>()

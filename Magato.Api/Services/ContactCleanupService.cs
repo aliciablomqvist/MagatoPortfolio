@@ -6,7 +6,7 @@ namespace Magato.Api.Services;
 public class ContactCleanupService : BackgroundService
 {
     private readonly IServiceProvider _services;
-    private readonly TimeSpan _cleanupInterval = TimeSpan.FromDays(1); // kör varje dag
+    private readonly TimeSpan _cleanupInterval = TimeSpan.FromDays(1); // körs varje dag
 
     public ContactCleanupService(IServiceProvider services)
     {
