@@ -20,7 +20,7 @@ namespace Magato.Api.Repositories;
   => _context.BlogPosts.FirstOrDefault(p => p.Slug == slug);
 
     public IEnumerable<BlogPost> GetByTag(string tag)
-        => _context.BlogPosts.Where(p => p.Tags != null && p.Tags.Contains(tag)).ToList(); // 👈 Taggar som lista
+        => _context.BlogPosts.Where(p => p.Tags != null && p.Tags.Contains(tag)).ToList();
 
     public IEnumerable<BlogPost> GetAll() => _context.BlogPosts.ToList();
 

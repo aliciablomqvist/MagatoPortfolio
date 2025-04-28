@@ -2,16 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Magato.Api.Data;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
-using Magato.Api.DTO;
 using Magato.Api.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +31,10 @@ if (!builder.Environment.IsEnvironment("Testing"))
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 }
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 
 // Dependency injection
@@ -49,8 +50,12 @@ builder.Services.AddScoped<IPageContentService, PageContentService>();
 builder.Services.AddScoped<IPageContentRepository, PageContentRepository>();
 builder.Services.AddScoped<IBlogPostService, BlogPostService>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
-
-
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductInquiryService, ProductInquiryService>();
+builder.Services.AddScoped<IProductInquiryRepository, ProductInquiryRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Validators
 builder.Services.AddFluentValidationAutoValidation();
@@ -59,16 +64,17 @@ builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UserLoginValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PageContentValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<BlogPostValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductInquiryValidator>();
 
-
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 //Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magato API", Version = "v1" });
-
+    c.UseInlineDefinitionsForEnums();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n" +

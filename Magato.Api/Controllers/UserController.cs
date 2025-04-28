@@ -5,7 +5,7 @@ using Magato.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace Magato.Api.Controllers; 
+namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -55,7 +55,7 @@ public class AuthController : ControllerBase
         }
     }
 
-//Testa gömd admin endpoint
+//Testa gömd admin endpoint - ta bort sen
     [Authorize(Roles = "Admin")]
     [HttpGet("admin-only")]
     public IActionResult AdminSecret()

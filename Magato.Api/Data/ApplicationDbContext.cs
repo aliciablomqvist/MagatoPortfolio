@@ -9,6 +9,43 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
+    // Content
+    public DbSet<PageContent> PageContents
+    {
+        get; set;
+    }
+    public DbSet<BlogPost> BlogPosts
+    {
+        get; set;
+    }
+    public DbSet<ContactMessage> ContactMessages
+    {
+        get; set;
+    }
+
+    // Product-related
+    public DbSet<Product> Products
+    {
+        get; set;
+    }
+    public DbSet<ProductInquiry> ProductInquiries
+    {
+        get; set;
+    }
+
+    public DbSet<ProductImage> ProductImages
+    {
+        get; set;
+    }
+
+    public DbSet<Category> Categories
+    {
+        get; set;
+    }
+
+
+
+    // Collection-related
     public DbSet<Collection> Collections
     {
         get; set;
@@ -29,29 +66,53 @@ public class ApplicationDbContext : DbContext
     {
         get; set;
     }
-    public DbSet<ContactMessage> ContactMessages
-    {
-        get; set;
-    }
+
+    // Auth
     public DbSet<User> Users
     {
         get; set;
     }
-    public DbSet<PageContent> PageContents
-    {
-        get; set;
-    }
 
-    public DbSet<BlogPost> BlogPosts
-    {
-        get; set;
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.ProductImages)
+            .WithOne(i => i.Product)
+            .HasForeignKey(i => i.ProductId);
+
+        modelBuilder.Entity<Product>()
+.Property(p => p.Status)
+.HasConversion<string>();
+
+
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.Category)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CategoryId);
+
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Status)
+            .HasConversion<string>();
+
+
+        modelBuilder.Entity<ProductInquiry>()
+         .HasOne(i => i.Product)
+         .WithMany(p => p.ProductInquiries)
+         .HasForeignKey(i => i.ProductId)
+         .OnDelete(DeleteBehavior.Cascade);
+
+      /*  modelBuilder.Entity<Product>()
+            .Property(p => p.ProductImages)
+            .HasConversion(
+                v => JsonSerializer.Serialize(v.Select(i => i.ImageUrl).ToList(), (JsonSerializerOptions)null),
+                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null)?.Select(url => new ProductImage { ImageUrl = url }).ToList() ?? new List<ProductImage>()
+            );*/
+
         base.OnModelCreating(modelBuilder);
 
-        // ValueConverter for MediaUrls
         var stringListConverter = new ValueConverter<List<string>, string>(
             v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
             v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null) ?? new List<string>()

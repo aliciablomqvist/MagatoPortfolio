@@ -61,6 +61,23 @@ namespace Magato.Api.Migrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("Magato.Api.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Magato.Api.Models.Collection", b =>
                 {
                     b.Property<int>("Id")
@@ -234,6 +251,96 @@ namespace Magato.Api.Migrations
                     b.ToTable("PageContents");
                 });
 
+            modelBuilder.Entity("Magato.Api.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.ProductInquiry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsHandled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductInquiries");
+                });
+
             modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
                 {
                     b.Property<int>("Id")
@@ -313,6 +420,39 @@ namespace Magato.Api.Migrations
                     b.Navigation("Collection");
                 });
 
+            modelBuilder.Entity("Magato.Api.Models.Product", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.ProductImage", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.ProductInquiry", b =>
+                {
+                    b.HasOne("Magato.Api.Models.Product", "Product")
+                        .WithMany("ProductInquiries")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
                 {
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
@@ -324,6 +464,11 @@ namespace Magato.Api.Migrations
                     b.Navigation("Collection");
                 });
 
+            modelBuilder.Entity("Magato.Api.Models.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("Magato.Api.Models.Collection", b =>
                 {
                     b.Navigation("Colors");
@@ -333,6 +478,13 @@ namespace Magato.Api.Migrations
                     b.Navigation("Materials");
 
                     b.Navigation("Sketches");
+                });
+
+            modelBuilder.Entity("Magato.Api.Models.Product", b =>
+                {
+                    b.Navigation("ProductImages");
+
+                    b.Navigation("ProductInquiries");
                 });
 #pragma warning restore 612, 618
         }
