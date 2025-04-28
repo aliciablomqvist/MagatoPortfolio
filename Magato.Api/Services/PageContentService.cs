@@ -68,7 +68,13 @@ public class PageContentService : IPageContentService
             ExtraText = entity.ExtraText,
             Published = entity.Published,
             LastModified = entity.LastModified,
-            MediaUrls = entity.MediaUrls
+            MediaUrls = entity.MediaUrls,
+            SocialMediaLinks = entity.SocialMediaLinks
+            .Select(link => new SocialMediaLinkDto
+            {
+                Platform = link.Platform,
+                Url = link.Url
+            }).ToList()
         };
     }
 
@@ -83,7 +89,14 @@ public class PageContentService : IPageContentService
             ExtraText = dto.ExtraText,
             Published = dto.Published,
             LastModified = dto.LastModified,
-            MediaUrls = dto.MediaUrls
+            MediaUrls = dto.MediaUrls,
+            SocialMediaLinks = dto.SocialMediaLinks
+            .Select(link => new SocialMediaLink
+            {
+                Platform = link.Platform,
+                Url = link.Url
+            }).ToList()
+
         };
     }
 }

@@ -104,12 +104,17 @@ public class ApplicationDbContext : DbContext
          .HasForeignKey(i => i.ProductId)
          .OnDelete(DeleteBehavior.Cascade);
 
-      /*  modelBuilder.Entity<Product>()
-            .Property(p => p.ProductImages)
-            .HasConversion(
-                v => JsonSerializer.Serialize(v.Select(i => i.ImageUrl).ToList(), (JsonSerializerOptions)null),
-                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null)?.Select(url => new ProductImage { ImageUrl = url }).ToList() ?? new List<ProductImage>()
-            );*/
+        /*  modelBuilder.Entity<Product>()
+              .Property(p => p.ProductImages)
+              .HasConversion(
+                  v => JsonSerializer.Serialize(v.Select(i => i.ImageUrl).ToList(), (JsonSerializerOptions)null),
+                  v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null)?.Select(url => new ProductImage { ImageUrl = url }).ToList() ?? new List<ProductImage>()
+              );*/
+
+        modelBuilder.Entity<PageContent>()
+    .HasMany(p => p.SocialMediaLinks)
+    .WithOne()
+    .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);
 

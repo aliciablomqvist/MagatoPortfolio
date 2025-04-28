@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Magato.Api.Services;
-
+using Magato.Api.DTO;
 
 namespace Magato.Api.Controllers;
 
@@ -31,7 +31,7 @@ public class CmsController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public IActionResult CreateContent(PageContentDto dto)
+    public IActionResult CreateContent([FromBody] PageContentDto dto)
     {
         _service.Add(dto);
         return Created($"/api/cms/{dto.Key}", dto);

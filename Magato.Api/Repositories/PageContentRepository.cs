@@ -16,12 +16,16 @@ public class PageContentRepository : IPageContentRepository
 
     public PageContent? Get(string key)
     {
-        return _context.PageContents.FirstOrDefault(c => c.Key == key);
+        return _context.PageContents
+          .Include(c => c.SocialMediaLinks)
+          .FirstOrDefault(c => c.Key == key);
     }
 
     public IEnumerable<PageContent> GetAll()
     {
-        return _context.PageContents.ToList();
+        return _context.PageContents
+         .Include(c => c.SocialMediaLinks)
+         .ToList();
     }
 
     public void Add(PageContent content)
@@ -42,6 +46,15 @@ public class PageContentRepository : IPageContentRepository
         existing.MediaUrls = content.MediaUrls;
         existing.Published = content.Published;
         existing.LastModified = DateTime.UtcNow;
+        existing.SocialMediaLinks.Clear();
+        foreach (var link in content.SocialMediaLinks)
+        {
+            existing.SocialMediaLinks.Add(new SocialMediaLink
+            {
+                Platform = link.Platform,
+                Url = link.Url
+            });
+        }
 
         _context.SaveChanges();
     }
