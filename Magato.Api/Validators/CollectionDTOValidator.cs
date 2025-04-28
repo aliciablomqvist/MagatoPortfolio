@@ -8,7 +8,7 @@ namespace Magato.Api.Validators
     {
         public CollectionDtoValidator()
         {
-            RuleFor(x => x.CollectionTitle).NotEmpty().WithMessage("Du måste fylla i namn på kollektionen.");
+            RuleFor(x => x.CollectionTitle).NotEmpty().WithMessage("You must specify a title for the collections.");
         }
     }
 }

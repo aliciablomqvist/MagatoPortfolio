@@ -10,21 +10,21 @@ public class PageContentValidator : AbstractValidator<PageContentDto>
     {
         RuleFor(x => x.Key)
             .NotEmpty().WithMessage("Key måste anges.")
-            .MaximumLength(100).WithMessage("Key får max vara 100 tecken.");
+            .MaximumLength(100).WithMessage("Key has to be max 100 characters long");
 
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Titel måste anges.")
-            .MaximumLength(200).WithMessage("Titel får max vara 200 tecken.");
+            .MaximumLength(200).WithMessage("Title has to be max 200 characters long");
 
         RuleFor(x => x.MainText)
-            .NotEmpty().WithMessage("MainText kan inte vara tom.");
+            .NotEmpty().WithMessage("MainText cannot be empty.");
 
         RuleForEach(x => x.MediaUrls)
             .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
-            .WithMessage("Alla media-URL:er måste vara giltiga URL:er.");
+            .WithMessage("Has to be a valid URL.");
 
         RuleFor(x => x.LastModified)
             .LessThanOrEqualTo(DateTime.UtcNow)
-            .WithMessage("LastModified får inte vara i framtiden.");
+            .WithMessage("LastModified cannot be in the future.");
     }
 }

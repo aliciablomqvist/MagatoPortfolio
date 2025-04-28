@@ -11,11 +11,11 @@ public class ContactMessageValidator //Kontrollerar bland annat format för namn
         var errors = new List<string>();
 
         if (string.IsNullOrWhiteSpace(dto.Name))
-            errors.Add("Namn krävs.");
+            errors.Add("You have to fill in a name.");
         if (string.IsNullOrWhiteSpace(dto.Email) || !dto.Email.Contains("@"))
-            errors.Add("Ogiltig e-post.");
+            errors.Add("Email is not valid");
         if (string.IsNullOrWhiteSpace(dto.Message))
-            errors.Add("Meddelande krävs.");
+            errors.Add("Message is empty.");
 
         return errors;
     }

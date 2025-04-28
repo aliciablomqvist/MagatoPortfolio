@@ -20,7 +20,7 @@ public class UserService : IUserService
     {
 
         if (_repo.AdminExists())
-            throw new InvalidOperationException("Admin finns redan");
+            throw new InvalidOperationException("Admin already exists");
 
         var user = new User
         {
@@ -38,7 +38,7 @@ public class UserService : IUserService
 
         var user = _repo.GetByUsername(dto.Username);
         if (user == null || user.PasswordHash != Hash(dto.Password))
-            throw new UnauthorizedAccessException("Fel användarnamn eller lösenord");
+            throw new UnauthorizedAccessException("Wrong username or password");
 
         return user;
     }

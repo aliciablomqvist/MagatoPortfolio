@@ -11,7 +11,7 @@ namespace ApiTest.Validators
             RuleFor(x => x.Hex)
                 .NotEmpty()
                 .Matches("^#(?:[0-9a-fA-F]{3}){1,2}$")
-                .WithMessage("Hex måste vara i formatet #RRGGBB.");
+                .WithMessage("Have to be in the following format: #RRGGBB.");
         }
     }
 }

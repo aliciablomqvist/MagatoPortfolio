@@ -52,7 +52,7 @@ public class ContactController : ControllerBase
     {
         var success = await _contactService.DeleteMessageAsync(id);
         if (!success)
-            return NotFound(new { error = "Meddelandet hittades inte." });
+            return NotFound(new { error = "The message was not found." });
 
         return NoContent();
     }

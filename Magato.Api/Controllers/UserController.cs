@@ -20,6 +20,7 @@ public class AuthController : ControllerBase
         _tokenService = tokenService;
     }
 
+//Temporär endpoint för att registera admin 
     [HttpPost("register")]
     public IActionResult Register(UserRegisterDto dto)
     {
