@@ -30,12 +30,19 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public IActionResult Create([FromBody] ProductDto dto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         _service.Add(dto);
+
         return CreatedAtAction(nameof(Get), new
         {
             id = dto.Id
         }, dto);
     }
+
 
 
     [Authorize(Roles = "Admin")]

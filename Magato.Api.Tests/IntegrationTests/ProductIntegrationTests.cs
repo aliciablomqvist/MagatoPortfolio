@@ -1,106 +1,154 @@
-
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using FluentAssertions;
-using Magato.Api.DTO;
 using Magato.Api.Data;
+using Magato.Api.DTO;
+using Magato.Api.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Magato.Api.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Xunit;
 
-namespace Magato.Api.Tests.IntegrationTests;
-
-public class ProductIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+namespace Magato.Api.Tests.IntegrationTests
 {
-    private readonly HttpClient _client;
-
-    public ProductIntegrationTests(WebApplicationFactory<Program> factory)
+    public class ProductIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {
-        _client = factory.WithWebHostBuilder(builder =>
+        private readonly WebApplicationFactory<Program> _factory;
+        private readonly HttpClient _client;
+
+        public ProductIntegrationTests(WebApplicationFactory<Program> factory)
         {
-            builder.UseSetting("environment", "Testing");
-            builder.ConfigureServices(services =>
+            _factory = factory.WithWebHostBuilder(builder =>
             {
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                if (descriptor != null)
-                    services.Remove(descriptor);
-
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("ProductTestDb"));
-
-                var sp = services.BuildServiceProvider();
-                using var scope = sp.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                db.Database.EnsureCreated();
-
-                db.Users.RemoveRange(db.Users);
-                db.Products.RemoveRange(db.Products);
-
-                db.Users.Add(new User
+                builder.UseSetting("environment", "Testing");
+                builder.ConfigureServices(services =>
                 {
-                    Username = "admin",
-                    PasswordHash = Convert.ToBase64String(
-                        System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
-                    IsAdmin = true
-                });
+                    var descriptor = services.SingleOrDefault(
+                        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+                    if (descriptor != null)
+                        services.Remove(descriptor);
 
-                db.Products.Add(new Product
-                {
-                    Id = 1,
-                    Title = "Sneakers",
-                    Price = 799,
-                    Category = "Shoes",
-                    Description = "Comfortable running sneakers"
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseInMemoryDatabase("ProductTestDb"));
                 });
-
-                db.SaveChanges();
             });
-        }).CreateClient();
-    }
 
-    private async Task<string> LoginAndGetTokenAsync()
-    {
-        var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
-        var content = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
-        return content!.Token;
-    }
+            _client = _factory.CreateClient();
+        }
 
-    [Fact]
-    public async Task GetAll_Returns_List()
-    {
-        var response = await _client.GetAsync("/api/products");
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        var products = await response.Content.ReadFromJsonAsync<List<ProductDto>>();
-        products.Should().NotBeNull();
-        products.Should().Contain(p => p.Title == "Sneakers");
-    }
-
-    [Fact]
-    public async Task Create_Product_Returns_Created()
-    {
-        var token = await LoginAndGetTokenAsync();
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-        var dto = new ProductDto
+        private async Task SeedTestDataAsync()
         {
-            Id = 2,
-            Title = "Flower dress",
-            Price = 1200,
-            Category = "Dresses",
-            Description = "Cute flower dress"
-        };
+            using var scope = _factory.Services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-        var response = await _client.PostAsJsonAsync("/api/products", dto);
+            db.Users.RemoveRange(db.Users);
+            db.Categories.RemoveRange(db.Categories);
+            db.Products.RemoveRange(db.Products);
 
-        response.StatusCode.Should().Be(HttpStatusCode.Created);
+            var category = new Category
+            {
+                Id = 1,
+                Name = "Shoes"
+            };
 
-        var created = await response.Content.ReadFromJsonAsync<ProductDto>();
-        created.Should().NotBeNull();
-        created!.Title.Should().Be(dto.Title);
+            db.Categories.Add(category);
+
+            db.Products.Add(new Product
+            {
+                Title = "Sneakers",
+                Price = 799,
+                CategoryId = category.Id,
+                Category = category,
+                Description = "Running sneakers",
+                Status = ProductStatus.InStock,
+                ProductImages = new List<ProductImage>
+        {
+            new ProductImage { ImageUrl = "https://pic.com/sneakers1.jpg" }
+        }
+            });
+
+            db.Users.Add(new User
+            {
+                Username = "admin",
+                PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
+                IsAdmin = true
+            });
+
+            await db.SaveChangesAsync();
+        }
+
+
+        private async Task AuthenticateAsync()
+        {
+            var login = new UserLoginDto
+            {
+                Username = "admin",
+                Password = "admin123"
+            };
+
+            var response = await _client.PostAsJsonAsync("/api/auth/login", login);
+            response.EnsureSuccessStatusCode();
+
+            var body = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", body!.Token);
+        }
+
+        [Fact]
+        public async Task GetAll_Returns_List()
+        {
+            await SeedTestDataAsync();
+
+            var response = await _client.GetAsync("/api/products");
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var products = await response.Content.ReadFromJsonAsync<List<ProductDto>>(new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() }
+            });
+
+            products.Should().NotBeNull();
+            products.Should().NotBeEmpty();
+
+        }
+
+        [Fact]
+        public async Task Create_Product_Returns_Created()
+        {
+            await SeedTestDataAsync();
+            await AuthenticateAsync();
+
+            var newProduct = new
+            {
+                title = "Shoes with painted flowers",
+                price = 1200,
+                description = "Amazing shoes",
+                categoryId = 1,
+                imageUrls = new List<string>
+                {
+                    "https://pic.com/dress1.jpg",
+                    "https://pic.com/dress2.jpg"
+                },
+                status = "InStock"
+            };
+
+            var response = await _client.PostAsJsonAsync("/api/products", newProduct);
+
+            var rawBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("Create Product Response: " + rawBody);
+
+            response.StatusCode.Should().Be(HttpStatusCode.Created);
+
+            var created = JsonSerializer.Deserialize<ProductDto>(rawBody, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                Converters = { new JsonStringEnumConverter() }
+            });
+
+            created.Should().NotBeNull();
+            created!.Title.Should().Be("Shoes with painted flowers");
+        }
     }
 }

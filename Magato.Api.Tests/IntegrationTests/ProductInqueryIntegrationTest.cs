@@ -44,13 +44,19 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
                     IsAdmin = true
                 });
 
+                db.Categories.RemoveRange(db.Categories);
+                var category = new Category { Id = 1, Name = "Shoes" };
+                db.Categories.Add(category);
+
                 db.Products.RemoveRange(db.Products);
+
                 db.Products.Add(new Product
                 {
                     Id = 1,
                     Title = "Sneakers",
                     Price = 799,
-                    Category = "Shoes",
+                    Category = category,
+                    CategoryId = category.Id,
                     Description = "Test product"
                 });
 

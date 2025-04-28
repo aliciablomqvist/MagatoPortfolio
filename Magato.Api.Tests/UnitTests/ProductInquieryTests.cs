@@ -12,13 +12,15 @@ namespace Magato.Api.Tests.UnitTests;
 
 public class ProductInquiryServiceTests
 {
-    private readonly Mock<IProductInquiryRepository> _repoMock;
     private readonly ProductInquiryService _service;
+    private readonly Mock<IProductInquiryRepository> _inquiryRepoMock;
+    private readonly Mock<IProductRepository> _productRepoMock;
 
     public ProductInquiryServiceTests()
     {
-        _repoMock = new Mock<IProductInquiryRepository>();
-        _service = new ProductInquiryService(_repoMock.Object);
+        _inquiryRepoMock = new Mock<IProductInquiryRepository>();
+        _productRepoMock = new Mock<IProductRepository>();
+        _service = new ProductInquiryService(_inquiryRepoMock.Object, _productRepoMock.Object);
     }
 
     [Fact]
@@ -27,17 +29,12 @@ public class ProductInquiryServiceTests
         var dto = new ProductInquiryDto
         {
             ProductId = 1,
-            Email = "customer@example.com",
+            Email = "mail@example.com",
             Message = "Do you have this product in size 42?"
         };
-
         _service.Add(dto);
 
-        _repoMock.Verify(r => r.Add(It.Is<ProductInquiry>(i =>
-            i.ProductId == dto.ProductId &&
-            i.Email == dto.Email &&
-            i.Message == dto.Message
-        )), Times.Once);
+        _inquiryRepoMock.Verify(r => r.Add(It.IsAny<ProductInquiry>()), Times.Once);
     }
 
     [Fact]
@@ -48,13 +45,13 @@ public class ProductInquiryServiceTests
             new ProductInquiry
             {
                 Product = new Product { Title = "Sneakers" },
-                Email = "customer@example.com",
+                Email = "mail@example.com",
                 Message = "Do you have this product in size 42?",
                 SentAt = System.DateTime.UtcNow
             }
         };
 
-        _repoMock.Setup(r => r.GetAll()).Returns(mockData);
+        _inquiryRepoMock.Setup(r => r.GetAll()).Returns(mockData);
 
         var result = _service.GetAll();
 

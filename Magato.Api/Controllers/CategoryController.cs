@@ -29,6 +29,38 @@ public class CategoriesController : ControllerBase
         _service.Add(dto);
         return CreatedAtAction(nameof(GetAll), null);
     }
-}
 
-//Lägg till fler senare (PUT och DELETE)
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, CategoryDto dto)
+    {
+        var existing = _service.GetById(id);
+        if (existing == null)
+        {
+            return NotFound(new
+            {
+                message = $"Category with ID {id} not found."
+            });
+        }
+
+        _service.Update(id, dto);
+        return NoContent(); 
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var existing = _service.GetById(id);
+        if (existing == null)
+        {
+            return NotFound(new
+            {
+                message = $"Category with ID {id} not found."
+            });
+        }
+
+        _service.Delete(id);
+        return NoContent();
+    }
+}

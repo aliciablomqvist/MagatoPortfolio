@@ -67,14 +67,14 @@ builder.Services.AddValidatorsFromAssemblyContaining<BlogPostValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductInquiryValidator>();
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 //Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magato API", Version = "v1" });
-
+    c.UseInlineDefinitionsForEnums();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n" +
