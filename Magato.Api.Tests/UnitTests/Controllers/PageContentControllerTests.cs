@@ -3,6 +3,7 @@ using Magato.Api.Controllers;
 using Magato.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Magato.Api.DTO;
 
 namespace Magato.Api.Tests.UnitTests;
 

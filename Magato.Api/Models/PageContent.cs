@@ -35,5 +35,7 @@ public class PageContent
     }
 
     public List<string> MediaUrls { get; set; } = new();
+
+    public List<SocialMediaLink> SocialMediaLinks { get; set; } = new List<SocialMediaLink>();
 }
 

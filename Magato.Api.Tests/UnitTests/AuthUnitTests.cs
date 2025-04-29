@@ -31,7 +31,7 @@ public class AuthUnitTests
             _service.RegisterAdmin(new UserRegisterDto { Username = "admin2", Password = "newpass" })
         );
 
-        Assert.Equal("Admin finns redan", ex.Message);
+        Assert.Equal("Admin already exists", ex.Message);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class AuthUnitTests
             _service.Authenticate(new UserLoginDto { Username = "admin", Password = "wrongpass" })
         );
 
-        Assert.Equal("Fel användarnamn eller lösenord", ex.Message);
+        Assert.Equal("Wrong username or password", ex.Message);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class AuthUnitTests
             _service.Authenticate(new UserLoginDto { Username = "nobody", Password = "doesntmatter" })
         );
 
-        Assert.Equal("Fel användarnamn eller lösenord", ex.Message);
+        Assert.Equal("Wrong username or password", ex.Message);
     }
 
 
