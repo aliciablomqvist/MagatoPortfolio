@@ -46,7 +46,7 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
             var registerContent = await registerResponse.Content.ReadAsStringAsync();
             Console.WriteLine("Register Response (400): " + registerContent);
 
-            registerContent.Should().Contain("Admin finns redan");
+            registerContent.Should().Contain("Admin already exists");
         }
         else
         {
