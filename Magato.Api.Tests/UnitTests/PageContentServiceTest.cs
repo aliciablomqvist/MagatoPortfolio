@@ -3,6 +3,7 @@ using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
 using Moq;
+using Magato.Api.DTO;
 
 namespace Magato.Api.Tests.UnitTests;
 
