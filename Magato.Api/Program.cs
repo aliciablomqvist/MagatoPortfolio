@@ -121,7 +121,18 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 });
 
-
+//Cors-configuration
+//För att tillåta allt ( OBS: endast vid test, ej prod) policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") //React port
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); //Notera: frontend ska då också sätta credentials: include i fetch/axios.
+    });
+});
 
 var app = builder.Build();
 
@@ -131,6 +142,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowFrontend");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -146,4 +158,6 @@ app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
 
-public partial class Program { }
+public partial class Program
+{
+}
