@@ -1,7 +1,7 @@
 using Magato.Api.Models;
 using Magato.Api.Data;
 
-namespace Magato.Api.Repositories; 
+namespace Magato.Api.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;

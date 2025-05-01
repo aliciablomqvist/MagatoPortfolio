@@ -6,4 +6,5 @@ public interface IUserService
 {
     User RegisterAdmin(UserRegisterDto dto);
     User Authenticate(UserLoginDto dto);
+    User GetByUsername(string username);
 }

@@ -73,6 +73,7 @@ public class ApplicationDbContext : DbContext
         get; set;
     }
 
+    public DbSet<RefreshToken> RefreshTokens { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

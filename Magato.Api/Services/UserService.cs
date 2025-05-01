@@ -4,8 +4,6 @@ using Magato.Api.Validators;
 using Magato.Api.Repositories;
 using System.Security.Cryptography;
 using System.Text;
-
-
 namespace Magato.Api.Services;
 public class UserService : IUserService
 {
@@ -49,5 +47,11 @@ public class UserService : IUserService
         using var sha = SHA256.Create();
         var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
         return Convert.ToBase64String(bytes);
+    }
+
+    public User GetByUsername(string username)
+    {
+        return _repo.GetByUsername(username)
+               ?? throw new Exception("User not found");
     }
 }

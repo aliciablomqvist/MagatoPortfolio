@@ -56,6 +56,8 @@ builder.Services.AddScoped<IProductInquiryService, ProductInquiryService>();
 builder.Services.AddScoped<IProductInquiryRepository, ProductInquiryRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
 // Validators
 builder.Services.AddFluentValidationAutoValidation();
