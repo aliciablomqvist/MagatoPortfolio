@@ -19,7 +19,7 @@ public class ContactService : IContactService
 
     public async Task<Result> HandleContactAsync(ContactMessageDto dto)
     {
-        var errors = _validator.Validate(dto);
+        var errors = _validator.ValidateAndExtractErrors(dto);
         if (errors.Any())
             return Result.Failure(errors);
 

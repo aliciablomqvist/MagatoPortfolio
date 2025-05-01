@@ -6,8 +6,7 @@ namespace Magato.Api.Validators;
 
 public class ContactMessageValidator : AbstractValidator<ContactMessageDto>
 {
-    private const string EmailRegex =
-           @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+    private const string EmailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
     public ContactMessageValidator()
     {
@@ -33,11 +32,12 @@ public class ContactMessageValidator : AbstractValidator<ContactMessageDto>
             .WithMessage("Potential spam detected.");
 
     }
-    public List<string> Validate(ContactMessageDto dto)
+    public List<string> ValidateAndExtractErrors(ContactMessageDto dto)
     {
         var result = base.Validate(dto);
         return result.IsValid
             ? new List<string>()
             : result.Errors.Select(e => e.ErrorMessage).ToList();
     }
+
 }
