@@ -14,6 +14,7 @@ public class ContactService : IContactService
     {
         _repo = repo;
         _validator = new ContactMessageValidator();
+
     }
 
     public async Task<Result> HandleContactAsync(ContactMessageDto dto)
@@ -33,6 +34,7 @@ public class ContactService : IContactService
         await _repo.AddAsync(message);
 
         return Result.Success();
+
     }
 
     public async Task<IEnumerable<ContactMessage>> GetAllMessagesAsync()

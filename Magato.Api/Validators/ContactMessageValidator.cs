@@ -1,22 +1,43 @@
 using FluentValidation;
+
 using Magato.Api.DTO;
-using FluentValidation.AspNetCore;
 
 namespace Magato.Api.Validators;
 
-public class ContactMessageValidator //Kontrollerar bland annat format för namn, email osv
+public class ContactMessageValidator : AbstractValidator<ContactMessageDto>
 {
+    private const string EmailRegex =
+           @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+    public ContactMessageValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty().WithMessage("Name is required.")
+            .MaximumLength(100);
+
+        RuleFor(x => x.Email)
+            .NotEmpty().WithMessage("Email is required.")
+            .Matches(EmailRegex).WithMessage("Invalid email format.")
+            .MaximumLength(200);
+
+        RuleFor(x => x.Message)
+            .NotEmpty().WithMessage("Message is required.")
+            .MaximumLength(1000);
+
+        RuleFor(x => x.GdprConsent)
+            .Equal(true).WithMessage("You must accept GDPR terms.");
+
+        // Honeypot
+        RuleFor(x => x.Honeypot)
+            .Must(string.IsNullOrWhiteSpace)
+            .WithMessage("Potential spam detected.");
+
+    }
     public List<string> Validate(ContactMessageDto dto)
     {
-        var errors = new List<string>();
-
-        if (string.IsNullOrWhiteSpace(dto.Name))
-            errors.Add("You have to fill in a name.");
-        if (string.IsNullOrWhiteSpace(dto.Email) || !dto.Email.Contains("@"))
-            errors.Add("Email is not valid");
-        if (string.IsNullOrWhiteSpace(dto.Message))
-            errors.Add("Message is empty.");
-
-        return errors;
+        var result = base.Validate(dto);
+        return result.IsValid
+            ? new List<string>()
+            : result.Errors.Select(e => e.ErrorMessage).ToList();
     }
 }
