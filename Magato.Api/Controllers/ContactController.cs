@@ -18,7 +18,6 @@ public class ContactController : ControllerBase
         _contactService = contactService;
     }
 
-    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Send([FromBody] ContactMessageDto dto)
     {

@@ -150,7 +150,12 @@ app.UseHttpsRedirection();
 
 app.UseGlobalExceptionHandling();
 app.UseInputValidation();
-app.UseRateLimiting();
+
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.UseRateLimiting();
+}
+
 app.UseRequestLogging();
 app.UseHoneypot();
 
