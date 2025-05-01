@@ -150,6 +150,7 @@ app.UseGlobalExceptionHandling();
 app.UseInputValidation();
 app.UseRateLimiting();
 app.UseRequestLogging();
+app.UseHoneypot();
 
 app.UseRouting();
 app.UseCors("AllowFrontend");

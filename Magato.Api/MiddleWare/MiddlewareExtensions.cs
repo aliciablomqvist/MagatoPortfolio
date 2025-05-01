@@ -19,4 +19,9 @@ public static class MiddlewareExtensions
     {
         return builder.UseMiddleware<ExceptionHandlingMiddleware>();
     }
+
+    public static IApplicationBuilder UseHoneypot(this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<HoneypotMiddleware>();
+    }
 }
