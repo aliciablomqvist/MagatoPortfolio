@@ -56,6 +56,8 @@ builder.Services.AddScoped<IProductInquiryService, ProductInquiryService>();
 builder.Services.AddScoped<IProductInquiryRepository, ProductInquiryRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
 // Validators
 builder.Services.AddFluentValidationAutoValidation();
@@ -66,6 +68,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<PageContentValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<BlogPostValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductInquiryValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<SocialMediaLinkDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<LookbookImageDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryDtoValidator>();
 
 //builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -124,8 +129,7 @@ builder.Services.AddAuthorization(options =>
 //Cors-configuration
 //För att tillåta allt ( OBS: endast vid test, ej prod) policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend", policy =>
+{   options.AddPolicy("AllowFrontend", policy =>
     {
         policy.WithOrigins("http://localhost:3000") //React port
               .AllowAnyHeader()
@@ -142,8 +146,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowFrontend");
+app.UseHttpsRedirection();
+
+app.UseGlobalExceptionHandling();
+app.UseInputValidation();
+
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.UseRateLimiting();
+}
+
+app.UseRequestLogging();
+app.UseHoneypot();
+
 app.UseRouting();
+app.UseCors("AllowFrontend");
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -152,8 +171,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 app.Run();

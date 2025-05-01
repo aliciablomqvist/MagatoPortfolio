@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Magato.Api.Models;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Magato.Api.Data;
 
@@ -73,6 +74,7 @@ public class ApplicationDbContext : DbContext
         get; set;
     }
 
+    public DbSet<RefreshToken> RefreshTokens { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -87,6 +89,9 @@ public class ApplicationDbContext : DbContext
 .Property(p => p.Status)
 .HasConversion<string>();
 
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Price)
+            .HasPrecision(18, 2);
 
         modelBuilder.Entity<Product>()
             .HasOne(p => p.Category)
@@ -111,7 +116,7 @@ public class ApplicationDbContext : DbContext
                   v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null)?.Select(url => new ProductImage { ImageUrl = url }).ToList() ?? new List<ProductImage>()
               );*/
 
-        modelBuilder.Entity<PageContent>()
+    modelBuilder.Entity<PageContent>()
     .HasMany(p => p.SocialMediaLinks)
     .WithOne()
     .OnDelete(DeleteBehavior.Cascade);
@@ -119,14 +124,18 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         var stringListConverter = new ValueConverter<List<string>, string>(
-            v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
-            v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null) ?? new List<string>()
+            v => JsonSerializer.Serialize(v, default(JsonSerializerOptions)),
+            v => JsonSerializer.Deserialize<List<string>>(v, default(JsonSerializerOptions)) ?? new List<string>()
         );
 
-        modelBuilder.Entity<PageContent>(entity =>
-        {
-            entity.Property(e => e.MediaUrls)
-                  .HasConversion(stringListConverter);
-        });
+        modelBuilder.Entity<PageContent>()
+       .Property(p => p.MediaUrls)
+       .HasConversion(stringListConverter)
+.Metadata.SetValueComparer(new ValueComparer<List<string>>(
+    (c1, c2) => (c1 == null && c2 == null) || (c1 != null && c2 != null && c1.SequenceEqual(c2)),
+    c => c == null ? 0 : c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+    c => c == null ? new List<string>() : c.ToList()
+));
+
     }
 }

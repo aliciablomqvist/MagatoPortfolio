@@ -14,11 +14,12 @@ public class ContactService : IContactService
     {
         _repo = repo;
         _validator = new ContactMessageValidator();
+
     }
 
     public async Task<Result> HandleContactAsync(ContactMessageDto dto)
     {
-        var errors = _validator.Validate(dto);
+        var errors = _validator.ValidateAndExtractErrors(dto);
         if (errors.Any())
             return Result.Failure(errors);
 
@@ -33,6 +34,7 @@ public class ContactService : IContactService
         await _repo.AddAsync(message);
 
         return Result.Success();
+
     }
 
     public async Task<IEnumerable<ContactMessage>> GetAllMessagesAsync()

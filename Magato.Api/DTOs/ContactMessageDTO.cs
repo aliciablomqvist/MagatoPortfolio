@@ -15,4 +15,11 @@ public class ContactMessageDto
     public string Message { get; set; } = string.Empty;
 
     public bool GdprConsent { get; set; }
+
+//Honeypot
+    public string? Honeypot
+    {
+        get; set;
+    }
+
 }

@@ -37,17 +37,18 @@ public class ContactController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
-
-    [HttpGet("messages")]
     [Authorize(Roles = "Admin")]
+    [HttpGet("messages")]
+
     public async Task<IActionResult> GetMessages()
     {
         var messages = await _contactService.GetAllMessagesAsync();
         return Ok(messages);
     }
 
-    [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+
     public async Task<IActionResult> Delete(int id)
     {
         var success = await _contactService.DeleteMessageAsync(id);
