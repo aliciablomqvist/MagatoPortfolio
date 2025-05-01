@@ -66,6 +66,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<PageContentValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<BlogPostValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductInquiryValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<SocialMediaLinkDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<LookbookImageDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryDtoValidator>();
 
 //builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -124,8 +127,7 @@ builder.Services.AddAuthorization(options =>
 //Cors-configuration
 //För att tillåta allt ( OBS: endast vid test, ej prod) policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend", policy =>
+{   options.AddPolicy("AllowFrontend", policy =>
     {
         policy.WithOrigins("http://localhost:3000") //React port
               .AllowAnyHeader()
@@ -142,8 +144,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowFrontend");
+app.UseHttpsRedirection();
+
+app.UseGlobalExceptionHandling();
+app.UseInputValidation();
+app.UseRateLimiting();
+app.UseRequestLogging();
+
 app.UseRouting();
+app.UseCors("AllowFrontend");
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -152,8 +163,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseHttpsRedirection();
 
 app.MapControllers();
 app.Run();

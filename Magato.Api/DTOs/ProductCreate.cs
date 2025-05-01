@@ -2,6 +2,8 @@ using Magato.Api.Models;
 
 namespace Magato.Api.DTO;
 
+//Används denna?
+
 public class ProductCreateDto
 {
     public string Title { get; set; } = default!;
