@@ -64,5 +64,16 @@ namespace Magato.Api.Controllers;
         return post == null ? NotFound() : Ok(post);
     }
 
-}
 
+//Testa endpoint för uppladdning
+    [Authorize(Roles = "Admin")]
+    [HttpPost("upload")]
+    public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)
+    {
+        var url = await fileStorage.UploadAsync(file);
+        return Ok(new
+        {
+            imageUrl = url
+        });
+    }
+}

@@ -72,6 +72,10 @@ builder.Services.AddValidatorsFromAssemblyContaining<SocialMediaLinkDtoValidator
 builder.Services.AddValidatorsFromAssemblyContaining<LookbookImageDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CategoryDtoValidator>();
 
+//Filuppladdning
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
+
 //builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -158,6 +162,7 @@ if (!app.Environment.IsEnvironment("Testing"))
 
 app.UseRequestLogging();
 app.UseHoneypot();
+app.UseStaticFiles(); // filupplasdding
 
 app.UseRouting();
 app.UseCors("AllowFrontend");

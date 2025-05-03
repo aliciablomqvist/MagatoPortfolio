@@ -29,7 +29,7 @@ public class PageContentServiceTests
             ExtraText = "Additional",
             Published = true,
             LastModified = DateTime.UtcNow,
-            MediaUrls = new List<string> { "url1.jpg" }
+            ImageUrls = new List<string> { "url1.jpg" }
         };
 
         _repoMock.Setup(r => r.Get("AboutMe")).Returns(content);
@@ -42,7 +42,7 @@ public class PageContentServiceTests
         result.MainText.Should().Be("Main Text");
         result.ExtraText.Should().Be("Additional");
         result.Published.Should().BeTrue();
-        result.MediaUrls.Should().Contain("url1.jpg");
+        result.ImageUrls.Should().Contain("url1.jpg");
     }
 
     [Fact]
@@ -82,7 +82,7 @@ public class PageContentServiceTests
             MainText = "Updated",
             ExtraText = "Extra",
             Published = true,
-            MediaUrls = new List<string> { "img1.jpg" }
+            ImageUrls = new List<string> { "img1.jpg" }
         };
 
         _repoMock.Setup(r => r.Get(dto.Key))
@@ -96,7 +96,7 @@ public class PageContentServiceTests
             p.MainText == dto.MainText &&
             p.ExtraText == dto.ExtraText &&
             p.Published == dto.Published &&
-            p.MediaUrls.SequenceEqual(dto.MediaUrls)
+            p.ImageUrls.SequenceEqual(dto.ImageUrls)
         )), Times.Once);
     }
 
@@ -110,7 +110,7 @@ public class PageContentServiceTests
             MainText = "Text",
             ExtraText = "Extra",
             Published = true,
-            MediaUrls = new List<string> { "img.jpg" }
+            ImageUrls = new List<string> { "img.jpg" }
         };
 
         _service.Add(dto);
@@ -121,7 +121,7 @@ public class PageContentServiceTests
             p.MainText == dto.MainText &&
             p.ExtraText == dto.ExtraText &&
             p.Published == dto.Published &&
-            p.MediaUrls.SequenceEqual(dto.MediaUrls)
+            p.ImageUrls.SequenceEqual(dto.ImageUrls)
         )), Times.Once);
     }
 

@@ -28,7 +28,7 @@ public class CmsControllerTests
             MainText = "Testinnehåll",
             ExtraText = "Extra",
             Published = true,
-            MediaUrls = new List<string> { "image1.jpg" },
+            ImageUrls = new List<string> { "image1.jpg" },
             LastModified = DateTime.UtcNow
         };
         _serviceMock.Setup(s => s.Get("AboutMe")).Returns(expected);
@@ -62,7 +62,7 @@ public class CmsControllerTests
             MainText = "Uppdaterad text",
             ExtraText = "Mer text",
             Published = false,
-            MediaUrls = new List<string> { "a.jpg" },
+            ImageUrls = new List<string> { "a.jpg" },
             LastModified = DateTime.UtcNow
         };
 
@@ -79,8 +79,8 @@ public class CmsControllerTests
     {
         var list = new List<PageContentDto>
         {
-            new PageContentDto { Key = "One", Title = "Ett", MainText = "A", MediaUrls = new(), LastModified = DateTime.UtcNow },
-            new PageContentDto { Key = "Two", Title = "Två", MainText = "B", MediaUrls = new(), LastModified = DateTime.UtcNow }
+            new PageContentDto { Key = "One", Title = "Ett", MainText = "A", ImageUrls = new(), LastModified = DateTime.UtcNow },
+            new PageContentDto { Key = "Two", Title = "Två", MainText = "B", ImageUrls = new(), LastModified = DateTime.UtcNow }
         };
 
         _serviceMock.Setup(s => s.GetAll()).Returns(list);
@@ -103,7 +103,7 @@ public class CmsControllerTests
             MainText = "Nytt innehåll",
             ExtraText = "Mer info",
             Published = false,
-            MediaUrls = new List<string> { "test.jpg" },
+            ImageUrls = new List<string> { "test.jpg" },
             LastModified = DateTime.UtcNow
         };
 
@@ -119,7 +119,7 @@ public class CmsControllerTests
     [Fact]
     public void DeleteContent_Calls_Service_And_Returns_NoContent()
     {
-        var existing = new PageContentDto { Key = "AboutMe", Title = "Om mig", MainText = "Info", MediaUrls = new(), LastModified = DateTime.UtcNow };
+        var existing = new PageContentDto { Key = "AboutMe", Title = "Om mig", MainText = "Info", ImageUrls = new(), LastModified = DateTime.UtcNow };
         _serviceMock.Setup(s => s.Get("AboutMe")).Returns(existing);
 
         var result = _controller.DeleteContent("AboutMe");

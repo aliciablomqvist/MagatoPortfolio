@@ -9,3 +9,4 @@ namespace Magato.Api.DTO
         public string Description { get; set; } = "";
     }
 }
+//Lägga till bild

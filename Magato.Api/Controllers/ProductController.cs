@@ -61,4 +61,14 @@ public class ProductsController : ControllerBase
         _service.Delete(id);
         return NoContent();
     }
+    [Authorize(Roles = "Admin")]
+    [HttpPost("upload")]
+    public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)
+    {
+        var url = await fileStorage.UploadAsync(file);
+        return Ok(new
+        {
+            imageUrls = url
+        });
+    }
 }

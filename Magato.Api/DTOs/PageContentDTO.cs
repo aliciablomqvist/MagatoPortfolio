@@ -24,7 +24,7 @@ public class PageContentDto
 
     public DateTime LastModified { get; set; } = DateTime.UtcNow;
 
-    public List<string> MediaUrls { get; set; } = new();
+    public List<string> ImageUrls { get; set; } = new();
 
     public List<SocialMediaLinkDto> SocialMediaLinks { get; set; } = new();
 }

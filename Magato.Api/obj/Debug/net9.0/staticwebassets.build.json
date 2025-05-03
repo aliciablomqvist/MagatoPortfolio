@@ -1,12 +1,20 @@
 {
   "Version": 1,
-  "Hash": "PDUQ6bGZ7waR06kHbZdpooY9cHJtOc+GskZwtheB9rI=",
+  "Hash": "Q/Zwhs5uYvnhlSQi+xWMQPiPpwGLxwDlc8CdT6FwWu0=",
   "Source": "Magato.Api",
   "BasePath": "_content/Magato.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Magato.Api\\wwwroot",
+      "Source": "Magato.Api",
+      "ContentRoot": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\",
+      "BasePath": "_content/Magato.Api",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [],
   "Endpoints": []
 }

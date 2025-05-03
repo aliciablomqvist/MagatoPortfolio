@@ -171,3 +171,4 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\refin
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.pdb
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.genruntimeconfig.cache
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\ref\Magato.Api.dll
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\Magato.Api.staticwebassets.runtime.json

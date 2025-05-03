@@ -59,4 +59,16 @@ public class CmsController : ControllerBase
         _service.Delete(key);
         return NoContent();
     }
+
+//Enpoint för att ladda upp filer
+    [HttpPost("upload")]
+    public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)
+    {
+        var url = await fileStorage.UploadAsync(file);
+        return Ok(new
+        {
+            mediaUrl = url //ändra till image url eller lös på annat dätt
+        });
+    }
+
 }

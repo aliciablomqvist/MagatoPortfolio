@@ -51,7 +51,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
                     Title = "About Me",
                     MainText = "Initial content",
                     ExtraText = "Extra info",
-                    MediaUrls = new List<string> { "https://example.com/image1.jpg" },
+                    ImageUrls = new List<string> { "https://example.com/image1.jpg" },
                     Published = true,
                     LastModified = DateTime.UtcNow
                 });
@@ -80,7 +80,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         content!.MainText.Should().Be("Initial content");
         content.Title.Should().Be("About Me");
         content.Published.Should().BeTrue();
-        content.MediaUrls.Should().Contain("https://example.com/image1.jpg");
+        content.ImageUrls.Should().Contain("https://example.com/image1.jpg");
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
             Title = "Updated Title",
             MainText = "Updated by test",
             ExtraText = "Updated extra",
-            MediaUrls = new List<string> { "https://example.com/image2.jpg" },
+            ImageUrls = new List<string> { "https://example.com/image2.jpg" },
             Published = false
         };
 
@@ -124,7 +124,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
             Key = "AboutMe",
             Title = "Should Fail",
             MainText = "Anonymous attempt",
-            MediaUrls = new List<string>()
+            ImageUrls = new List<string>()
         };
 
         var response = await _client.PutAsJsonAsync($"/api/cms/{dto.Key}", dto);
@@ -152,7 +152,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
             Title = "New Title",
             MainText = "This is new",
             ExtraText = "More info",
-            MediaUrls = new List<string> { "https://example.com/new.jpg" },
+            ImageUrls = new List<string> { "https://example.com/new.jpg" },
             Published = true
         };
 
@@ -164,7 +164,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         content.Should().NotBeNull();
         content!.Key.Should().Be("NewPage");
         content.Title.Should().Be("New Title");
-        content.MediaUrls.Should().Contain("https://example.com/new.jpg");
+        content.ImageUrls.Should().Contain("https://example.com/new.jpg");
     }
 
     [Fact]
@@ -189,7 +189,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
             Key = "Welcome",
             Title = "Welcome Page",
             MainText = "Hello from test",
-            MediaUrls = new List<string> { "https://example.com/welcome.jpg" },
+            ImageUrls = new List<string> { "https://example.com/welcome.jpg" },
             Published = true
         };
 
@@ -199,6 +199,6 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         var created = await response.Content.ReadFromJsonAsync<PageContentDto>();
         created!.Key.Should().Be(dto.Key);
         created.Title.Should().Be("Welcome Page");
-        created.MediaUrls.Should().Contain("https://example.com/welcome.jpg");
+        created.ImageUrls.Should().Contain("https://example.com/welcome.jpg");
     }
 }
