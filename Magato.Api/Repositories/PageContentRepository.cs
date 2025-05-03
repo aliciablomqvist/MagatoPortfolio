@@ -43,7 +43,7 @@ public class PageContentRepository : IPageContentRepository
         existing.Title = content.Title;
         existing.MainText = content.MainText;
         existing.ExtraText = content.ExtraText;
-        existing.MediaUrls = content.MediaUrls;
+        existing.ImageUrls = content.ImageUrls;
         existing.Published = content.Published;
         existing.LastModified = DateTime.UtcNow;
         existing.SocialMediaLinks.Clear();

@@ -46,7 +46,7 @@ public class PageContentService : IPageContentService
         existing.SubText = dto.SubText;
         existing.ExtraText = dto.ExtraText;
         existing.Published = dto.Published;
-        existing.MediaUrls = dto.MediaUrls;
+        existing.ImageUrls = dto.ImageUrls;
         existing.LastModified = DateTime.UtcNow;
 
         _repo.Update(existing);
@@ -68,7 +68,7 @@ public class PageContentService : IPageContentService
             ExtraText = entity.ExtraText,
             Published = entity.Published,
             LastModified = entity.LastModified,
-            MediaUrls = entity.MediaUrls,
+            ImageUrls = entity.ImageUrls,
             SocialMediaLinks = entity.SocialMediaLinks
             .Select(link => new SocialMediaLinkDto
             {
@@ -89,7 +89,7 @@ public class PageContentService : IPageContentService
             ExtraText = dto.ExtraText,
             Published = dto.Published,
             LastModified = dto.LastModified,
-            MediaUrls = dto.MediaUrls,
+            ImageUrls = dto.ImageUrls,
             SocialMediaLinks = dto.SocialMediaLinks
             .Select(link => new SocialMediaLink
             {

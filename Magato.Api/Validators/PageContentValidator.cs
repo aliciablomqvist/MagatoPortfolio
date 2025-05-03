@@ -19,7 +19,7 @@ public class PageContentValidator : AbstractValidator<PageContentDto>
         RuleFor(x => x.MainText)
             .NotEmpty().WithMessage("MainText cannot be empty.");
 
-        RuleForEach(x => x.MediaUrls)
+        RuleForEach(x => x.ImageUrls)
             .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
             .WithMessage("Has to be a valid URL.");
 

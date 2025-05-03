@@ -129,7 +129,7 @@ public class ApplicationDbContext : DbContext
         );
 
         modelBuilder.Entity<PageContent>()
-       .Property(p => p.MediaUrls)
+       .Property(p => p.ImageUrls)
        .HasConversion(stringListConverter)
 .Metadata.SetValueComparer(new ValueComparer<List<string>>(
     (c1, c2) => (c1 == null && c2 == null) || (c1 != null && c2 != null && c1.SequenceEqual(c2)),

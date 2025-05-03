@@ -1,0 +1,65 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\1ffojxpk.zle.webp",
+      "PackagePath": "staticwebassets\\uploads\\1ffojxpk.zle.webp"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\awijvrfk.kch.jpg",
+      "PackagePath": "staticwebassets\\uploads\\awijvrfk.kch.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\d1qzwjip.vqk.pdf",
+      "PackagePath": "staticwebassets\\uploads\\d1qzwjip.vqk.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\ekljoyup.hcr.jpg",
+      "PackagePath": "staticwebassets\\uploads\\ekljoyup.hcr.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\gguz3fc5.2rp.pdf",
+      "PackagePath": "staticwebassets\\uploads\\gguz3fc5.2rp.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\k1uulnsx.lrx.jfif",
+      "PackagePath": "staticwebassets\\uploads\\k1uulnsx.lrx.jfif"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\ngj0tyke.xhq.jfif",
+      "PackagePath": "staticwebassets\\uploads\\ngj0tyke.xhq.jfif"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\qk33yxze.e1x.webp",
+      "PackagePath": "staticwebassets\\uploads\\qk33yxze.e1x.webp"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\vxiars3k.bn4.webp",
+      "PackagePath": "staticwebassets\\uploads\\vxiars3k.bn4.webp"
+    },
+    {
+      "Id": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\yw3iptn2.anv.jpg",
+      "PackagePath": "staticwebassets\\uploads\\yw3iptn2.anv.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Magato.Api.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Magato.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.Magato.Api.props",
+      "PackagePath": "build\\Magato.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.Magato.Api.props",
+      "PackagePath": "buildMultiTargeting\\Magato.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.Magato.Api.props",
+      "PackagePath": "buildTransitive\\Magato.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
