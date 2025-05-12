@@ -1,5 +1,6 @@
-using Magato.Api.Models;
 using System.ComponentModel.DataAnnotations;
+
+using Magato.Api.Models;
 
 
 namespace Magato.Api.DTO;
@@ -14,9 +15,12 @@ public class ContactMessageDto
     [Required]
     public string Message { get; set; } = string.Empty;
 
-    public bool GdprConsent { get; set; }
+    public bool GdprConsent
+    {
+        get; set;
+    }
 
-//Honeypot
+    //Honeypot
     public string? Honeypot
     {
         get; set;

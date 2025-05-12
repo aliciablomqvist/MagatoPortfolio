@@ -19,6 +19,9 @@ public class GdprController : ControllerBase
     {
         var text = _config["Gdpr:ContactFormText"] ??
                    "No GDPR text found";
-        return Ok(new { text });
+        return Ok(new
+        {
+            text
+        });
     }
 }

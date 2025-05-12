@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Magato.Api.Controllers;
@@ -22,14 +23,18 @@ public class AuthController : ControllerBase
         _refreshTokenService = refreshTokenService;
     }
 
-//Temporär endpoint för att registera admin
+    //Temporär endpoint för att registera admin
     [HttpPost("register")]
     public IActionResult Register(UserRegisterDto dto)
     {
         try
         {
             var user = _userService.RegisterAdmin(dto);
-            return Ok(new { user.Username, user.IsAdmin });
+            return Ok(new
+            {
+                user.Username,
+                user.IsAdmin
+            });
         }
         catch (Exception ex)
         {
@@ -60,7 +65,7 @@ public class AuthController : ControllerBase
         }
     }
 
-//Testa gömd admin endpoint - ta bort sen
+    //Testa gömd admin endpoint - ta bort sen
     [Authorize(Roles = "Admin")]
     [HttpGet("admin-only")]
     public IActionResult AdminSecret()

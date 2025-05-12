@@ -1,8 +1,10 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Magato.Api.Models;
 using System.Text.Json;
+
+using Magato.Api.Models;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Magato.Api.Data;
 
@@ -116,10 +118,10 @@ public class ApplicationDbContext : DbContext
                   v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions)null)?.Select(url => new ProductImage { ImageUrl = url }).ToList() ?? new List<ProductImage>()
               );*/
 
-    modelBuilder.Entity<PageContent>()
-    .HasMany(p => p.SocialMediaLinks)
-    .WithOne()
-    .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<PageContent>()
+        .HasMany(p => p.SocialMediaLinks)
+        .WithOne()
+        .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);
 

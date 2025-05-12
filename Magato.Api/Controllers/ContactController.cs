@@ -1,9 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
+using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
-using Magato.Api.Data;
+
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Magato.Api.Controllers;
 
@@ -26,9 +27,15 @@ public class ContactController : ControllerBase
             var result = await _contactService.HandleContactAsync(dto);
 
             if (!result.IsSuccess)
-                return BadRequest(new { errors = result.Errors });
+                return BadRequest(new
+                {
+                    errors = result.Errors
+                });
 
-            return Ok(new { success = true });
+            return Ok(new
+            {
+                success = true
+            });
         }
         catch (Exception ex)
         {
@@ -53,7 +60,10 @@ public class ContactController : ControllerBase
     {
         var success = await _contactService.DeleteMessageAsync(id);
         if (!success)
-            return NotFound(new { error = "The message was not found." });
+            return NotFound(new
+            {
+                error = "The message was not found."
+            });
 
         return NoContent();
     }

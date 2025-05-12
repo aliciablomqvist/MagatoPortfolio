@@ -12,7 +12,7 @@ public class ProductInquiryDto
     {
         get; set;
     }
-    
+
     //Honeypot
     public string? Honeypot
     {

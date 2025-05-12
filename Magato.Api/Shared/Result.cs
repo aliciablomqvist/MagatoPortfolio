@@ -1,7 +1,10 @@
 namespace Magato.Api.Shared;
 public class Result
 {
-    public bool IsSuccess { get; }
+    public bool IsSuccess
+    {
+        get;
+    }
     public List<string> Errors { get; } = new();
 
     private Result(bool success, List<string>? errors = null)

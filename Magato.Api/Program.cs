@@ -1,14 +1,17 @@
-using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.Json.Serialization;
+
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
 using Magato.Api.Data;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
 using Magato.Api.Validators;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.OpenApi.Models;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Text.Json.Serialization;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

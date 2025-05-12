@@ -1,9 +1,10 @@
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Validators;
-using Magato.Api.Repositories;
 using System.Security.Cryptography;
 using System.Text;
+
+using Magato.Api.DTO;
+using Magato.Api.Models;
+using Magato.Api.Repositories;
+using Magato.Api.Validators;
 
 
 namespace Magato.Api.Services;

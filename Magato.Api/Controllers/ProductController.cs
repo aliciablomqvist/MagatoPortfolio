@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Magato.Api.Controllers;
@@ -49,7 +50,8 @@ public class ProductsController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult Update(int id, ProductDto dto)
     {
-        if (id != dto.Id) return BadRequest();
+        if (id != dto.Id)
+            return BadRequest();
         _service.Update(dto);
         return NoContent();
     }

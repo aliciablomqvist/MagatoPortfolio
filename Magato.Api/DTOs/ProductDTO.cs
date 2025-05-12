@@ -1,11 +1,14 @@
-using Magato.Api.Models;
-
 using System.Text.Json.Serialization;
+
+using Magato.Api.Models;
 
 namespace Magato.Api.DTO;
 public class ProductDto
 {
-    public int Id { get; set; }
+    public int Id
+    {
+        get; set;
+    }
     public string Title { get; set; } = default!;
 
     public decimal Price

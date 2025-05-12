@@ -8,7 +8,10 @@ namespace Magato.Api.DTO
     {
         public string CollectionTitle { get; set; } = "";
         public string CollectionDescription { get; set; } = "";
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ReleaseDate
+        {
+            get; set;
+        }
 
         public List<ColorDto> Colors { get; set; } = new();
         public List<MaterialDto> Materials { get; set; } = new();

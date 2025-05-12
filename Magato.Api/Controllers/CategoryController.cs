@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using Magato.Api.Services;
 using Magato.Api.DTO;
+using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Magato.Api.Controllers;
 
@@ -44,7 +45,7 @@ public class CategoriesController : ControllerBase
         }
 
         _service.Update(id, dto);
-        return NoContent(); 
+        return NoContent();
     }
 
     [Authorize(Roles = "Admin")]

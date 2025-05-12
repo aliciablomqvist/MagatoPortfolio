@@ -1,24 +1,25 @@
 using Magato.Api.DTO;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Magato.Api.Controllers;
 
-    [ApiController]
-    [Route("api/blog")]
-    public class BlogPostController : ControllerBase
+[ApiController]
+[Route("api/blog")]
+public class BlogPostController : ControllerBase
+{
+    private readonly IBlogPostService _service;
+
+    public BlogPostController(IBlogPostService service)
     {
-        private readonly IBlogPostService _service;
+        _service = service;
+    }
 
-        public BlogPostController(IBlogPostService service)
-        {
-            _service = service;
-        }
-
-        [HttpGet]
-        public IActionResult GetAll()
-            => Ok(_service.GetAll());
+    [HttpGet]
+    public IActionResult GetAll()
+        => Ok(_service.GetAll());
 
     [HttpGet("{id:int}")]
     public IActionResult Get(int id)
@@ -28,34 +29,34 @@ namespace Magato.Api.Controllers;
     }
 
     [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult Create(BlogPostDto dto)
+    [HttpPost]
+    public IActionResult Create(BlogPostDto dto)
+    {
+        _service.Add(dto);
+        return CreatedAtAction(nameof(Get), new
         {
-            _service.Add(dto);
-            return CreatedAtAction(nameof(Get), new
-            {
-                id = dto.Id
-            }, dto);
-        }
+            id = dto.Id
+        }, dto);
+    }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPut("{id:int}")]
-        public IActionResult Update(int id, BlogPostDto dto)
-        {
-            if (id != dto.Id)
-                return BadRequest();
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id:int}")]
+    public IActionResult Update(int id, BlogPostDto dto)
+    {
+        if (id != dto.Id)
+            return BadRequest();
 
-            _service.Update(dto);
-            return NoContent();
-        }
+        _service.Update(dto);
+        return NoContent();
+    }
 
-        [Authorize(Roles = "Admin")]
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _service.Delete(id);
-            return NoContent();
-        }
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        _service.Delete(id);
+        return NoContent();
+    }
 
     [HttpGet("{slug}")]
     public IActionResult GetBySlug(string slug)
@@ -65,7 +66,7 @@ namespace Magato.Api.Controllers;
     }
 
 
-//Testa endpoint för uppladdning
+    //Testa endpoint för uppladdning
     [Authorize(Roles = "Admin")]
     [HttpPost("upload")]
     public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)

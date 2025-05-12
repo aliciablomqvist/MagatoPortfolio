@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Magato.Api.Models;
 public class ContactMessage
 {
-    public int Id { get; set; }
+    public int Id
+    {
+        get; set;
+    }
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;

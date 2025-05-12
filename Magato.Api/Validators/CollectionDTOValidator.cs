@@ -1,6 +1,7 @@
 using FluentValidation;
-using Magato.Api.DTO;
 using FluentValidation.AspNetCore;
+
+using Magato.Api.DTO;
 
 namespace Magato.Api.Validators
 {

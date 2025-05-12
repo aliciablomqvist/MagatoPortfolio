@@ -3,23 +3,23 @@ using Magato.Api.Models;
 using Magato.Api.Repositories;
 
 namespace Magato.Api.Services;
-    public class BlogPostService : IBlogPostService
+public class BlogPostService : IBlogPostService
+{
+    private readonly IBlogPostRepository _repo;
+
+    public BlogPostService(IBlogPostRepository repo)
     {
-        private readonly IBlogPostRepository _repo;
+        _repo = repo;
+    }
 
-        public BlogPostService(IBlogPostRepository repo)
-        {
-            _repo = repo;
-        }
+    public BlogPostDto? Get(int id)
+    {
+        var post = _repo.Get(id);
+        return post == null ? null : Map(post);
+    }
 
-        public BlogPostDto? Get(int id)
-        {
-            var post = _repo.Get(id);
-            return post == null ? null : Map(post);
-        }
-
-        public IEnumerable<BlogPostDto> GetAll()
-            => _repo.GetAll().Select(Map);
+    public IEnumerable<BlogPostDto> GetAll()
+        => _repo.GetAll().Select(Map);
 
     public void Add(BlogPostDto dto)
     {

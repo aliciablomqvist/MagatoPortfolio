@@ -56,7 +56,8 @@ namespace Magato.Api.Services
         public async Task<bool> UpdateCollectionAsync(int id, CollectionDto dto)
         {
             var existing = await _repo.GetCollectionByIdAsync(id);
-            if (existing == null) return false;
+            if (existing == null)
+                return false;
 
             existing.CollectionTitle = dto.CollectionTitle;
             existing.CollectionDescription = dto.CollectionDescription;
@@ -74,7 +75,8 @@ namespace Magato.Api.Services
         public async Task<bool> DeleteCollectionAsync(int id)
         {
             var exists = await _repo.CollectionExistsAsync(id);
-            if (!exists) return false;
+            if (!exists)
+                return false;
 
             await _repo.DeleteCollectionAsync(id);
             return true;
@@ -89,7 +91,8 @@ namespace Magato.Api.Services
         public async Task<bool> AddSketchAsync(int collectionId, SketchDto dto)
         {
             var collection = await _repo.GetCollectionByIdAsync(collectionId);
-            if (collection == null) return false;
+            if (collection == null)
+                return false;
 
             collection.Sketches.Add(new Sketch
             {
@@ -104,7 +107,8 @@ namespace Magato.Api.Services
         public async Task<bool> AddMaterialAsync(int collectionId, MaterialDto dto)
         {
             var collection = await _repo.GetCollectionByIdAsync(collectionId);
-            if (collection == null) return false;
+            if (collection == null)
+                return false;
 
             collection.Materials.Add(new Material
             {
@@ -120,7 +124,8 @@ namespace Magato.Api.Services
         public async Task<bool> AddColorAsync(int collectionId, ColorDto dto)
         {
             var collection = await _repo.GetCollectionByIdAsync(collectionId);
-            if (collection == null) return false;
+            if (collection == null)
+                return false;
 
             collection.Colors.Add(new ColorOption
             {
@@ -135,7 +140,8 @@ namespace Magato.Api.Services
         public async Task<bool> UpdateColorAsync(int colorId, ColorDto dto)
         {
             var color = await _repo.GetColorByIdAsync(colorId);
-            if (color == null) return false;
+            if (color == null)
+                return false;
 
             color.Name = dto.Name;
             color.Hex = dto.Hex;
@@ -147,7 +153,8 @@ namespace Magato.Api.Services
         public async Task<bool> DeleteColorAsync(int colorId)
         {
             var color = await _repo.GetColorByIdAsync(colorId);
-            if (color == null) return false;
+            if (color == null)
+                return false;
 
             await _repo.DeleteColorAsync(colorId);
             return true;
@@ -156,7 +163,8 @@ namespace Magato.Api.Services
         public async Task<bool> UpdateMaterialAsync(int materialId, MaterialDto dto)
         {
             var material = await _repo.GetMaterialAsync(materialId);
-            if (material == null) return false;
+            if (material == null)
+                return false;
 
             material.Name = dto.Name;
             material.Description = dto.Description;
@@ -168,7 +176,8 @@ namespace Magato.Api.Services
         public async Task<bool> DeleteMaterialAsync(int materialId)
         {
             var material = await _repo.GetMaterialAsync(materialId);
-            if (material == null) return false;
+            if (material == null)
+                return false;
 
             await _repo.DeleteMaterialAsync(materialId);
             return true;
@@ -177,7 +186,8 @@ namespace Magato.Api.Services
         public async Task<bool> UpdateSketchAsync(int sketchId, SketchDto dto)
         {
             var sketch = await _repo.GetSketchAsync(sketchId);
-            if (sketch == null) return false;
+            if (sketch == null)
+                return false;
 
             sketch.Url = dto.Url;
 
@@ -188,7 +198,8 @@ namespace Magato.Api.Services
         public async Task<bool> DeleteSketchAsync(int sketchId)
         {
             var sketch = await _repo.GetSketchAsync(sketchId);
-            if (sketch == null) return false;
+            if (sketch == null)
+                return false;
 
             await _repo.DeleteSketchAsync(sketchId);
             return true;
@@ -197,7 +208,8 @@ namespace Magato.Api.Services
         public async Task<bool> AddLookbookImageAsync(int collectionId, LookbookImageDto dto)
         {
             var collection = await _repo.GetCollectionByIdAsync(collectionId);
-            if (collection == null) return false;
+            if (collection == null)
+                return false;
 
             var image = new LookbookImage
             {
@@ -213,7 +225,8 @@ namespace Magato.Api.Services
         public async Task<bool> UpdateLookbookImageAsync(int imageId, LookbookImageDto dto)
         {
             var existing = await _repo.GetLookbookImageAsync(imageId);
-            if (existing == null) return false;
+            if (existing == null)
+                return false;
 
             existing.Url = dto.Url;
             existing.Description = dto.Description;
@@ -225,7 +238,8 @@ namespace Magato.Api.Services
         public async Task<bool> DeleteLookbookImageAsync(int imageId)
         {
             var existing = await _repo.GetLookbookImageAsync(imageId);
-            if (existing == null) return false;
+            if (existing == null)
+                return false;
 
             await _repo.DeleteLookbookImageAsync(imageId);
             return true;

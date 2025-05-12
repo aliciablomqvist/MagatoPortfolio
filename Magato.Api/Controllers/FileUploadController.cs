@@ -30,6 +30,9 @@ public class UploadController : ControllerBase
         await file.CopyToAsync(stream);
 
         var imageUrl = $"/uploads/{file.FileName}";
-        return Ok(new { imageUrl });
+        return Ok(new
+        {
+            imageUrl
+        });
     }
 }

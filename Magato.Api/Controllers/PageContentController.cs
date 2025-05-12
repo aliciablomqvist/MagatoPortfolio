@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Magato.Api.Services;
 using Magato.Api.DTO;
+using Magato.Api.Services;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Magato.Api.Controllers;
 
@@ -60,7 +61,7 @@ public class CmsController : ControllerBase
         return NoContent();
     }
 
-//Enpoint för att ladda upp filer
+    //Enpoint för att ladda upp filer
     [HttpPost("upload")]
     public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)
     {

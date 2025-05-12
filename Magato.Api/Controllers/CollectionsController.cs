@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Magato.Api.Controllers;
 

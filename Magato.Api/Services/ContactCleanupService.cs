@@ -1,7 +1,8 @@
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Magato.Api.Data;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 namespace Magato.Api.Services;
 public class ContactCleanupService : BackgroundService
 {

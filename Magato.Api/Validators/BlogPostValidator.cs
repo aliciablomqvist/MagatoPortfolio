@@ -1,4 +1,5 @@
 using FluentValidation;
+
 using Magato.Api.DTO;
 
 namespace Magato.Api.Validators;

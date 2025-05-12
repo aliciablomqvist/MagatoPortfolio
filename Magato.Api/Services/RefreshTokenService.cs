@@ -15,7 +15,7 @@ public class RefreshTokenService : IRefreshTokenService
         {
             Token = token,
             Username = username,
-            Expires = DateTime.UtcNow.AddDays(7) 
+            Expires = DateTime.UtcNow.AddDays(7)
         };
 
         _repo.Add(refresh);

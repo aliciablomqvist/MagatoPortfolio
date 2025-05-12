@@ -3,7 +3,10 @@ namespace Magato.Api.DTO;
 
 public class ProductInquiryResponseDto
 {
-    public int Id { get; set; } //Fundera på om detta ska vara här eller flyttas
+    public int Id
+    {
+        get; set;
+    } //Fundera på om detta ska vara här eller flyttas
     public string ProductTitle { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
@@ -16,5 +19,8 @@ public class ProductInquiryResponseDto
     {
         get; set;
     }
-    public DateTime SentAt { get; set; }
+    public DateTime SentAt
+    {
+        get; set;
+    }
 }

@@ -6,10 +6,16 @@ namespace Magato.Api.Models;
 
 public class Product
 {
-    public int Id { get; set; }
+    public int Id
+    {
+        get; set;
+    }
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public decimal Price { get; set; }
+    public decimal Price
+    {
+        get; set;
+    }
 
 
     public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
