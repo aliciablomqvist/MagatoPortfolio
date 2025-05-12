@@ -2,12 +2,13 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using Magato.Api.Data;
+using Magato.Api.Models;
+
+using Microsoft.EntityFrameworkCore;
+
 namespace Magato.Api.Repositories
 {
-    using Magato.Api.Data;
-    using Magato.Api.Models;
-    using Microsoft.EntityFrameworkCore;
-
     /// <summary>
     /// Handles database operations related to collections and their associated data.
     /// </summary>

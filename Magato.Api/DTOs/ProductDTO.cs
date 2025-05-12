@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Text.Json.Serialization;
+
 using Magato.Api.Models;
 
 namespace Magato.Api.DTO;

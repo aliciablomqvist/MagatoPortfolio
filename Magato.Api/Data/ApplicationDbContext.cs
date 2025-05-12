@@ -3,7 +3,9 @@
 // </copyright>
 
 using System.Text.Json;
+
 using Magato.Api.Models;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

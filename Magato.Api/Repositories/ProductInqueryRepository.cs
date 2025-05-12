@@ -4,6 +4,7 @@
 
 using Magato.Api.Data;
 using Magato.Api.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Magato.Api.Repositories;

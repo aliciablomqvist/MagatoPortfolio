@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.ComponentModel.DataAnnotations;
+
 using Magato.Api.Models;
 
 namespace Magato.Api.DTO;

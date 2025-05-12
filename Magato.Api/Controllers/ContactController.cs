@@ -6,6 +6,7 @@ using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -6,10 +6,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Validators;
+
 using Microsoft.IdentityModel.Tokens;
 
 namespace Magato.Api.Services;

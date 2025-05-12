@@ -2,11 +2,11 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using Magato.Api.DTO;
+using Magato.Api.Models;
+
 namespace Magato.Api.Services
 {
-    using Magato.Api.DTO;
-    using Magato.Api.Models;
-
     /// <summary>
     /// Service interface for managing collections and their related data.
     /// </summary>

@@ -2,10 +2,10 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using Magato.Api.Models;
+
 namespace Magato.Api.Repositories
 {
-    using Magato.Api.Models;
-
     /// <summary>
     /// Interface for handling data access related to collections and their child entities.
     /// </summary>

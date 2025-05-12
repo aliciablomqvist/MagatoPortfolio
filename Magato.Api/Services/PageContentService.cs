@@ -4,6 +4,7 @@
 
 using System.Security.Cryptography;
 using System.Text;
+
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;

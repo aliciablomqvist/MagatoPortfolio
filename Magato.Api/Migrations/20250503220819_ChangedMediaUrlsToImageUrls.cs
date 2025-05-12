@@ -2,12 +2,12 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using Microsoft.EntityFrameworkCore.Migrations;
+
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
-    using Microsoft.EntityFrameworkCore.Migrations;
-
     /// <inheritdoc />
     public partial class ChangedMediaUrlsToImageUrls : Migration
     {

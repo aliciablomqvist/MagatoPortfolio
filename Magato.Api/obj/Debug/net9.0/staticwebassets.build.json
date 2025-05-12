@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Q/Zwhs5uYvnhlSQi+xWMQPiPpwGLxwDlc8CdT6FwWu0=",
+  "Hash": "/LXPbFbJq6eZ7JXZdM3LhJ+eIS9GGPMzWAyfwbM26zY=",
   "Source": "Magato.Api",
   "BasePath": "_content/Magato.Api",
   "Mode": "Default",
@@ -15,6 +15,111 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
+      "SourceId": "Magato.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\",
+      "BasePath": "_content/Magato.Api",
+      "RelativePath": "uploads/test#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "c0sjjcprmr",
+      "Integrity": "dPgf4WfZm0y0HW0MzagieMrunz4vJdXlo5Nv89zsYNA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\test.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "uploads/test.c0sjjcprmr.png",
+      "AssetFile": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dPgf4WfZm0y0HW0MzagieMrunz4vJdXlo5Nv89zsYNA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 22:41:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "c0sjjcprmr"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/test.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dPgf4WfZm0y0HW0MzagieMrunz4vJdXlo5Nv89zsYNA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/test.png",
+      "AssetFile": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dPgf4WfZm0y0HW0MzagieMrunz4vJdXlo5Nv89zsYNA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 22:41:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dPgf4WfZm0y0HW0MzagieMrunz4vJdXlo5Nv89zsYNA="
+        }
+      ]
+    }
+  ]
 }

@@ -5,8 +5,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+
 using Magato.Api.DTO;
 using Magato.Api.Models;
+
 using Microsoft.IdentityModel.Tokens;
 
 namespace Magato.Api.Services;

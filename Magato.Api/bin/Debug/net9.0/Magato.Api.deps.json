@@ -12,9 +12,11 @@
           "FluentValidation.AspNetCore": "11.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.4",
           "Microsoft.AspNetCore.OpenApi": "9.0.1",
+          "Microsoft.CodeAnalysis.NetAnalyzers": "9.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.3",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.3",
+          "StyleCop.Analyzers": "1.1.118",
           "Swashbuckle.AspNetCore": "8.0.0"
         },
         "runtime": {
@@ -298,6 +300,7 @@
           }
         }
       },
+      "Microsoft.CodeAnalysis.NetAnalyzers/9.0.0": {},
       "Microsoft.CodeAnalysis.Workspaces.Common/4.8.0": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
@@ -797,6 +800,7 @@
           }
         }
       },
+      "StyleCop.Analyzers/1.1.118": {},
       "Swashbuckle.AspNetCore/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -1205,6 +1209,13 @@
       "path": "microsoft.codeanalysis.csharp.workspaces/4.8.0",
       "hashPath": "microsoft.codeanalysis.csharp.workspaces.4.8.0.nupkg.sha512"
     },
+    "Microsoft.CodeAnalysis.NetAnalyzers/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JajbvkrBgtdRghavIjcJuNHMOja4lqBmEezbhZyqWPYh2cpLhT5mPpfC7NQVDO4IehWQum9t/nwF4v+qQGtYWg==",
+      "path": "microsoft.codeanalysis.netanalyzers/9.0.0",
+      "hashPath": "microsoft.codeanalysis.netanalyzers.9.0.0.nupkg.sha512"
+    },
     "Microsoft.CodeAnalysis.Workspaces.Common/4.8.0": {
       "type": "package",
       "serviceable": true,
@@ -1442,6 +1453,13 @@
       "sha512": "sha512-YqueG52R/Xej4VVbKuRIodjiAhV0HR/XVbLbNrJhCZnzjnSjgMJ/dCdV0akQQxavX6hp/LC6rqLGLcXeQYU7XA==",
       "path": "mono.texttemplating/3.0.0",
       "hashPath": "mono.texttemplating.3.0.0.nupkg.sha512"
+    },
+    "StyleCop.Analyzers/1.1.118": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw==",
+      "path": "stylecop.analyzers/1.1.118",
+      "hashPath": "stylecop.analyzers.1.1.118.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/8.0.0": {
       "type": "package",

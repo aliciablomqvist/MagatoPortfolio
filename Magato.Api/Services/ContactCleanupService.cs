@@ -3,6 +3,7 @@
 // </copyright>
 
 using Magato.Api.Data;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

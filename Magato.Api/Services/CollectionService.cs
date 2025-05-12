@@ -2,12 +2,12 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using Magato.Api.DTO;
+using Magato.Api.Models;
+using Magato.Api.Repositories;
+
 namespace Magato.Api.Services
 {
-    using Magato.Api.DTO;
-    using Magato.Api.Models;
-    using Magato.Api.Repositories;
-
     /// <summary>
     /// Service layer that handles business logic for collections and their related entities.
     /// </summary>
