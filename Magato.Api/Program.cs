@@ -132,15 +132,19 @@ builder.Services.AddAuthorization(options =>
 
 //Cors-configuration
 //För att tillåta allt ( OBS: endast vid test, ej prod) policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+
 builder.Services.AddCors(options =>
-{   options.AddPolicy("AllowFrontend", policy =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
     {
         policy.WithOrigins("http://localhost:3000") //React port
               .AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowCredentials(); //Notera: frontend ska då också sätta credentials: include i fetch/axios.
+          .AllowCredentials(); //Notera: frontend ska då också sätta credentials: include i fetch/axios.
     });
 });
+
+
 
 var app = builder.Build();
 
@@ -150,23 +154,28 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+    app.UseHttpsRedirection();
 
-app.UseGlobalExceptionHandling();
-app.UseInputValidation();
 
-if (!app.Environment.IsEnvironment("Testing"))
+
+
+if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"))
 {
     app.UseRateLimiting();
+    app.UseGlobalExceptionHandling();
+    app.UseInputValidation();
 }
+
+
 
 app.UseRequestLogging();
 app.UseHoneypot();
 app.UseStaticFiles(); // filupplasdding
 
 app.UseRouting();
-app.UseCors("AllowFrontend");
 
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
