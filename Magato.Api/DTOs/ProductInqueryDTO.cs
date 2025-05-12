@@ -1,3 +1,7 @@
+// <copyright file="ProductInqueryDTO.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Magato.Api.DTO;
 public class ProductInquiryDto
 {
@@ -5,7 +9,9 @@ public class ProductInquiryDto
     {
         get; set;
     }
+
     public string Email { get; set; } = string.Empty;
+
     public string Message { get; set; } = string.Empty;
 
     public string? Size
@@ -13,7 +19,7 @@ public class ProductInquiryDto
         get; set;
     }
 
-    //Honeypot
+    // Honeypot
     public string? Honeypot
     {
         get; set;

@@ -1,3 +1,7 @@
+// <copyright file="CategoryValidator.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using FluentValidation;
 
 using Magato.Api.DTO;
@@ -6,7 +10,7 @@ public class CategoryDtoValidator : AbstractValidator<CategoryDto>
 {
     public CategoryDtoValidator()
     {
-        RuleFor(c => c.Name)
+        this.RuleFor(c => c.Name)
             .NotEmpty().WithMessage("Name is required.")
             .MaximumLength(100).WithMessage("Name cannot exceed 100 characters.");
     }

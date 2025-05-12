@@ -1,11 +1,14 @@
-using System;
-
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250415091906_ProductInqueryToDb.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class ProductInqueryToDb : Migration
     {
@@ -21,7 +24,7 @@ namespace Magato.Api.Migrations
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {

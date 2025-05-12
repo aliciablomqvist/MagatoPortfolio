@@ -1,3 +1,7 @@
+// <copyright file="MaterialDTO.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Magato.Api.DTO
 {
     /// <summary>
@@ -5,8 +9,10 @@ namespace Magato.Api.DTO
     /// </summary>
     public class MaterialDto
     {
-        public string Name { get; set; } = "";
-        public string Description { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
     }
 }
-//Lägga till bild
+
+// Lägga till bild

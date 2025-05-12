@@ -1,9 +1,13 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250411111626_AddSlugTagsImageUrlsToBlogPost.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddSlugTagsImageUrlsToBlogPost : Migration
     {
@@ -22,7 +26,7 @@ namespace Magato.Api.Migrations
                 table: "BlogPosts",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<string>(
                 name: "Tags",

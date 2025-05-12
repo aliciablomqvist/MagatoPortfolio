@@ -1,25 +1,29 @@
+// <copyright file="RateLimitingMiddleware.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.Collections.Concurrent;
 
 public class RateLimitingMiddleware
 {
-    private readonly RequestDelegate _next;
-    private static readonly ConcurrentDictionary<string, (DateTime resetTime, int count)> _requestLogs = new();
+    private readonly RequestDelegate next;
+    private static readonly ConcurrentDictionary<string, (DateTime resetTime, int count)> requestLogs = new ();
 
     private const int LIMIT = 10;
     private static readonly TimeSpan PERIOD = TimeSpan.FromMinutes(1);
 
     public RateLimitingMiddleware(RequestDelegate next)
     {
-        _next = next;
+        this.next = next;
     }
 
     public async Task InvokeAsync(HttpContext context)
     {
-        //Admin ok
+        // Admin ok
         if (context.User.Identity?.IsAuthenticated == true &&
             context.User.IsInRole("Admin"))
         {
-            await _next(context);
+            await this.next(context);
             return;
         }
 
@@ -27,11 +31,11 @@ public class RateLimitingMiddleware
 
         var now = DateTime.UtcNow;
 
-        var entry = _requestLogs.GetOrAdd(key, _ => (now.Add(PERIOD), 0));
+        var entry = requestLogs.GetOrAdd(key, _ => (now.Add(PERIOD), 0));
 
         if (entry.resetTime < now)
         {
-            _requestLogs[key] = (now.Add(PERIOD), 1);
+            requestLogs[key] = (now.Add(PERIOD), 1);
         }
         else
         {
@@ -42,9 +46,9 @@ public class RateLimitingMiddleware
                 return;
             }
 
-            _requestLogs[key] = (entry.resetTime, entry.count + 1);
+            requestLogs[key] = (entry.resetTime, entry.count + 1);
         }
 
-        await _next(context);
+        await this.next(context);
     }
 }

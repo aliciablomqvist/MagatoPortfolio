@@ -1,11 +1,14 @@
-using System;
-
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250411080306_AddMediaUrlsToPageContent.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddMediaUrlsToPageContent : Migration
     {
@@ -41,7 +44,7 @@ namespace Magato.Api.Migrations
                 table: "PageContents",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<bool>(
                 name: "Published",

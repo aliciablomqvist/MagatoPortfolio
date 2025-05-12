@@ -1,8 +1,11 @@
+// <copyright file="ContactController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +15,11 @@ namespace Magato.Api.Controllers;
 [Route("api/[controller]")]
 public class ContactController : ControllerBase
 {
-    private readonly IContactService _contactService;
+    private readonly IContactService contactService;
 
     public ContactController(IContactService contactService)
     {
-        _contactService = contactService;
+        this.contactService = contactService;
     }
 
     [HttpPost]
@@ -24,33 +27,36 @@ public class ContactController : ControllerBase
     {
         try
         {
-            var result = await _contactService.HandleContactAsync(dto);
+            var result = await this.contactService.HandleContactAsync(dto);
 
             if (!result.IsSuccess)
-                return BadRequest(new
-                {
-                    errors = result.Errors
-                });
-
-            return Ok(new
             {
-                success = true
+                return this.BadRequest(new
+                {
+                    errors = result.Errors,
+                });
+            }
+
+            return this.Ok(new
+            {
+                success = true,
             });
         }
         catch (Exception ex)
         {
-            //Loggning för felsök
+            // Loggning för felsök
             Console.WriteLine(" HÄR BLIR DET FEL: " + ex.Message);
-            return StatusCode(500, "Internal Server Error");
+            return this.StatusCode(500, "Internal Server Error");
         }
     }
+
     [Authorize(Roles = "Admin")]
     [HttpGet("messages")]
 
     public async Task<IActionResult> GetMessages()
     {
-        var messages = await _contactService.GetAllMessagesAsync();
-        return Ok(messages);
+        var messages = await this.contactService.GetAllMessagesAsync();
+        return this.Ok(messages);
     }
 
     [Authorize(Roles = "Admin")]
@@ -58,14 +64,15 @@ public class ContactController : ControllerBase
 
     public async Task<IActionResult> Delete(int id)
     {
-        var success = await _contactService.DeleteMessageAsync(id);
+        var success = await this.contactService.DeleteMessageAsync(id);
         if (!success)
-            return NotFound(new
+        {
+            return this.NotFound(new
             {
-                error = "The message was not found."
+                error = "The message was not found.",
             });
+        }
 
-        return NoContent();
+        return this.NoContent();
     }
-
 }

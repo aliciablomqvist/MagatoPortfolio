@@ -1,10 +1,14 @@
+// <copyright file="RefreshTokenService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 public class RefreshTokenService : IRefreshTokenService
 {
-    private readonly IRefreshTokenRepository _repo;
+    private readonly IRefreshTokenRepository repo;
 
     public RefreshTokenService(IRefreshTokenRepository repo)
     {
-        _repo = repo;
+        this.repo = repo;
     }
 
     public RefreshToken CreateAndStore(string username)
@@ -15,14 +19,14 @@ public class RefreshTokenService : IRefreshTokenService
         {
             Token = token,
             Username = username,
-            Expires = DateTime.UtcNow.AddDays(7)
+            Expires = DateTime.UtcNow.AddDays(7),
         };
 
-        _repo.Add(refresh);
+        this.repo.Add(refresh);
         return refresh;
     }
 
-    public RefreshToken? Get(string token) => _repo.Get(token);
+    public RefreshToken? Get(string token) => this.repo.Get(token);
 
-    public void Revoke(string token) => _repo.Revoke(token);
+    public void Revoke(string token) => this.repo.Revoke(token);
 }

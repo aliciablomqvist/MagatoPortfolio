@@ -1,50 +1,54 @@
+// <copyright file="ContactService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Shared;
 using Magato.Api.Validators;
+
 namespace Magato.Api.Services;
 
 public class ContactService : IContactService
 {
-    private readonly IContactRepository _repo;
-    private readonly ContactMessageValidator _validator;
+    private readonly IContactRepository repo;
+    private readonly ContactMessageValidator validator;
 
     public ContactService(IContactRepository repo)
     {
-        _repo = repo;
-        _validator = new ContactMessageValidator();
-
+        this.repo = repo;
+        this.validator = new ContactMessageValidator();
     }
 
     public async Task<Result> HandleContactAsync(ContactMessageDto dto)
     {
-        var errors = _validator.ValidateAndExtractErrors(dto);
+        var errors = this.validator.ValidateAndExtractErrors(dto);
         if (errors.Any())
+        {
             return Result.Failure(errors);
+        }
 
         var message = new ContactMessage
         {
             Name = dto.Name,
             Email = dto.Email,
             Message = dto.Message,
-            GdprConsent = dto.GdprConsent
+            GdprConsent = dto.GdprConsent,
         };
 
-        await _repo.AddAsync(message);
+        await this.repo.AddAsync(message);
 
         return Result.Success();
-
     }
 
     public async Task<IEnumerable<ContactMessage>> GetAllMessagesAsync()
     {
-        return await _repo.GetAllAsync();
+        return await this.repo.GetAllAsync();
     }
 
     public async Task<bool> DeleteMessageAsync(int id)
     {
-        return await _repo.DeleteAsync(id);
+        return await this.repo.DeleteAsync(id);
     }
-
 }

@@ -1,3 +1,7 @@
+// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -24,7 +28,6 @@ builder.Configuration
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-
 /*builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));*/
 
@@ -38,7 +41,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
-
 
 // Dependency injection
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
@@ -75,14 +77,14 @@ builder.Services.AddValidatorsFromAssemblyContaining<SocialMediaLinkDtoValidator
 builder.Services.AddValidatorsFromAssemblyContaining<LookbookImageDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CategoryDtoValidator>();
 
-//Filuppladdning
+// Filuppladdning
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
 
-//builder.Services.AddControllers();
+// builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-//Swagger
+// Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magato API", Version = "v1" });
@@ -94,7 +96,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
+        Scheme = "Bearer",
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -109,10 +111,9 @@ builder.Services.AddSwaggerGen(c =>
                 }
             },
             new List<string>()
-        }
+        },
     });
 });
-
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -124,7 +125,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "supersecretkey123"))
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "supersecretkey123")),
         };
     });
 
@@ -133,21 +134,18 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 });
 
-//Cors-configuration
-//För att tillåta allt ( OBS: endast vid test, ej prod) policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-
+// Cors-configuration
+// För att tillåta allt ( OBS: endast vid test, ej prod) policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") //React port
+        policy.WithOrigins("http://localhost:3000") // React port
               .AllowAnyHeader()
               .AllowAnyMethod()
-          .AllowCredentials(); //Notera: frontend ska då också sätta credentials: include i fetch/axios.
+          .AllowCredentials(); // Notera: frontend ska då också sätta credentials: include i fetch/axios.
     });
 });
-
-
 
 var app = builder.Build();
 
@@ -158,10 +156,9 @@ if (app.Environment.IsDevelopment())
 }
 
 if (!app.Environment.IsDevelopment())
+{
     app.UseHttpsRedirection();
-
-
-
+}
 
 if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"))
 {
@@ -169,8 +166,6 @@ if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"
     app.UseGlobalExceptionHandling();
     app.UseInputValidation();
 }
-
-
 
 app.UseRequestLogging();
 app.UseHoneypot();

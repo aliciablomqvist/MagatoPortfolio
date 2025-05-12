@@ -1,9 +1,13 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250422141150_AddMissingChanges.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddMissingChanges : Migration
     {

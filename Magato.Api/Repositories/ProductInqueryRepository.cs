@@ -1,22 +1,25 @@
+// <copyright file="ProductInqueryRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Magato.Api.Data;
 using Magato.Api.Models;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace Magato.Api.Repositories;
 
 public class ProductInquiryRepository : IProductInquiryRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public ProductInquiryRepository(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public IEnumerable<ProductInquiry> GetAll()
     {
-        return _context.ProductInquiries
+        return this.context.ProductInquiries
             .Include(i => i.Product)
             .OrderByDescending(i => i.SentAt)
             .ToList();
@@ -24,20 +27,20 @@ public class ProductInquiryRepository : IProductInquiryRepository
 
     public ProductInquiry? Get(int id)
     {
-        return _context.ProductInquiries
+        return this.context.ProductInquiries
             .Include(i => i.Product)
             .FirstOrDefault(i => i.Id == id);
     }
 
     public void Add(ProductInquiry inquiry)
     {
-        _context.ProductInquiries.Add(inquiry);
-        _context.SaveChanges();
+        this.context.ProductInquiries.Add(inquiry);
+        this.context.SaveChanges();
     }
 
     public void Update(ProductInquiry inquiry)
     {
-        _context.ProductInquiries.Update(inquiry);
-        _context.SaveChanges();
+        this.context.ProductInquiries.Update(inquiry);
+        this.context.SaveChanges();
     }
 }

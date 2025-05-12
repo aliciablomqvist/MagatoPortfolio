@@ -1,3 +1,7 @@
+// <copyright file="ExceptionHandlingMiddleware.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
@@ -7,24 +11,24 @@ using Microsoft.Extensions.Logging;
 
 public class ExceptionHandlingMiddleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    private readonly RequestDelegate next;
+    private readonly ILogger<ExceptionHandlingMiddleware> logger;
 
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
-        _next = next;
-        _logger = logger;
+        this.next = next;
+        this.logger = logger;
     }
 
     public async Task Invoke(HttpContext context)
     {
         try
         {
-            await _next(context);
+            await this.next(context);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unhandled exception occurred");
+            this.logger.LogError(ex, "Unhandled exception occurred");
 
             context.Response.ContentType = "application/problem+json";
 
@@ -42,7 +46,7 @@ public class ExceptionHandlingMiddleware
                 type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
                 title = GetTitleForStatus(statusCode),
                 status = statusCode,
-                detail = ex.Message // Ta bort i prod.
+                detail = ex.Message, // Ta bort i prod.
             };
 
             var json = JsonSerializer.Serialize(problem);

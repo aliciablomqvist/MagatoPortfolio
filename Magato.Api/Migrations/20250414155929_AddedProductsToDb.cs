@@ -1,9 +1,13 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250414155929_AddedProductsToDb.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddedProductsToDb : Migration
     {
@@ -20,7 +24,7 @@ namespace Magato.Api.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageUrls = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ImageUrls = table.Column<string>(type: "nvarchar(max)", nullable: false),
                 },
                 constraints: table =>
                 {

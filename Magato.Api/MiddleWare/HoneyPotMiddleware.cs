@@ -1,12 +1,16 @@
+// <copyright file="HoneyPotMiddleware.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 public class HoneypotMiddleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<HoneypotMiddleware> _logger;
+    private readonly RequestDelegate next;
+    private readonly ILogger<HoneypotMiddleware> logger;
 
     public HoneypotMiddleware(RequestDelegate next, ILogger<HoneypotMiddleware> logger)
     {
-        _next = next;
-        _logger = logger;
+        this.next = next;
+        this.logger = logger;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -22,13 +26,13 @@ public class HoneypotMiddleware
             if (body.Contains("\"honeypot\"") &&
                 !body.Contains("\"honeypot\":\"\""))
             {
-                _logger.LogWarning("Honeypot triggered from IP: {IP}", context.Connection.RemoteIpAddress);
+                this.logger.LogWarning("Honeypot triggered from IP: {IP}", context.Connection.RemoteIpAddress);
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync("Spam detected.");
                 return;
             }
         }
 
-        await _next(context);
+        await this.next(context);
     }
 }

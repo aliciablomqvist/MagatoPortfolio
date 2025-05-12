@@ -1,11 +1,14 @@
-using System;
-
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250407084234_AddContactMessages.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddContactMessages : Migration
     {
@@ -22,7 +25,7 @@ namespace Magato.Api.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GdprConsent = table.Column<bool>(type: "bit", nullable: false)
+                    GdprConsent = table.Column<bool>(type: "bit", nullable: false),
                 },
                 constraints: table =>
                 {

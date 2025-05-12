@@ -1,6 +1,9 @@
+// <copyright file="CategoryController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Magato.Api.DTO;
 using Magato.Api.Services;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,58 +13,58 @@ namespace Magato.Api.Controllers;
 [Route("api/categories")]
 public class CategoriesController : ControllerBase
 {
-    private readonly ICategoryService _service;
+    private readonly ICategoryService service;
 
     public CategoriesController(ICategoryService service)
     {
-        _service = service;
+        this.service = service;
     }
 
     [HttpGet]
     public IActionResult GetAll()
     {
-        return Ok(_service.GetAll());
+        return this.Ok(this.service.GetAll());
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
     public IActionResult Create(CategoryDto dto)
     {
-        _service.Add(dto);
-        return CreatedAtAction(nameof(GetAll), null);
+        this.service.Add(dto);
+        return this.CreatedAtAction(nameof(this.GetAll), null);
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public IActionResult Update(int id, CategoryDto dto)
     {
-        var existing = _service.GetById(id);
+        var existing = this.service.GetById(id);
         if (existing == null)
         {
-            return NotFound(new
+            return this.NotFound(new
             {
-                message = $"Category with ID {id} not found."
+                message = $"Category with ID {id} not found.",
             });
         }
 
-        _service.Update(id, dto);
-        return NoContent();
+        this.service.Update(id, dto);
+        return this.NoContent();
     }
 
     [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var existing = _service.GetById(id);
+        var existing = this.service.GetById(id);
         if (existing == null)
         {
-            return NotFound(new
+            return this.NotFound(new
             {
-                message = $"Category with ID {id} not found."
+                message = $"Category with ID {id} not found.",
             });
         }
 
-        _service.Delete(id);
-        return NoContent();
+        this.service.Delete(id);
+        return this.NoContent();
     }
 }

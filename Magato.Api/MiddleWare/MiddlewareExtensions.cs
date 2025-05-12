@@ -1,3 +1,7 @@
+// <copyright file="MiddlewareExtensions.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 public static class MiddlewareExtensions
 {
     public static IApplicationBuilder UseRequestLogging(this IApplicationBuilder builder)

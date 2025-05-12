@@ -1,11 +1,14 @@
-using System;
-
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250331103814_InitialCreate.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
@@ -20,7 +23,7 @@ namespace Magato.Api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CollectionTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CollectionDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -35,7 +38,7 @@ namespace Magato.Api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Hex = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CollectionId = table.Column<int>(type: "int", nullable: false)
+                    CollectionId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -56,7 +59,7 @@ namespace Magato.Api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CollectionId = table.Column<int>(type: "int", nullable: false)
+                    CollectionId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -76,7 +79,7 @@ namespace Magato.Api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CollectionId = table.Column<int>(type: "int", nullable: false)
+                    CollectionId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

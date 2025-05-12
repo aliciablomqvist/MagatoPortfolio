@@ -1,3 +1,7 @@
+// <copyright file="Result.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Magato.Api.Shared;
 public class Result
 {
@@ -5,15 +9,19 @@ public class Result
     {
         get;
     }
-    public List<string> Errors { get; } = new();
+
+    public List<string> Errors { get; } = new ();
 
     private Result(bool success, List<string>? errors = null)
     {
-        IsSuccess = success;
+        this.IsSuccess = success;
         if (errors != null)
-            Errors = errors;
+        {
+            this.Errors = errors;
+        }
     }
 
-    public static Result Success() => new(true);
-    public static Result Failure(List<string> errors) => new(false, errors);
+    public static Result Success() => new (true);
+
+    public static Result Failure(List<string> errors) => new (false, errors);
 }

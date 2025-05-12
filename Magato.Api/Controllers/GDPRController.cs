@@ -1,3 +1,7 @@
+// <copyright file="GDPRController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -7,21 +11,21 @@ namespace Magato.Api.Controllers;
 [Route("api/[controller]")]
 public class GdprController : ControllerBase
 {
-    private readonly IConfiguration _config;
+    private readonly IConfiguration config;
 
     public GdprController(IConfiguration config)
     {
-        _config = config;
+        this.config = config;
     }
 
     [HttpGet("contact-text")]
     public IActionResult GetContactGdprText()
     {
-        var text = _config["Gdpr:ContactFormText"] ??
+        var text = this.config["Gdpr:ContactFormText"] ??
                    "No GDPR text found";
-        return Ok(new
+        return this.Ok(new
         {
-            text
+            text,
         });
     }
 }

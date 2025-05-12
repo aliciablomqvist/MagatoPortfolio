@@ -1,9 +1,13 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250418121901_ChangesInProductInquieryModel.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class ChangesInProductInquieryModel : Migration
     {

@@ -1,14 +1,18 @@
+// <copyright file="InputValidationMiddleware.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.Text.Json;
 
 public class InputValidationMiddleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<InputValidationMiddleware> _logger;
+    private readonly RequestDelegate next;
+    private readonly ILogger<InputValidationMiddleware> logger;
 
     public InputValidationMiddleware(RequestDelegate next, ILogger<InputValidationMiddleware> logger)
     {
-        _next = next;
-        _logger = logger;
+        this.next = next;
+        this.logger = logger;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -28,13 +32,13 @@ public class InputValidationMiddleware
             }
             catch (JsonException ex)
             {
-                _logger.LogWarning("Invalid JSON: {Message}", ex.Message);
+                this.logger.LogWarning("Invalid JSON: {Message}", ex.Message);
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync("Invalid JSON format.");
                 return;
             }
         }
 
-        await _next(context);
+        await this.next(context);
     }
 }

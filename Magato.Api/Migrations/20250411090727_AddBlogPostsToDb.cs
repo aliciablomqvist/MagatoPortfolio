@@ -1,11 +1,14 @@
-using System;
-
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250411090727_AddBlogPostsToDb.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddBlogPostsToDb : Migration
     {
@@ -21,7 +24,7 @@ namespace Magato.Api.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PublishedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PublishedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {

@@ -1,3 +1,7 @@
+// <copyright file="FileUploadController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Magato.Api.Controllers;
@@ -6,23 +10,27 @@ namespace Magato.Api.Controllers;
 [Route("api/[controller]")]
 public class UploadController : ControllerBase
 {
-    private readonly IWebHostEnvironment _env;
+    private readonly IWebHostEnvironment env;
 
     public UploadController(IWebHostEnvironment env)
     {
-        _env = env;
+        this.env = env;
     }
 
     [HttpPost]
     public async Task<IActionResult> Upload(IFormFile file)
     {
         if (file == null || file.Length == 0)
-            return BadRequest("No file uploaded.");
+        {
+            return this.BadRequest("No file uploaded.");
+        }
 
-        var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
+        var uploadsFolder = Path.Combine(this.env.WebRootPath ?? "wwwroot", "uploads");
 
         if (!Directory.Exists(uploadsFolder))
+        {
             Directory.CreateDirectory(uploadsFolder);
+        }
 
         var filePath = Path.Combine(uploadsFolder, file.FileName);
 
@@ -30,9 +38,9 @@ public class UploadController : ControllerBase
         await file.CopyToAsync(stream);
 
         var imageUrl = $"/uploads/{file.FileName}";
-        return Ok(new
+        return this.Ok(new
         {
-            imageUrl
+            imageUrl,
         });
     }
 }

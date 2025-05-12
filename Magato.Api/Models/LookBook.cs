@@ -1,5 +1,8 @@
-using System.Text.Json.Serialization;
+// <copyright file="LookBook.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Magato.Api.Models;
@@ -10,8 +13,10 @@ public class LookbookImage
     {
         get; set;
     }
-    public string Url { get; set; } = "";
-    public string Description { get; set; } = "";
+
+    public string Url { get; set; } = string.Empty;
+
+    public string Description { get; set; } = string.Empty;
 
     public int CollectionId
     {

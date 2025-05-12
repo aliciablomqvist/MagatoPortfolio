@@ -1,46 +1,50 @@
+// <copyright file="PageContentService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.Security.Cryptography;
 using System.Text;
-
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Validators;
 
-
 namespace Magato.Api.Services;
 
 public class PageContentService : IPageContentService
 {
-    private readonly IPageContentRepository _repo;
+    private readonly IPageContentRepository repo;
 
     public PageContentService(IPageContentRepository repo)
     {
-        _repo = repo;
+        this.repo = repo;
     }
 
     public PageContentDto? Get(string key)
     {
-        var content = _repo.Get(key);
+        var content = this.repo.Get(key);
         return content == null ? null : MapToDto(content);
     }
 
     public IEnumerable<PageContentDto> GetAll()
     {
-        return _repo.GetAll().Select(MapToDto);
+        return this.repo.GetAll().Select(MapToDto);
     }
 
     public void Add(PageContentDto dto)
     {
         var content = MapToEntity(dto);
         content.LastModified = DateTime.UtcNow;
-        _repo.Add(content);
+        this.repo.Add(content);
     }
 
     public void Update(PageContentDto dto)
     {
-        var existing = _repo.Get(dto.Key);
+        var existing = this.repo.Get(dto.Key);
         if (existing == null)
+        {
             return;
+        }
 
         existing.Title = dto.Title;
         existing.MainText = dto.MainText;
@@ -50,12 +54,12 @@ public class PageContentService : IPageContentService
         existing.ImageUrls = dto.ImageUrls;
         existing.LastModified = DateTime.UtcNow;
 
-        _repo.Update(existing);
+        this.repo.Update(existing);
     }
 
     public void Delete(string key)
     {
-        _repo.Delete(key);
+        this.repo.Delete(key);
     }
 
     private static PageContentDto MapToDto(PageContent entity)
@@ -75,7 +79,7 @@ public class PageContentService : IPageContentService
             {
                 Platform = link.Platform,
                 Url = link.Url
-            }).ToList()
+            }).ToList(),
         };
     }
 
@@ -96,8 +100,7 @@ public class PageContentService : IPageContentService
             {
                 Platform = link.Platform,
                 Url = link.Url
-            }).ToList()
-
+            }).ToList(),
         };
     }
 }

@@ -1,9 +1,13 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250428183900_SocialMediaLinksAddedToDB.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class SocialMediaLinksAddedToDB : Migration
     {
@@ -25,7 +29,7 @@ namespace Magato.Api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PageContentId = table.Column<int>(type: "int", nullable: true)
+                    PageContentId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
