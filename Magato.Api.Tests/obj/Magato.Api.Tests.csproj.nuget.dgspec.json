@@ -177,6 +177,12 @@
               "target": "Package",
               "version": "[9.0.1, )"
             },
+            "Microsoft.CodeAnalysis.NetAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.3, )"
@@ -190,6 +196,12 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.3, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.1.118, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

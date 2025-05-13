@@ -1,0 +1,24 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Restore
+      run: dotnet restore
+
+    - name: dotnet format (check only)
+      run: dotnet format --verify-no-changes
+
+    - name: Build (warnings as errors)
+      run: dotnet build -warnaserror
+
+    - name: Test
+      run: dotnet test
