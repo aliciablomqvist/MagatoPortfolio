@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 public class RateLimitingMiddleware
 {
     private readonly RequestDelegate next;
-    private static readonly ConcurrentDictionary<string, (DateTime resetTime, int count)> requestLogs = new ();
+    private static readonly ConcurrentDictionary<string, (DateTime resetTime, int count)> RequestLogs = new ();
 
     private const int LIMIT = 10;
     private static readonly TimeSpan PERIOD = TimeSpan.FromMinutes(1);
@@ -31,11 +31,11 @@ public class RateLimitingMiddleware
 
         var now = DateTime.UtcNow;
 
-        var entry = requestLogs.GetOrAdd(key, _ => (now.Add(PERIOD), 0));
+        var entry = RequestLogs.GetOrAdd(key, _ => (now.Add(PERIOD), 0));
 
         if (entry.resetTime < now)
         {
-            requestLogs[key] = (now.Add(PERIOD), 1);
+            RequestLogs[key] = (now.Add(PERIOD), 1);
         }
         else
         {
@@ -46,7 +46,7 @@ public class RateLimitingMiddleware
                 return;
             }
 
-            requestLogs[key] = (entry.resetTime, entry.count + 1);
+            RequestLogs[key] = (entry.resetTime, entry.count + 1);
         }
 
         await this.next(context);

@@ -1,13 +1,17 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+
 using FluentAssertions;
+
+using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Models;
-using Magato.Api.Data;
+
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+
 using Xunit;
 
 namespace Magato.Api.Tests.IntegrationTests;
@@ -120,7 +124,7 @@ public class BlogIntegrationTests : IClassFixture<WebApplicationFactory<Program>
             Content = "Updated Content",
             Author = "Updated Author",
             PublishedAt = DateTime.UtcNow,
-            Tags = new List<string> { "update", "news" }, 
+            Tags = new List<string> { "update", "news" },
             ImageUrls = new List<string> { "https://img.com/updated.png" }
         };
 

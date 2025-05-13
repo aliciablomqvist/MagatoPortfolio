@@ -1,10 +1,6 @@
-// <copyright file="CollectionsController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using Magato.Api.DTO;
 using Magato.Api.Models;
-using Magato.Api.Services;
+using Magato.Api.Services.Collections;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,184 +8,122 @@ using Microsoft.AspNetCore.Mvc;
 namespace Magato.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class CollectionsController : ControllerBase
+[Route("api/collections")]
+public sealed class CollectionsController : ControllerBase
 {
-    private readonly ICollectionService service;
+    private readonly ICollectionReader reader;
+    private readonly ICollectionWriter writer;
+    private readonly IColorWriter colors;
+    private readonly IMaterialWriter materials;
+    private readonly ISketchWriter sketches;
+    private readonly ILookbookWriter lookbooks;
 
-    public CollectionsController(ICollectionService service)
+    public CollectionsController(
+        ICollectionReader reader,
+        ICollectionWriter writer,
+        IColorWriter colors,
+        IMaterialWriter materials,
+        ISketchWriter sketches,
+        ILookbookWriter lookbooks)
     {
-        this.service = service;
+        this.reader = reader;
+        this.writer = writer;
+        this.colors = colors;
+        this.materials = materials;
+        this.sketches = sketches;
+        this.lookbooks = lookbooks;
     }
 
-    // ----------------------
-    // COLLECTIONS
-    // ----------------------
-
-    /// <summary>Gets all collections with related data.</summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    // ---------- Collection CRUD ----------
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Collection>>> GetAll()
-    {
-        var collections = await this.service.GetAllCollectionsAsync();
-        return this.Ok(collections);
-    }
+    public Task<IEnumerable<Collection>> GetAll() => this.reader.GetAllAsync();
 
-    /// <summary>Gets a specific collection by ID.</summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
-    [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Collection>> GetById(int id)
-    {
-        var collection = await this.service.GetCollectionByIdAsync(id);
-        return collection == null ? this.NotFound() : this.Ok(collection);
-    }
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Get(int id)
+        => (await this.reader.GetByIdAsync(id)) is { } col ? this.Ok(col) : this.NotFound();
 
-    /// <summary>Creates a new collection.</summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> Create([FromBody] CollectionCreateDto dto)
+    public async Task<IActionResult> Create(CollectionCreateDto dto)
     {
-        var collection = await this.service.AddCollectionAsync(dto);
-        return this.CreatedAtAction(nameof(this.GetById), new
+        var created = await this.writer.AddAsync(dto);
+        return this.CreatedAtAction(nameof(this.Get), new
         {
-            id = collection.Id,
-        }, collection);
+            id = created.Id,
+        }, created);
     }
 
-    /// <summary>Updates a collection by ID.</summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
     [Authorize(Roles = "Admin")]
-    [HttpPut("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update(int id, [FromBody] CollectionDto dto)
-    {
-        var updated = await this.service.UpdateCollectionAsync(id, dto);
-        return updated ? this.Ok() : this.NotFound();
-    }
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Update(int id, CollectionDto dto)
+        => await this.writer.UpdateAsync(id, dto) ? this.NoContent() : this.NotFound();
 
-    /// <summary>Deletes a collection by ID.</summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
-    {
-        var success = await this.service.DeleteCollectionAsync(id);
-        return success ? this.NoContent() : this.NotFound();
-    }
+        => await this.writer.DeleteAsync(id) ? this.NoContent() : this.NotFound();
 
-    // ----------------------
-    // COLORS
-    // ----------------------
+    // ---------- Colors ----------
     [Authorize(Roles = "Admin")]
-    [HttpPost("{id}/colors")]
-    public async Task<IActionResult> AddColor(int id, [FromBody] ColorDto dto)
-    {
-        var success = await this.service.AddColorAsync(id, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPost("{collectionId:int}/colors")]
+    public async Task<IActionResult> AddColor(int collectionId, ColorDto dto)
+        => await this.colors.AddAsync(collectionId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("colors/{colorId}")]
-    public async Task<IActionResult> UpdateColor(int colorId, [FromBody] ColorDto dto)
-    {
-        var success = await this.service.UpdateColorAsync(colorId, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPut("colors/{colorId:int}")]
+    public async Task<IActionResult> UpdateColor(int colorId, ColorDto dto)
+        => await this.colors.UpdateAsync(colorId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("colors/{colorId}")]
+    [HttpDelete("colors/{colorId:int}")]
     public async Task<IActionResult> DeleteColor(int colorId)
-    {
-        var success = await this.service.DeleteColorAsync(colorId);
-        return success ? this.Ok() : this.NotFound();
-    }
+        => await this.colors.DeleteAsync(colorId) ? this.NoContent() : this.NotFound();
 
-    // ----------------------
-    // MATERIALS
-    // ----------------------
+    // ---------- Materials ----------
     [Authorize(Roles = "Admin")]
-    [HttpPost("{id}/materials")]
-    public async Task<IActionResult> AddMaterial(int id, [FromBody] MaterialDto dto)
-    {
-        var success = await this.service.AddMaterialAsync(id, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPost("{collectionId:int}/materials")]
+    public async Task<IActionResult> AddMaterial(int collectionId, MaterialDto dto)
+        => await this.materials.AddAsync(collectionId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("materials/{materialId}")]
-    public async Task<IActionResult> UpdateMaterial(int materialId, [FromBody] MaterialDto dto)
-    {
-        var success = await this.service.UpdateMaterialAsync(materialId, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPut("materials/{materialId:int}")]
+    public async Task<IActionResult> UpdateMaterial(int materialId, MaterialDto dto)
+        => await this.materials.UpdateAsync(materialId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("materials/{materialId}")]
+    [HttpDelete("materials/{materialId:int}")]
     public async Task<IActionResult> DeleteMaterial(int materialId)
-    {
-        var success = await this.service.DeleteMaterialAsync(materialId);
-        return success ? this.Ok() : this.NotFound();
-    }
+        => await this.materials.DeleteAsync(materialId) ? this.NoContent() : this.NotFound();
 
-    // ----------------------
-    // SKETCHES
-    // ----------------------
+    // ---------- Sketches ----------
     [Authorize(Roles = "Admin")]
-    [HttpPost("{id}/sketches")]
-    public async Task<IActionResult> AddSketch(int id, [FromBody] SketchDto dto)
-    {
-        var success = await this.service.AddSketchAsync(id, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPost("{collectionId:int}/sketches")]
+    public async Task<IActionResult> AddSketch(int collectionId, SketchDto dto)
+        => await this.sketches.AddAsync(collectionId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("sketches/{sketchId}")]
-    public async Task<IActionResult> UpdateSketch(int sketchId, [FromBody] SketchDto dto)
-    {
-        var success = await this.service.UpdateSketchAsync(sketchId, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPut("sketches/{sketchId:int}")]
+    public async Task<IActionResult> UpdateSketch(int sketchId, SketchDto dto)
+        => await this.sketches.UpdateAsync(sketchId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("sketches/{sketchId}")]
+    [HttpDelete("sketches/{sketchId:int}")]
     public async Task<IActionResult> DeleteSketch(int sketchId)
-    {
-        var success = await this.service.DeleteSketchAsync(sketchId);
-        return success ? this.Ok() : this.NotFound();
-    }
+        => await this.sketches.DeleteAsync(sketchId) ? this.NoContent() : this.NotFound();
 
-    // ----------------------
-    // LOOKBOOK
-    // ----------------------
+    // ---------- Lookbook images ----------
     [Authorize(Roles = "Admin")]
-    [HttpPost("{id}/lookbook")]
-    public async Task<IActionResult> AddLookbookImage(int id, [FromBody] LookbookImageDto dto)
-    {
-        var success = await this.service.AddLookbookImageAsync(id, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPost("{collectionId:int}/lookbook")]
+    public async Task<IActionResult> AddLookbookImage(int collectionId, LookbookImageDto dto)
+        => await this.lookbooks.AddAsync(collectionId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("lookbook/{imageId}")]
-    public async Task<IActionResult> UpdateLookbookImage(int imageId, [FromBody] LookbookImageDto dto)
-    {
-        var success = await this.service.UpdateLookbookImageAsync(imageId, dto);
-        return success ? this.Ok() : this.NotFound();
-    }
+    [HttpPut("lookbook/{imageId:int}")]
+    public async Task<IActionResult> UpdateLookbookImage(int imageId, LookbookImageDto dto)
+        => await this.lookbooks.UpdateAsync(imageId, dto) ? this.NoContent() : this.NotFound();
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("lookbook/{imageId}")]
+    [HttpDelete("lookbook/{imageId:int}")]
     public async Task<IActionResult> DeleteLookbookImage(int imageId)
-    {
-        var success = await this.service.DeleteLookbookImageAsync(imageId);
-        return success ? this.Ok() : this.NotFound();
-    }
+        => await this.lookbooks.DeleteAsync(imageId) ? this.NoContent() : this.NotFound();
 }

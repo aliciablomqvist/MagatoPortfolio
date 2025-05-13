@@ -1,5 +1,7 @@
 using Magato.Api;
+
 using NetArchTest.Rules;
+
 using Xunit;
 
 public class BaseClassTest

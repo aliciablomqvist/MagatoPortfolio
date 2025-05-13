@@ -1,4 +1,5 @@
-﻿using NetArchTest.Rules;
+using NetArchTest.Rules;
+
 using Xunit;
 
 public class ArchitectureTests

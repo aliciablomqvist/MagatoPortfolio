@@ -1,11 +1,14 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+
 using FluentAssertions;
+
 using Magato.Api.Data;
+
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 
 public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
@@ -128,5 +131,8 @@ public class LoginResponseDto
 {
     public string Token { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
-    public bool IsAdmin { get; set; }
+    public bool IsAdmin
+    {
+        get; set;
+    }
 }

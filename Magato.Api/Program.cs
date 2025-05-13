@@ -1,3 +1,7 @@
+// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using Magato.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +41,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
+{
     app.MapOpenApi();
+}
 
 app.MapControllers();
 

@@ -1,9 +1,11 @@
-using Magato.Api.DTO;
 using Magato.Api.Controllers;
+using Magato.Api.DTO;
 using Magato.Api.Services;
-using Moq;
 using Magato.Api.Shared;
+
 using Microsoft.AspNetCore.Mvc;
+
+using Moq;
 
 
 namespace Magato.Tests.UnitTests.Controllers;

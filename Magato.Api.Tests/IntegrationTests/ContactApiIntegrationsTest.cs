@@ -1,14 +1,19 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+
 using FluentAssertions;
+
 using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+
 using Moq;
+
 using Xunit;
 
 namespace Magato.Tests.IntegrationTests;

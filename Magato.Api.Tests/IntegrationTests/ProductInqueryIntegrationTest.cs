@@ -1,13 +1,16 @@
-using FluentAssertions;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+
+using FluentAssertions;
+
+using Magato.Api.Data;
 using Magato.Api.DTO;
 using Magato.Api.Models;
-using Magato.Api.Data;
+
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Magato.Api.Tests.IntegrationTests;

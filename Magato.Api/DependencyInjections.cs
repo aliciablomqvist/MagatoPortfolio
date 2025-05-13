@@ -1,23 +1,27 @@
+// <copyright file="DependencyInjections.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 using System.Text;
+using System.Text.Json.Serialization;
+
 using FluentValidation;
 using FluentValidation.AspNetCore;
+
 using Magato.Api.Data;
 using Magato.Api.Repositories;
+using Magato.Api.Repositories.Collections;
 using Magato.Api.Services;
+using Magato.Api.Services.Collections;
 using Magato.Api.Validators;
-using Microsoft.AspNetCore.Hosting;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text.Json.Serialization;
 
 namespace Magato.Api;
 public static class DependencyInjection
 {
-
     public static IServiceCollection AddMagatoServices(
         this IServiceCollection services,
         IConfiguration cfg,
@@ -35,8 +39,19 @@ public static class DependencyInjection
                     o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
         // ---------- Repositories & Services ----------
+        // Collection aggregate
         services.AddScoped<ICollectionRepository, CollectionRepository>();
-        services.AddScoped<ICollectionService, CollectionService>();
+        services.AddScoped<IColorRepository, ColorRepository>();
+        services.AddScoped<IMaterialRepository, MaterialRepository>();
+        services.AddScoped<ISketchRepository, SketchRepository>();
+        services.AddScoped<ILookbookRepository, LookbookRepository>();
+        services.AddScoped<ICollectionReader, CollectionReader>();
+        services.AddScoped<ICollectionWriter, CollectionWriter>();
+        services.AddScoped<IColorWriter, ColorWriter>();
+        services.AddScoped<IMaterialWriter, MaterialWriter>();
+        services.AddScoped<ISketchWriter, SketchWriter>();
+        services.AddScoped<ILookbookWriter, LookbookWriter>();
+
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ITokenService, TokenService>();
@@ -118,7 +133,7 @@ public static class DependencyInjection
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,
-                            Id   = "Bearer",
+                            Id = "Bearer",
                         },
                     },
                     new List<string>()

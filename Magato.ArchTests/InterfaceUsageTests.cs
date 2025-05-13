@@ -1,6 +1,8 @@
-using NetArchTest.Rules;
-using Xunit;
 using Magato.Api;
+
+using NetArchTest.Rules;
+
+using Xunit;
 
 namespace Magato.ArchTests;
 

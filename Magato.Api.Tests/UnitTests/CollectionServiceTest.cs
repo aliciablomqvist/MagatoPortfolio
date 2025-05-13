@@ -1,9 +1,11 @@
+using FluentAssertions;
+
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
 using Magato.Api.Services;
+
 using Moq;
-using FluentAssertions;
 
 
 namespace Magato.Tests.UnitTests

@@ -79,7 +79,7 @@ public class PageContentService : IPageContentService
             .Select(link => new SocialMediaLinkDto
             {
                 Platform = link.Platform,
-                Url = link.Url
+                Url = link.Url,
             }).ToList(),
         };
     }
@@ -100,7 +100,7 @@ public class PageContentService : IPageContentService
             .Select(link => new SocialMediaLink
             {
                 Platform = link.Platform,
-                Url = link.Url
+                Url = link.Url,
             }).ToList(),
         };
     }

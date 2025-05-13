@@ -1,0 +1,20 @@
+// <copyright file="CollectionReader.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using Magato.Api.Models;
+using Magato.Api.Repositories.Collections;
+
+namespace Magato.Api.Services.Collections;
+public sealed class CollectionReader : ICollectionReader
+{
+    private readonly ICollectionRepository repo;
+
+    public CollectionReader(ICollectionRepository repo) => this.repo = repo;
+
+    public Task<IEnumerable<Collection>> GetAllAsync() => this.repo.GetAllAsync();
+
+    public Task<Collection?> GetByIdAsync(int id) => this.repo.GetByIdAsync(id);
+
+    public Task<bool> ExistsAsync(int id) => this.repo.ExistsAsync(id);
+}
