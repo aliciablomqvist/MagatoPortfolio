@@ -1,25 +1,22 @@
 // <copyright file="DependencyInjections.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api;
 
 using System.Text;
 using System.Text.Json.Serialization;
-
 using FluentValidation;
 using FluentValidation.AspNetCore;
-
 using Magato.Api.Data;
 using Magato.Api.Repositories;
 using Magato.Api.Repositories.Collections;
 using Magato.Api.Services;
 using Magato.Api.Services.Collections;
 using Magato.Api.Validators;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
-namespace Magato.Api;
 public static class DependencyInjection
 {
     public static IServiceCollection AddMagatoServices(

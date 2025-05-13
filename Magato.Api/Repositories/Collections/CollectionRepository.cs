@@ -2,13 +2,11 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace Magato.Api.Repositories.Collections;
+using Microsoft.EntityFrameworkCore;
 using Magato.Api.Data;
 using Magato.Api.Models;
 
-using Microsoft.EntityFrameworkCore;
-
-
-namespace Magato.Api.Repositories.Collections;
 public sealed class CollectionRepository : ICollectionRepository
 {
     private readonly ApplicationDbContext db;

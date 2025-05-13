@@ -37,7 +37,7 @@ csharp_style_expression_bodied_constructors = when_possible:suggestion
 # prefer using directive inside/outside namespace
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = true
-csharp_using_directive_placement = outside_namespace:warning
+sharp_using_directive_placement = inside_namespace:warning
 
 # prefer pattern matching
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion

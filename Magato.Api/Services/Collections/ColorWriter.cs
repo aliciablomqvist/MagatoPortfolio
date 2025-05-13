@@ -1,12 +1,12 @@
 // <copyright file="ColorWriter.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Services.Collections;
 
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories.Collections;
 
-namespace Magato.Api.Services.Collections;
 public sealed class ColorWriter : IColorWriter
 {
     private readonly IColorRepository colors;

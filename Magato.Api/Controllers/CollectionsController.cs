@@ -1,11 +1,10 @@
+namespace Magato.Api.Controllers;
+
 using Magato.Api.DTO;
 using Magato.Api.Models;
-using Magato.Api.Services.Collections;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Magato.Api.Controllers;
+using Magato.Api.Services.Collections;
 
 [ApiController]
 [Route("api/collections")]
@@ -47,10 +46,13 @@ public sealed class CollectionsController : ControllerBase
     public async Task<IActionResult> Create(CollectionCreateDto dto)
     {
         var created = await this.writer.AddAsync(dto);
-        return this.CreatedAtAction(nameof(this.Get), new
-        {
-            id = created.Id,
-        }, created);
+        return this.CreatedAtAction(
+            nameof(this.Get),
+            new
+            {
+                id = created.Id,
+            },
+            created);
     }
 
     [Authorize(Roles = "Admin")]
