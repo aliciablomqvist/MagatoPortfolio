@@ -2,13 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.Services;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-using Magato.Api.Models;
-
-using Microsoft.IdentityModel.Tokens;
 
 public class TokenService : ITokenService
 {

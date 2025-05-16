@@ -3,8 +3,6 @@
 // </copyright>
 namespace Magato.Api.Controllers;
 
-using Microsoft.AspNetCore.Mvc;
-
 [ApiController]
 [Route("api/[controller]")]
 public class UploadController : ControllerBase

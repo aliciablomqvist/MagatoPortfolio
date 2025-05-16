@@ -3,10 +3,6 @@
 // </copyright>
 namespace Magato.Api.DTO;
 
-using System.Text.Json.Serialization;
-
-using Magato.Api.Models;
-
 public class ProductDto
 {
     public int Id

@@ -1,17 +1,4 @@
 
-using System.Collections.Generic;
-
-using FluentAssertions;
-
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Repositories;
-using Magato.Api.Services;
-
-using Moq;
-
-using Xunit;
-
 namespace Magato.Api.Tests.UnitTests;
 
 public class BlogServiceTests

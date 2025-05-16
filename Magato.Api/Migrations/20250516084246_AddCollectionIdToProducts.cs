@@ -1,4 +1,4 @@
-﻿// <copyright file="20250516084246_AddCollectionIdToProducts.cs" company="PlaceholderCompany">
+// <copyright file="20250516084246_AddCollectionIdToProducts.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 

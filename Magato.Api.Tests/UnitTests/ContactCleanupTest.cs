@@ -1,9 +1,3 @@
-using FluentAssertions;
-
-using Magato.Api.Data;
-using Magato.Api.Models;
-
-using Microsoft.EntityFrameworkCore;
 
 namespace Magato.Tests.UnitTests.Services;
 public class ContactCleanupTests

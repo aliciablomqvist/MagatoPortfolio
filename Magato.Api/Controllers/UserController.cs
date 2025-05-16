@@ -3,13 +3,6 @@
 // </copyright>
 namespace Magato.Api.Controllers;
 
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Services;
-
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase

@@ -3,8 +3,6 @@
 // </copyright>
 namespace Magato.Api.Models;
 
-using System.Text.Json.Serialization;
-
 public class LookbookImage
 {
     public int Id
