@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "apsQzpYpWbg=",
+  "dgSpecHash": "CsWeEc8WXjQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Stefan\\Systemutveckling\\examensarbete\\Magato.Api\\Magato.Api.csproj",
+  "projectFilePath": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\Magato.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stefan\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Stefan\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
