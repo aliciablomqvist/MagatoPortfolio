@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 using FluentAssertions;
 
 using Magato.Api.Data;
+using Magato.Api.DTO;
 
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
