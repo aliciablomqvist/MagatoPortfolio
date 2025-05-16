@@ -12,7 +12,7 @@ public sealed class DipNewKeywordTests
 {
     [Fact]
     public void Application_Should_Not_Create_SqlConnection_With_New()
-    {
+{
         var offenders = typeof(Magato.Api.ApiAssemblyMarker).Assembly
             .GetTypes()
             .Where(t => t.Namespace?.Contains(".Services") == true)

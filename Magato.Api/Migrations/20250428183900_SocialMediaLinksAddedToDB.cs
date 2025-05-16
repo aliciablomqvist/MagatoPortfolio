@@ -10,10 +10,10 @@ namespace Magato.Api.Migrations
 
     /// <inheritdoc />
     public partial class SocialMediaLinksAddedToDB : Migration
-    {
+{
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.AddColumn<int>(
                 name: "Status",
                 table: "ProductInquiries",
@@ -24,7 +24,7 @@ namespace Magato.Api.Migrations
             migrationBuilder.CreateTable(
                 name: "SocialMediaLink",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -32,7 +32,7 @@ namespace Magato.Api.Migrations
                     PageContentId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_SocialMediaLink", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SocialMediaLink_PageContents_PageContentId",
@@ -50,7 +50,7 @@ namespace Magato.Api.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.DropTable(
                 name: "SocialMediaLink");
 

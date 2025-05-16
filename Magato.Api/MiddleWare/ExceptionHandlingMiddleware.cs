@@ -12,25 +12,25 @@ public class ExceptionHandlingMiddleware
     private readonly ILogger<ExceptionHandlingMiddleware> logger;
 
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
-    {
+{
         this.next = next;
         this.logger = logger;
     }
 
     public async Task Invoke(HttpContext context)
-    {
+{
         try
-        {
+{
             await this.next(context);
         }
         catch (Exception ex)
-        {
+{
             this.logger.LogError(ex, "Unhandled exception occurred");
 
             context.Response.ContentType = "application/problem+json";
 
             var statusCode = ex switch
-            {
+{
                 UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                 ValidationException => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
@@ -39,7 +39,7 @@ public class ExceptionHandlingMiddleware
             context.Response.StatusCode = statusCode;
 
             var problem = new
-            {
+{
                 type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
                 title = GetTitleForStatus(statusCode),
                 status = statusCode,
@@ -52,9 +52,9 @@ public class ExceptionHandlingMiddleware
     }
 
     private static string GetTitleForStatus(int status)
-    {
+{
         return status switch
-        {
+{
             400 => "Bad Request",
             401 => "Unauthorized",
             403 => "Forbidden",

@@ -9,5 +9,5 @@ namespace Magato.Api.DTO;
 /// </summary>
 public class SketchDto
 {
-    public string Url { get; set; } = string.Empty;
+    public string Url{ get; set; } = string.Empty;
 }

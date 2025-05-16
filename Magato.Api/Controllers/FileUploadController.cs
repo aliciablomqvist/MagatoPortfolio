@@ -10,22 +10,22 @@ public class UploadController : ControllerBase
     private readonly IWebHostEnvironment env;
 
     public UploadController(IWebHostEnvironment env)
-    {
+{
         this.env = env;
     }
 
     [HttpPost]
     public async Task<IActionResult> Upload(IFormFile file)
-    {
+{
         if (file == null || file.Length == 0)
-        {
+{
             return this.BadRequest("No file uploaded.");
         }
 
         var uploadsFolder = Path.Combine(this.env.WebRootPath ?? "wwwroot", "uploads");
 
         if (!Directory.Exists(uploadsFolder))
-        {
+{
             Directory.CreateDirectory(uploadsFolder);
         }
 
@@ -36,7 +36,7 @@ public class UploadController : ControllerBase
 
         var imageUrl = $"/uploads/{file.FileName}";
         return this.Ok(new
-        {
+{
             imageUrl,
         });
     }

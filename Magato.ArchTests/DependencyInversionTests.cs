@@ -10,7 +10,7 @@ public sealed class DependencyInversionTests
 {
     [Fact]
     public void Controllers_should_not_depend_on_Repositories_or_Data()
-    {
+{
         var result = Types.InAssembly(typeof(ApiAssemblyMarker).Assembly)
                           .That().ResideInNamespace("Magato.Api.Controllers..")
                           .ShouldNot().HaveDependencyOnAny(
@@ -23,7 +23,7 @@ public sealed class DependencyInversionTests
 
     [Fact]
     public void Services_should_not_depend_on_DbContext()
-    {
+{
         var result = Types.InAssembly(typeof(ApiAssemblyMarker).Assembly)
                           .That().ResideInNamespace("Magato.Api.Services..")
                           .ShouldNot().HaveDependencyOn("Magato.Api.Data.ApplicationDbContext")

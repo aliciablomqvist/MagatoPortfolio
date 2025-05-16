@@ -9,13 +9,13 @@ public class LocalFileStorageService : IFileStorageService
     private readonly IHttpContextAccessor httpContextAccessor;
 
     public LocalFileStorageService(IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
-    {
+{
         this.env = env;
         this.httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<string> UploadAsync(IFormFile file)
-    {
+{
         var uploadsFolder = Path.Combine(this.env.WebRootPath ?? "wwwroot", "uploads");
         Directory.CreateDirectory(uploadsFolder);
 

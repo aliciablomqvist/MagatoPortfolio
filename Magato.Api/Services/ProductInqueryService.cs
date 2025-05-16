@@ -13,21 +13,21 @@ public class ProductInquiryService : IProductInquiryService
     private readonly IProductRepository productRepo;
 
     public ProductInquiryService(IProductInquiryRepository repo, IProductRepository productRepo)
-    {
+{
         this.repo = repo;
         this.productRepo = productRepo;
     }
 
     public async Task<ProductInquiryResponseDto> AddAsync(ProductInquiryCreateDto dto)
-    {
+{
         var product = await this.productRepo.GetByIdAsync(dto.ProductId);
         if (product == null)
-        {
-            throw new InvalidOperationException($"Product with ID {dto.ProductId} was not found.");
+{
+            throw new InvalidOperationException($"Product with ID{dto.ProductId} was not found.");
         }
 
         var inquiry = new ProductInquiry
-        {
+{
             ProductId = dto.ProductId,
             Email = dto.Email,
             Message = dto.Message,
@@ -37,7 +37,7 @@ public class ProductInquiryService : IProductInquiryService
         await this.repo.AddAsync(inquiry);
 
         return new ProductInquiryResponseDto
-        {
+{
             // Id = inquiry.Id,
             ProductTitle = product.Title,
             Email = inquiry.Email,
@@ -50,11 +50,11 @@ public class ProductInquiryService : IProductInquiryService
     }
 
     public async Task<IEnumerable<ProductInquiryResponseDto>> GetAllAsync()
-    {
+{
         var inquiries = await this.repo.GetAllAsync();
 
         return inquiries.Select(i => new ProductInquiryResponseDto
-        {
+{
             Id = i.Id,
             ProductTitle = i.Product?.Title ?? "Unknown",
             Email = i.Email,
@@ -66,15 +66,15 @@ public class ProductInquiryService : IProductInquiryService
     }
 
     public async Task<ProductInquiryResponseDto?> GetByIdAsync(int id)
-    {
+{
         var inquiry = await this.repo.GetByIdAsync(id);
         if (inquiry == null)
-        {
+{
             return null;
         }
 
         return new ProductInquiryResponseDto
-        {
+{
             Id = inquiry.Id,
             ProductTitle = inquiry.Product?.Title ?? "Unknown",
             Email = inquiry.Email,
@@ -86,10 +86,10 @@ public class ProductInquiryService : IProductInquiryService
     }
 
     public async Task MarkAsHandledAsync(int id)
-    {
+{
         var inquiry = await this.repo.GetByIdAsync(id);
         if (inquiry != null)
-        {
+{
             inquiry.IsHandled = true;
             await this.repo.UpdateAsync(inquiry);
         }

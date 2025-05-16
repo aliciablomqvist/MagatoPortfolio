@@ -11,7 +11,7 @@ public class ProductService : IProductService
     private readonly IProductRepository repo;
 
     public ProductService(IProductRepository repo)
-    {
+{
         this.repo = repo;
     }
 
@@ -22,7 +22,7 @@ public class ProductService : IProductService
         => (await this.repo.GetForSaleAsync()).Select(Map);
 
     public async Task<ProductDto?> GetByIdAsync(int id)
-    {
+{
         var product = await this.repo.GetByIdAsync(id);
         return product == null ? null : Map(product);
     }
@@ -37,7 +37,7 @@ public class ProductService : IProductService
         => await this.repo.DeleteAsync(id);
 
     private static ProductDto Map(Product p) => new ()
-    {
+{
         Id = p.Id,
         Title = p.Title,
         Description = p.Description,
@@ -50,14 +50,14 @@ public class ProductService : IProductService
     };
 
     private static Product Map(ProductDto dto) => new ()
-    {
+{
         Id = dto.Id,
         Title = dto.Title,
         Description = dto.Description,
         Price = dto.Price,
         CategoryId = dto.CategoryId,
         IsForSale = dto.IsForSale,
-        ProductImages = dto.ImageUrls.Select(url => new ProductImage { ImageUrl = url }).ToList(),
+        ProductImages = dto.ImageUrls.Select(url => new ProductImage{ ImageUrl = url }).ToList(),
         Status = dto.Status,
     };
 }

@@ -22,7 +22,7 @@ public sealed class CollectionsController : ControllerBase
         IMaterialWriter materials,
         ISketchWriter sketches,
         ILookbookWriter lookbooks)
-    {
+{
         this.reader = reader;
         this.writer = writer;
         this.colors = colors;
@@ -37,17 +37,17 @@ public sealed class CollectionsController : ControllerBase
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get(int id)
-        => (await this.reader.GetByIdAsync(id)) is { } col ? this.Ok(col) : this.NotFound();
+        => (await this.reader.GetByIdAsync(id)) is{ } col ? this.Ok(col) : this.NotFound();
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(CollectionCreateDto dto)
-    {
+{
         var created = await this.writer.AddAsync(dto);
         return this.CreatedAtAction(
             nameof(this.Get),
             new
-            {
+{
                 id = created.Id,
             },
             created);

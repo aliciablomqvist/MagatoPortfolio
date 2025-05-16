@@ -12,14 +12,14 @@ namespace Magato.Api.Migrations
 
     /// <inheritdoc />
     public partial class InitialCreate : Migration
-    {
+{
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.CreateTable(
                 name: "Collections",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CollectionTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -27,14 +27,14 @@ namespace Magato.Api.Migrations
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_Collections", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Colors",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -42,7 +42,7 @@ namespace Magato.Api.Migrations
                     CollectionId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_Colors", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Colors_Collections_CollectionId",
@@ -55,7 +55,7 @@ namespace Magato.Api.Migrations
             migrationBuilder.CreateTable(
                 name: "Materials",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -63,7 +63,7 @@ namespace Magato.Api.Migrations
                     CollectionId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_Materials", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Materials_Collections_CollectionId",
@@ -76,14 +76,14 @@ namespace Magato.Api.Migrations
             migrationBuilder.CreateTable(
                 name: "Sketches",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CollectionId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_Sketches", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Sketches_Collections_CollectionId",
@@ -111,7 +111,7 @@ namespace Magato.Api.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.DropTable(
                 name: "Colors");
 

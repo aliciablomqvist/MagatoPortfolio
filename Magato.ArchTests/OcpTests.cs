@@ -12,7 +12,7 @@ public sealed class OcpTests
 {
     [Fact]
     public void No_Enum_Switch_In_Api_Layer()
-    {
+{
         var offenders = typeof(Magato.Api.ApiAssemblyMarker).Assembly
             .GetTypes()
             .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
@@ -28,7 +28,7 @@ public sealed class OcpTests
 
     [Fact]
     public void No_Type_Switch_In_Application_Layer()
-    {
+{
         var offenders = typeof(Magato.Api.ApiAssemblyMarker).Assembly
             .GetTypes()
             .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic |

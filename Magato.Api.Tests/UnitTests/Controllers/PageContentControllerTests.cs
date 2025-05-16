@@ -7,22 +7,22 @@ public class CmsControllerTests
     private readonly Mock<IPageContentService> _serviceMock;
 
     public CmsControllerTests()
-    {
+{
         _serviceMock = new Mock<IPageContentService>();
         _controller = new CmsController(_serviceMock.Object);
     }
 
     [Fact]
     public void GetContent_Returns_Ok_With_Content_When_Found()
-    {
+{
         var expected = new PageContentDto
-        {
+{
             Key = "AboutMe",
             Title = "Om mig",
             MainText = "Testinnehåll",
             ExtraText = "Extra",
             Published = true,
-            ImageUrls = new List<string> { "image1.jpg" },
+            ImageUrls = new List<string>{ "image1.jpg" },
             LastModified = DateTime.UtcNow
         };
         _serviceMock.Setup(s => s.Get("AboutMe")).Returns(expected);
@@ -38,7 +38,7 @@ public class CmsControllerTests
 
     [Fact]
     public void GetContent_Returns_NotFound_When_Null()
-    {
+{
         _serviceMock.Setup(s => s.Get("Missing")).Returns((PageContentDto?)null);
 
         var result = _controller.GetContent("Missing");
@@ -48,15 +48,15 @@ public class CmsControllerTests
 
     [Fact]
     public void UpdateContent_Calls_Service_And_Returns_NoContent()
-    {
+{
         var dto = new PageContentDto
-        {
+{
             Key = "StartPage",
             Title = "Startsida",
             MainText = "Uppdaterad text",
             ExtraText = "Mer text",
             Published = false,
-            ImageUrls = new List<string> { "a.jpg" },
+            ImageUrls = new List<string>{ "a.jpg" },
             LastModified = DateTime.UtcNow
         };
 
@@ -70,11 +70,11 @@ public class CmsControllerTests
 
     [Fact]
     public void GetAll_Returns_Ok_With_List()
-    {
+{
         var list = new List<PageContentDto>
-        {
-            new PageContentDto { Key = "One", Title = "Ett", MainText = "A", ImageUrls = new(), LastModified = DateTime.UtcNow },
-            new PageContentDto { Key = "Two", Title = "Två", MainText = "B", ImageUrls = new(), LastModified = DateTime.UtcNow }
+{
+            new PageContentDto{ Key = "One", Title = "Ett", MainText = "A", ImageUrls = new(), LastModified = DateTime.UtcNow },
+            new PageContentDto{ Key = "Two", Title = "Två", MainText = "B", ImageUrls = new(), LastModified = DateTime.UtcNow }
         };
 
         _serviceMock.Setup(s => s.GetAll()).Returns(list);
@@ -89,15 +89,15 @@ public class CmsControllerTests
 
     [Fact]
     public void CreateContent_Calls_Service_And_Returns_Created()
-    {
+{
         var dto = new PageContentDto
-        {
+{
             Key = "NewPage",
             Title = "Ny sida",
             MainText = "Nytt innehåll",
             ExtraText = "Mer info",
             Published = false,
-            ImageUrls = new List<string> { "test.jpg" },
+            ImageUrls = new List<string>{ "test.jpg" },
             LastModified = DateTime.UtcNow
         };
 
@@ -112,8 +112,8 @@ public class CmsControllerTests
 
     [Fact]
     public void DeleteContent_Calls_Service_And_Returns_NoContent()
-    {
-        var existing = new PageContentDto { Key = "AboutMe", Title = "Om mig", MainText = "Info", ImageUrls = new(), LastModified = DateTime.UtcNow };
+{
+        var existing = new PageContentDto{ Key = "AboutMe", Title = "Om mig", MainText = "Info", ImageUrls = new(), LastModified = DateTime.UtcNow };
         _serviceMock.Setup(s => s.Get("AboutMe")).Returns(existing);
 
         var result = _controller.DeleteContent("AboutMe");

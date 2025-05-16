@@ -9,7 +9,7 @@ using Magato.Api.DTO;
 public class BlogPostValidator : AbstractValidator<BlogPostDto>
 {
     public BlogPostValidator()
-    {
+{
         this.RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
         this.RuleFor(x => x.Content).NotEmpty();
         this.RuleFor(x => x.Author).NotEmpty();

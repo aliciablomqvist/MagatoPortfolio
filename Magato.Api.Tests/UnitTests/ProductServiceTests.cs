@@ -2,23 +2,23 @@
 namespace Magato.Api.Tests.UnitTests
 {
     public class ProductServiceTests
-    {
+{
         private readonly ProductService _service;
         private readonly Mock<IProductRepository> _repoMock;
 
         public ProductServiceTests()
-        {
+{
             _repoMock = new Mock<IProductRepository>();
             _service = new ProductService(_repoMock.Object);
         }
 
         [Fact]
         public async Task GetAllAsync_Returns_All_Products()
-        {
+{
             var products = new List<Product>
-            {
-                new Product { Id = 1, Title = "Shoe", Price = 999 },
-                new Product { Id = 2, Title = "Hat", Price = 499 }
+{
+                new Product{ Id = 1, Title = "Shoe", Price = 999 },
+                new Product{ Id = 2, Title = "Hat", Price = 499 }
             };
 
             _repoMock.Setup(r => r.GetAllAsync()).ReturnsAsync(products);
@@ -30,14 +30,14 @@ namespace Magato.Api.Tests.UnitTests
 
         [Fact]
         public async Task AddAsync_Calls_Repo_AddAsync()
-        {
+{
             var dto = new ProductDto
-            {
+{
                 Title = "Shirt",
                 Description = "Pretty shirt",
                 Price = 199,
                 CategoryId = 1,
-                ImageUrls = new List<string> { "https://examplepic.com/image.jpg" },
+                ImageUrls = new List<string>{ "https://examplepic.com/image.jpg" },
                 Status = ProductStatus.InStock
             };
 
@@ -55,7 +55,7 @@ namespace Magato.Api.Tests.UnitTests
 
         [Fact]
         public async Task DeleteAsync_Calls_Repo_DeleteAsync()
-        {
+{
             await _service.DeleteAsync(3);
             _repoMock.Verify(r => r.DeleteAsync(3), Times.Once);
         }

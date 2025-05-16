@@ -14,16 +14,16 @@ public class RateLimitingMiddleware
     private static readonly TimeSpan PERIOD = TimeSpan.FromMinutes(1);
 
     public RateLimitingMiddleware(RequestDelegate next)
-    {
+{
         this.next = next;
     }
 
     public async Task InvokeAsync(HttpContext context)
-    {
+{
         // Admin ok
         if (context.User.Identity?.IsAuthenticated == true &&
             context.User.IsInRole("Admin"))
-        {
+{
             await this.next(context);
             return;
         }
@@ -35,13 +35,13 @@ public class RateLimitingMiddleware
         var entry = RequestLogs.GetOrAdd(key, _ => (now.Add(PERIOD), 0));
 
         if (entry.resetTime < now)
-        {
+{
             RequestLogs[key] = (now.Add(PERIOD), 1);
         }
         else
-        {
+{
             if (entry.count >= LIMIT)
-            {
+{
                 context.Response.StatusCode = StatusCodes.Status429TooManyRequests;
                 await context.Response.WriteAsync("Too many requests. Please try again later.");
                 return;

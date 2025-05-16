@@ -8,7 +8,7 @@ public class ProductInquiryServiceTests
     private readonly Mock<IProductRepository> _productRepoMock;
 
     public ProductInquiryServiceTests()
-    {
+{
         _inquiryRepoMock = new Mock<IProductInquiryRepository>();
         _productRepoMock = new Mock<IProductRepository>();
         _service = new ProductInquiryService(_inquiryRepoMock.Object, _productRepoMock.Object);
@@ -16,9 +16,9 @@ public class ProductInquiryServiceTests
 
     [Fact]
     public async Task AddAsync_Calls_Repository_AddAsync()
-    {
+{
         var dto = new ProductInquiryCreateDto
-        {
+{
             ProductId = 1,
             Email = "mail@example.com",
             Message = "Do you have this product in size 42?"
@@ -26,7 +26,7 @@ public class ProductInquiryServiceTests
 
 
         _productRepoMock.Setup(r => r.GetByIdAsync(dto.ProductId))
-            .ReturnsAsync(new Product { Id = 1, Title = "Sneakers" });
+            .ReturnsAsync(new Product{ Id = 1, Title = "Sneakers" });
 
         _inquiryRepoMock.Setup(r => r.AddAsync(It.IsAny<ProductInquiry>()))
             .Returns(Task.CompletedTask);
@@ -38,13 +38,13 @@ public class ProductInquiryServiceTests
 
     [Fact]
     public async Task GetAllAsync_Returns_Mapped_Dtos()
-    {
+{
         var mockData = new List<ProductInquiry>
-        {
+{
             new ProductInquiry
-            {
+{
                 Id = 1,
-                Product = new Product { Title = "Sneakers" },
+                Product = new Product{ Title = "Sneakers" },
                 Email = "mail@example.com",
                 Message = "Do you have this product in size 42?",
                 SentAt = System.DateTime.UtcNow

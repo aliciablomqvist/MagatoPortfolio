@@ -9,7 +9,7 @@ using Magato.Api.DTO;
 public class ProductValidator : AbstractValidator<ProductDto>
 {
     public ProductValidator()
-    {
+{
         this.RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
         this.RuleFor(x => x.Description).NotEmpty();
         this.RuleFor(x => x.Price).GreaterThanOrEqualTo(0);

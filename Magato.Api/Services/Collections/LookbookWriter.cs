@@ -15,21 +15,21 @@ public sealed class LookbookWriter : ILookbookWriter
     public LookbookWriter(
         ILookbookRepository lookbooks,
         ICollectionRepository collections)
-    {
+{
         this.lookbooks = lookbooks;
         this.collections = collections;
     }
 
     public async Task<bool> AddAsync(int collectionId, LookbookImageDto dto)
-    {
+{
         var col = await this.collections.GetByIdAsync(collectionId);
         if (col is null)
-        {
+{
             return false;
         }
 
         var image = new LookbookImage
-        {
+{
             Url = dto.Url,
             Description = dto.Description,
             CollectionId = collectionId,
@@ -40,10 +40,10 @@ public sealed class LookbookWriter : ILookbookWriter
     }
 
     public async Task<bool> UpdateAsync(int imageId, LookbookImageDto dto)
-    {
+{
         var image = await this.lookbooks.GetByIdAsync(imageId);
         if (image is null)
-        {
+{
             return false;
         }
 
@@ -55,10 +55,10 @@ public sealed class LookbookWriter : ILookbookWriter
     }
 
     public async Task<bool> DeleteAsync(int imageId)
-    {
+{
         var image = await this.lookbooks.GetByIdAsync(imageId);
         if (image is null)
-        {
+{
             return false;
         }
 

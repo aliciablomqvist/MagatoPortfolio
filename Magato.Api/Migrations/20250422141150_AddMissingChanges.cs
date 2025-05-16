@@ -10,10 +10,10 @@ namespace Magato.Api.Migrations
 
     /// <inheritdoc />
     public partial class AddMissingChanges : Migration
-    {
+{
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_Category_CategoryId",
                 table: "Products");
@@ -42,7 +42,7 @@ namespace Magato.Api.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_Categories_CategoryId",
                 table: "Products");

@@ -2,21 +2,21 @@
 namespace Magato.Tests.UnitTests
 {
     public class CollectionWriterTests
-    {
+{
         private readonly Mock<ICollectionRepository> _repoMock = new();
         private readonly CollectionWriter _writer;
 
         public CollectionWriterTests()
-        {
+{
             _writer = new CollectionWriter(_repoMock.Object);
         }
 
         [Fact]
         public async Task AddAsync_ShouldAddCollection()
-        {
+{
             // Arrange
             var dto = new CollectionCreateDto
-            {
+{
                 CollectionTitle = "Höst 2025",
                 CollectionDescription = "Snygga jackor",
                 ReleaseDate = DateTime.Now
@@ -33,7 +33,7 @@ namespace Magato.Tests.UnitTests
 
         [Fact]
         public async Task DeleteAsync_ShouldReturnFalse_WhenNotFound()
-        {
+{
             _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
                      .ReturnsAsync((Collection?)null);
 
@@ -44,11 +44,11 @@ namespace Magato.Tests.UnitTests
 
         [Fact]
         public async Task UpdateAsync_ShouldReturnFalse_WhenCollectionNotFound()
-        {
+{
             _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
                      .ReturnsAsync((Collection?)null);
 
-            var dto = new CollectionDto { Id = 99, CollectionTitle = "Uppdaterad" };
+            var dto = new CollectionDto{ Id = 99, CollectionTitle = "Uppdaterad" };
             var result = await _writer.UpdateAsync(99, dto);
 
             result.Should().BeFalse();

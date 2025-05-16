@@ -9,9 +9,9 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration cfg,
         IWebHostEnvironment env)
-    {
+{
         if (!env.IsEnvironment("Testing"))
-        {
+{
             services.AddDbContext<ApplicationDbContext>(o =>
                 o.UseSqlServer(cfg.GetConnectionString("DefaultConnection")));
         }
@@ -76,9 +76,9 @@ public static class DependencyInjection
         // ---------- Auth ----------
         services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", o =>
-                {
+{
                     o.TokenValidationParameters = new TokenValidationParameters
-                    {
+{
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         ValidateLifetime = true,
@@ -89,32 +89,32 @@ public static class DependencyInjection
                 });
 
         services.AddAuthorization(o =>
-        {
+{
             o.AddPolicy("Admin", p => p.RequireRole("Admin"));
         });
 
         // ---------- Swagger ----------
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magato API", Version = "v1" });
+{
+            c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Magato API", Version = "v1" });
             c.UseInlineDefinitionsForEnums();
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
+{
                 Description = "JWT Authorization header using the Bearer scheme.\r\n\r\n" +
-                              "Skriv 'Bearer {token}' i fältet nedan.\r\n\r\nExempel: 'Bearer abc123xyz'",
+                              "Skriv 'Bearer{token}' i fältet nedan.\r\n\r\nExempel: 'Bearer abc123xyz'",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey,
                 Scheme = "Bearer",
             });
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
+{
+{
                     new OpenApiSecurityScheme
-                    {
+{
                         Reference = new OpenApiReference
-                        {
+{
                             Type = ReferenceType.SecurityScheme,
                             Id = "Bearer",
                         },
@@ -126,9 +126,9 @@ public static class DependencyInjection
 
         // ---------- CORS ----------
         services.AddCors(o =>
-        {
+{
             o.AddPolicy("AllowFrontend", p =>
-            {
+{
                 p.WithOrigins("http://localhost:3000")
                  .AllowAnyHeader()
                  .AllowAnyMethod()

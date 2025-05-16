@@ -8,7 +8,7 @@ public class BaseClassTest
 {
     [Fact]
     public void Application_layer_must_not_have_Base_classes()
-    {
+{
         var types = Types.InAssembly(typeof(ApiAssemblyMarker).Assembly)
                          .That().HaveNameStartingWith("Base")
                          .GetTypes();

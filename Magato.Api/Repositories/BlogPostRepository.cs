@@ -10,7 +10,7 @@ public class BlogPostRepository : IBlogPostRepository
     private readonly ApplicationDbContext context;
 
     public BlogPostRepository(ApplicationDbContext context)
-    {
+{
         this.context = context;
     }
 
@@ -25,16 +25,16 @@ public class BlogPostRepository : IBlogPostRepository
     public IEnumerable<BlogPost> GetAll() => this.context.BlogPosts.ToList();
 
     public void Add(BlogPost post)
-    {
+{
         this.context.BlogPosts.Add(post);
         this.context.SaveChanges();
     }
 
     public void Update(BlogPost post)
-    {
+{
         var existing = this.context.BlogPosts.Find(post.Id);
         if (existing == null)
-        {
+{
             return;
         }
 
@@ -49,10 +49,10 @@ public class BlogPostRepository : IBlogPostRepository
     }
 
     public void Delete(int id)
-    {
+{
         var post = this.context.BlogPosts.Find(id);
         if (post == null)
-        {
+{
             return;
         }
 

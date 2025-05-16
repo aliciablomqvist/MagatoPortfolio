@@ -10,7 +10,7 @@ public class InMemoryUserRepository : IUserRepository
     private readonly List<User> users = new ();
 
     public void Add(User user)
-    {
+{
         user.Id = this.users.Count + 1;
         this.users.Add(user);
     }

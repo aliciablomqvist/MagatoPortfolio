@@ -3,17 +3,17 @@
 namespace Magato.Tests.IntegrationTests
 {
     public class CollectionsApiTests : IClassFixture<WebApplicationFactory<Program>>
-    {
+{
         private readonly HttpClient _client;
 
         public CollectionsApiTests(WebApplicationFactory<Program> factory)
-        {
+{
             _client = factory.WithWebHostBuilder(builder =>
-            {
+{
                 builder.UseSetting("environment", "Testing");
 
                 builder.ConfigureServices(services =>
-                {
+{
                     var dbDescriptor = services.SingleOrDefault(
                         d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                     if (dbDescriptor != null)
@@ -34,30 +34,30 @@ namespace Magato.Tests.IntegrationTests
         }
 
         private async Task EnsureAdminExistsAsync()
-        {
+{
             var registerResponse = await _client.PostAsJsonAsync("/api/auth/register", new
-            {
+{
                 username = "admin",
                 password = "admin123"
             });
 
             if (registerResponse.StatusCode == HttpStatusCode.BadRequest)
-            {
+{
                 var body = await registerResponse.Content.ReadAsStringAsync();
                 Console.WriteLine("Register Response (400): " + body);
             }
             else
-            {
+{
                 registerResponse.EnsureSuccessStatusCode();
             }
         }
 
         [Fact]
         public async Task Login_Should_Return_Token()
-        {
+{
             await EnsureAdminExistsAsync();
 
-            var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
+            var loginDto = new UserLoginDto{ Username = "admin", Password = "admin123" };
             var loginResp = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
             var body = await loginResp.Content.ReadAsStringAsync();
 
@@ -73,10 +73,10 @@ namespace Magato.Tests.IntegrationTests
 
         [Fact]
         public async Task CreateCollection_ShouldReturn201()
-        {
+{
             await EnsureAdminExistsAsync();
 
-            var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
+            var loginDto = new UserLoginDto{ Username = "admin", Password = "admin123" };
             var loginResp = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
             var loginBody = await loginResp.Content.ReadAsStringAsync();
 
@@ -89,7 +89,7 @@ namespace Magato.Tests.IntegrationTests
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResult!.Token);
 
             var dto = new
-            {
+{
                 collectionTitle = "Vår 2025",
                 collectionDescription = "Inspirerad av naturen",
                 releaseDate = "2025-04-01T00:00:00Z"
@@ -106,7 +106,7 @@ namespace Magato.Tests.IntegrationTests
 
         [Fact]
         public async Task GetAllCollections_ShouldReturn200()
-        {
+{
             var response = await _client.GetAsync("/api/Collections");
 
             Console.WriteLine("GetAllCollections status: " + response.StatusCode);

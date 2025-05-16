@@ -8,19 +8,19 @@ public class TokenService : ITokenService
     private readonly IConfiguration config;
 
     public TokenService(IConfiguration config)
-    {
+{
         this.config = config;
     }
 
     public string GenerateToken(User user)
-    {
+{
         var claims = new List<Claim>
-        {
+{
             new Claim(ClaimTypes.Name, user.Username),
         };
 
         if (user.IsAdmin)
-        {
+{
             claims.Add(new Claim(ClaimTypes.Role, "Admin"));
         }
 

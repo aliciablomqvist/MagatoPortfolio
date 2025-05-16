@@ -16,22 +16,22 @@ public sealed class ColorRepository : IColorRepository
         this.db.Colors.FindAsync(id).AsTask();
 
     public async Task AddAsync(ColorOption color)
-    {
+{
         this.db.Colors.Add(color);
         await this.db.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(ColorOption color)
-    {
+{
         this.db.Colors.Update(color);
         await this.db.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
-    {
+{
         var entity = await this.db.Colors.FindAsync(id);
         if (entity is null)
-        {
+{
             return;
         }
 

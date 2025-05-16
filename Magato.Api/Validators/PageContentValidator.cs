@@ -10,7 +10,7 @@ using Magato.Api.DTO;
 public class PageContentValidator : AbstractValidator<PageContentDto>
 {
     public PageContentValidator()
-    {
+{
         this.RuleFor(x => x.Key)
             .NotEmpty().WithMessage("Key måste anges.")
             .MaximumLength(100).WithMessage("Key has to be max 100 characters long");

@@ -7,16 +7,16 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
     private readonly HttpClient _client;
 
     public ContactApiIntegrationTests(WebApplicationFactory<Program> factory)
-    {
+{
         _client = factory.WithWebHostBuilder(builder =>
-        {
+{
             builder.UseSetting("environment", "Testing");
             builder.ConfigureServices(services =>
-            {
+{
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                 if (descriptor != null)
-                {
+{
                     services.Remove(descriptor);
                 }
                 services.AddDbContext<ApplicationDbContext>(options =>
@@ -32,9 +32,9 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
 
     [Fact]
     public async Task PostContactMessage_ReturnsOk_AndSavesToDb()
-    {
+{
         var dto = new
-        {
+{
             name = "Testperson",
             email = "test@mail.com",
             message = "Här skickas ett meddelande!",

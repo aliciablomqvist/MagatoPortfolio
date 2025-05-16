@@ -2,17 +2,17 @@
 namespace Magato.Api.Tests.IntegrationTests
 {
     public class ProductIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
-    {
+{
         private readonly WebApplicationFactory<Program> _factory;
         private readonly HttpClient _client;
 
         public ProductIntegrationTests(WebApplicationFactory<Program> factory)
-        {
+{
             _factory = factory.WithWebHostBuilder(builder =>
-            {
+{
                 builder.UseSetting("environment", "Testing");
                 builder.ConfigureServices(services =>
-                {
+{
                     var descriptor = services.SingleOrDefault(
                         d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                     if (descriptor != null)
@@ -27,7 +27,7 @@ namespace Magato.Api.Tests.IntegrationTests
         }
 
         private async Task SeedTestDataAsync()
-        {
+{
             using var scope = _factory.Services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -36,7 +36,7 @@ namespace Magato.Api.Tests.IntegrationTests
             db.Products.RemoveRange(db.Products);
 
             var category = new Category
-            {
+{
                 Id = 1,
                 Name = "Shoes"
             };
@@ -44,7 +44,7 @@ namespace Magato.Api.Tests.IntegrationTests
             db.Categories.Add(category);
 
             db.Products.Add(new Product
-            {
+{
                 Title = "Sneakers",
                 Price = 799,
                 CategoryId = category.Id,
@@ -52,13 +52,13 @@ namespace Magato.Api.Tests.IntegrationTests
                 Description = "Running sneakers",
                 Status = ProductStatus.InStock,
                 ProductImages = new List<ProductImage>
-        {
-            new ProductImage { ImageUrl = "https://pic.com/sneakers1.jpg" }
+{
+            new ProductImage{ ImageUrl = "https://pic.com/sneakers1.jpg" }
         }
             });
 
             db.Users.Add(new User
-            {
+{
                 Username = "admin",
                 PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
                 IsAdmin = true
@@ -69,9 +69,9 @@ namespace Magato.Api.Tests.IntegrationTests
 
 
         private async Task AuthenticateAsync()
-        {
+{
             var login = new UserLoginDto
-            {
+{
                 Username = "admin",
                 Password = "admin123"
             };
@@ -85,15 +85,15 @@ namespace Magato.Api.Tests.IntegrationTests
 
         [Fact]
         public async Task GetAll_Returns_List()
-        {
+{
             await SeedTestDataAsync();
 
             var response = await _client.GetAsync("/api/products");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             var products = await response.Content.ReadFromJsonAsync<List<ProductDto>>(new JsonSerializerOptions
-            {
-                Converters = { new JsonStringEnumConverter() }
+{
+                Converters ={ new JsonStringEnumConverter() }
             });
 
             products.Should().NotBeNull();
@@ -103,18 +103,18 @@ namespace Magato.Api.Tests.IntegrationTests
 
         [Fact]
         public async Task Create_Product_Returns_Created()
-        {
+{
             await SeedTestDataAsync();
             await AuthenticateAsync();
 
             var newProduct = new
-            {
+{
                 title = "Shoes with painted flowers",
                 price = 1200,
                 description = "Amazing shoes",
                 categoryId = 1,
                 imageUrls = new List<string>
-                {
+{
                     "https://pic.com/dress1.jpg",
                     "https://pic.com/dress2.jpg"
                 },
@@ -129,9 +129,9 @@ namespace Magato.Api.Tests.IntegrationTests
             response.StatusCode.Should().Be(HttpStatusCode.Created);
 
             var created = JsonSerializer.Deserialize<ProductDto>(rawBody, new JsonSerializerOptions
-            {
+{
                 PropertyNameCaseInsensitive = true,
-                Converters = { new JsonStringEnumConverter() }
+                Converters ={ new JsonStringEnumConverter() }
             });
 
             created.Should().NotBeNull();

@@ -6,17 +6,17 @@ namespace Magato.Api.Shared;
 public class Result
 {
     public bool IsSuccess
-    {
+{
         get;
     }
 
-    public List<string> Errors { get; } = new ();
+    public List<string> Errors{ get; } = new ();
 
     private Result(bool success, List<string>? errors = null)
-    {
+{
         this.IsSuccess = success;
         if (errors != null)
-        {
+{
             this.Errors = errors;
         }
     }

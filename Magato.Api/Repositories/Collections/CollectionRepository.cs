@@ -15,7 +15,7 @@ public sealed class CollectionRepository : ICollectionRepository
     public CollectionRepository(ApplicationDbContext db) => this.db = db;
 
     public async Task<IEnumerable<Collection>> GetAllAsync()
-    {
+{
         return await this.db.Collections
             .Include(c => c.Colors)
             .Include(c => c.Materials)
@@ -34,22 +34,22 @@ public sealed class CollectionRepository : ICollectionRepository
           .FirstOrDefaultAsync(c => c.Id == id);
 
     public async Task AddAsync(Collection collection)
-    {
+{
         this.db.Collections.Add(collection);
         await this.db.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(Collection collection)
-    {
+{
         this.db.Collections.Update(collection);
         await this.db.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
-    {
+{
         var entity = await this.db.Collections.FindAsync(id);
         if (entity is null)
-        {
+{
             return;
         }
 

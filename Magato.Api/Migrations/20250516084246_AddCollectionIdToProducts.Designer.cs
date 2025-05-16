@@ -14,10 +14,10 @@ namespace Magato.Api.Migrations
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250516084246_AddCollectionIdToProducts")]
     partial class AddCollectionIdToProducts
-    {
+{
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
+{
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.3")
@@ -26,7 +26,7 @@ namespace Magato.Api.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Magato.Api.Models.BlogPost", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -65,7 +65,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Category", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -82,7 +82,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Collection", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -106,7 +106,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ColorOption", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -132,7 +132,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ContactMessage", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -163,7 +163,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.LookbookImage", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -189,7 +189,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Material", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -215,7 +215,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.PageContent", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -255,7 +255,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Product", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -297,7 +297,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ProductImage", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -319,7 +319,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ProductInquiry", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -357,7 +357,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -379,7 +379,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.SocialMediaLink", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -405,7 +405,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.User", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -429,7 +429,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("RefreshToken", b =>
-                {
+{
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -459,7 +459,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ColorOption", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
                         .WithMany("Colors")
                         .HasForeignKey("CollectionId")
@@ -470,7 +470,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.LookbookImage", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
                         .WithMany("LookbookImages")
                         .HasForeignKey("CollectionId")
@@ -481,7 +481,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Material", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
                         .WithMany("Materials")
                         .HasForeignKey("CollectionId")
@@ -492,7 +492,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Product", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
@@ -510,7 +510,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ProductImage", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Product", "Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
@@ -521,7 +521,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.ProductInquiry", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Product", "Product")
                         .WithMany("ProductInquiries")
                         .HasForeignKey("ProductId")
@@ -532,7 +532,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Sketch", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.Collection", "Collection")
                         .WithMany("Sketches")
                         .HasForeignKey("CollectionId")
@@ -543,7 +543,7 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.SocialMediaLink", b =>
-                {
+{
                     b.HasOne("Magato.Api.Models.PageContent", null)
                         .WithMany("SocialMediaLinks")
                         .HasForeignKey("PageContentId")
@@ -551,12 +551,12 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Category", b =>
-                {
+{
                     b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Collection", b =>
-                {
+{
                     b.Navigation("Colors");
 
                     b.Navigation("LookbookImages");
@@ -569,12 +569,12 @@ namespace Magato.Api.Migrations
                 });
 
             modelBuilder.Entity("Magato.Api.Models.PageContent", b =>
-                {
+{
                     b.Navigation("SocialMediaLinks");
                 });
 
             modelBuilder.Entity("Magato.Api.Models.Product", b =>
-                {
+{
                     b.Navigation("ProductImages");
 
                     b.Navigation("ProductInquiries");

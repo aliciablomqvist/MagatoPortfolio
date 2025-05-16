@@ -6,12 +6,12 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     private readonly HttpClient _client;
 
     public CmsIntegrationTests(WebApplicationFactory<Program> factory)
-    {
+{
         _client = factory.WithWebHostBuilder(builder =>
-        {
+{
             builder.UseSetting("environment", "Testing");
             builder.ConfigureServices(services =>
-            {
+{
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                 if (descriptor != null)
@@ -28,18 +28,18 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
                 db.Users.RemoveRange(db.Users);
                 db.PageContents.RemoveRange(db.PageContents);
                 db.Users.Add(new User
-                {
+{
                     Username = "admin",
                     PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
                     IsAdmin = true
                 });
                 db.PageContents.Add(new PageContent
-                {
+{
                     Key = "AboutMe",
                     Title = "About Me",
                     MainText = "Initial content",
                     ExtraText = "Extra info",
-                    ImageUrls = new List<string> { "https://example.com/image1.jpg" },
+                    ImageUrls = new List<string>{ "https://example.com/image1.jpg" },
                     Published = true,
                     LastModified = DateTime.UtcNow
                 });
@@ -49,8 +49,8 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     }
 
     private async Task<string> LoginAndGetTokenAsync()
-    {
-        var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
+{
+        var loginDto = new UserLoginDto{ Username = "admin", Password = "admin123" };
         var response = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
         var content = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
         return content!.Token;
@@ -58,7 +58,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Get_PageContent_ByKey_Returns_Content()
-    {
+{
         var response = await _client.GetAsync("/api/cms/AboutMe");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -73,7 +73,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Get_All_PageContent_Returns_List()
-    {
+{
         var response = await _client.GetAsync("/api/cms");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -85,17 +85,17 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Update_PageContent_As_Admin_Returns_204()
-    {
+{
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var dto = new PageContentDto
-        {
+{
             Key = "AboutMe",
             Title = "Updated Title",
             MainText = "Updated by test",
             ExtraText = "Updated extra",
-            ImageUrls = new List<string> { "https://example.com/image2.jpg" },
+            ImageUrls = new List<string>{ "https://example.com/image2.jpg" },
             Published = false
         };
 
@@ -106,9 +106,9 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Update_PageContent_As_Anonymous_Returns_401()
-    {
+{
         var dto = new PageContentDto
-        {
+{
             Key = "AboutMe",
             Title = "Should Fail",
             MainText = "Anonymous attempt",
@@ -122,7 +122,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Get_Nonexistent_PageContent_Returns_404()
-    {
+{
         var response = await _client.GetAsync("/api/cms/DoesNotExist");
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -130,17 +130,17 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Add_New_PageContent_As_Admin_Returns_201()
-    {
+{
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var dto = new PageContentDto
-        {
+{
             Key = "NewPage",
             Title = "New Title",
             MainText = "This is new",
             ExtraText = "More info",
-            ImageUrls = new List<string> { "https://example.com/new.jpg" },
+            ImageUrls = new List<string>{ "https://example.com/new.jpg" },
             Published = true
         };
 
@@ -157,7 +157,7 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Delete_PageContent_As_Admin_Returns_204()
-    {
+{
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -168,16 +168,16 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task Create_PageContent_As_Admin_Returns_Created()
-    {
+{
         var token = await LoginAndGetTokenAsync();
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var dto = new PageContentDto
-        {
+{
             Key = "Welcome",
             Title = "Welcome Page",
             MainText = "Hello from test",
-            ImageUrls = new List<string> { "https://example.com/welcome.jpg" },
+            ImageUrls = new List<string>{ "https://example.com/welcome.jpg" },
             Published = true
         };
 

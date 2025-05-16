@@ -11,7 +11,7 @@ public class ContactMessageValidator : AbstractValidator<ContactMessageCreateDto
     private const string EmailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
     public ContactMessageValidator()
-    {
+{
         this.RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required.")
             .MaximumLength(100);
@@ -35,7 +35,7 @@ public class ContactMessageValidator : AbstractValidator<ContactMessageCreateDto
     }
 
     public List<string> ValidateAndExtractErrors(ContactMessageCreateDto dto)
-    {
+{
         var result = this.Validate(dto);
         return result.IsValid
             ? new List<string>()

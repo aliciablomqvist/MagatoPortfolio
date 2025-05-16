@@ -12,7 +12,7 @@ public sealed class LiskovNotImplementedTests
 {
     [Fact]
     public void Concrete_Classes_Should_Not_Throw_NotImplementedException()
-    {
+{
         var offenders = typeof(Magato.Api.ApiAssemblyMarker).Assembly
             .GetTypes()
             .Where(t => t.IsClass && !t.IsAbstract)

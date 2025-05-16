@@ -9,7 +9,7 @@ using Magato.Api.DTO;
 public class UserLoginValidator : AbstractValidator<UserLoginDto>
 {
     public UserLoginValidator()
-    {
+{
         this.RuleFor(x => x.Username).NotEmpty();
         this.RuleFor(x => x.Password).NotEmpty();
     }

@@ -4,12 +4,12 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     private readonly HttpClient _client;
 
     public AuthIntegrationTests(WebApplicationFactory<Program> factory)
-    {
+{
         _client = factory.WithWebHostBuilder(builder =>
-        {
+{
             builder.UseSetting("environment", "Testing");
             builder.ConfigureServices(services =>
-            {
+{
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                 if (descriptor != null)
@@ -28,23 +28,23 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
     [Fact]
     public async Task Register_And_Login_Admin_Success()
-    {
-        var registerDto = new UserRegisterDto { Username = "admin", Password = "admin123" };
+{
+        var registerDto = new UserRegisterDto{ Username = "admin", Password = "admin123" };
         var registerResponse = await _client.PostAsJsonAsync("/api/auth/register", registerDto);
 
         if (registerResponse.StatusCode == HttpStatusCode.BadRequest)
-        {
+{
             var registerContent = await registerResponse.Content.ReadAsStringAsync();
             Console.WriteLine("Register Response (400): " + registerContent);
 
             registerContent.Should().Contain("Admin already exists");
         }
         else
-        {
+{
             registerResponse.EnsureSuccessStatusCode();
         }
 
-        var loginDto = new UserLoginDto { Username = "admin", Password = "admin123" };
+        var loginDto = new UserLoginDto{ Username = "admin", Password = "admin123" };
         var loginResponse = await _client.PostAsJsonAsync("/api/auth/login", loginDto);
         loginResponse.EnsureSuccessStatusCode();
 
@@ -62,7 +62,7 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
     [Fact]
     public async Task Admin_Only_Endpoint_Should_Return_401_When_Unauthorized()
-    {
+{
         _client.DefaultRequestHeaders.Authorization = null;
 
         var response = await _client.GetAsync("/api/auth/admin-only");
@@ -74,7 +74,7 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
     [Fact]
     public async Task Admin_Only_Endpoint_Should_Return_401_When_Token_Is_Invalid()
-    {
+{
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "invalid.token.value");
 
         var response = await _client.GetAsync("/api/auth/admin-only");
@@ -90,8 +90,8 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     [InlineData("", "")]
     [InlineData("user", "123")]
     public async Task Register_Fails_With_Invalid_Input(string username, string password)
-    {
-        var dto = new UserRegisterDto { Username = username, Password = password };
+{
+        var dto = new UserRegisterDto{ Username = username, Password = password };
         var response = await _client.PostAsJsonAsync("/api/auth/register", dto);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -104,9 +104,9 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
     [Fact]
     public async Task Second_Admin_Registration_Should_Fail()
-    {
-        var dto1 = new UserRegisterDto { Username = "admin", Password = "admin123" };
-        var dto2 = new UserRegisterDto { Username = "admin2", Password = "admin456" };
+{
+        var dto1 = new UserRegisterDto{ Username = "admin", Password = "admin123" };
+        var dto2 = new UserRegisterDto{ Username = "admin2", Password = "admin456" };
 
         await _client.PostAsJsonAsync("/api/auth/register", dto1);
         var secondResponse = await _client.PostAsJsonAsync("/api/auth/register", dto2);
@@ -117,10 +117,10 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
 
 public class LoginResponseDto
 {
-    public string Token { get; set; } = string.Empty;
-    public string Username { get; set; } = string.Empty;
+    public string Token{ get; set; } = string.Empty;
+    public string Username{ get; set; } = string.Empty;
     public bool IsAdmin
-    {
+{
         get; set;
     }
 }

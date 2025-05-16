@@ -10,7 +10,7 @@ using Magato.Api.DTO;
 public class ColorDtoValidator : AbstractValidator<ColorDto>
 {
     public ColorDtoValidator()
-    {
+{
         this.RuleFor(x => x.Name).NotEmpty();
         this.RuleFor(x => x.Hex)
             .NotEmpty()

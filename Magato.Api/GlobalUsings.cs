@@ -7,9 +7,11 @@ global using System.Security.Claims;
 global using System.Security.Cryptography;
 global using System.Text;
 global using System.Text.Json.Serialization;
+
 // Tredjepart
 global using FluentValidation;
 global using FluentValidation.AspNetCore;
+
 // Magato.Api (projektets egna)
 global using Magato.Api;
 global using Magato.Api.Data;
@@ -21,6 +23,7 @@ global using Magato.Api.Services;
 global using Magato.Api.Services.Collections;
 global using Magato.Api.Shared;
 global using Magato.Api.Validators;
+
 // Microsoft
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc;

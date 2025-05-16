@@ -13,7 +13,7 @@ public class ProductInquiryValidator : AbstractValidator<ProductInquiryCreateDto
         @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
     public ProductInquiryValidator()
-    {
+{
         this.RuleFor(x => x.ProductId)
             .GreaterThan(0)
             .WithMessage("Invalid product.");

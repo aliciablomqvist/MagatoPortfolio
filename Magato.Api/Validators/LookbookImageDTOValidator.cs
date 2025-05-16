@@ -9,7 +9,7 @@ using Magato.Api.DTO;
 public class LookbookImageDtoValidator : AbstractValidator<LookbookImageDto>
 {
     public LookbookImageDtoValidator()
-    {
+{
         this.RuleFor(i => i.Url)
             .NotEmpty().WithMessage("Image URL is required.")
             .Must(uri => Uri.IsWellFormedUriString(uri, UriKind.Absolute))
