@@ -94,7 +94,7 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
     [Fact]
     public async Task Create_Inquiry_Returns_Created()
     {
-        var dto = new ProductInquiryDto
+        var dto = new ProductInquiryCreateDto
         {
             ProductId = 1,
             Email = "customer@example.com",

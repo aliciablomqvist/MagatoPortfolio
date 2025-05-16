@@ -2,10 +2,10 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace Magato.Api.Repositories;
 using Magato.Api.Data;
 using Magato.Api.Models;
 
-namespace Magato.Api.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext context;

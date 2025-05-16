@@ -1,13 +1,10 @@
 // <copyright file="ProductInqueryRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Repositories;
 using Magato.Api.Data;
 using Magato.Api.Models;
-
 using Microsoft.EntityFrameworkCore;
-
-namespace Magato.Api.Repositories;
 
 public class ProductInquiryRepository : IProductInquiryRepository
 {

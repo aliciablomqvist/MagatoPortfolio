@@ -1,14 +1,12 @@
 // <copyright file="BlogController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Controllers;
 
 using Magato.Api.DTO;
 using Magato.Api.Services;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/blog")]
@@ -71,7 +69,6 @@ public class BlogPostController : ControllerBase
         return post == null ? this.NotFound() : this.Ok(post);
     }
 
-    // Testa endpoint för uppladdning
     [Authorize(Roles = "Admin")]
     [HttpPost("upload")]
     public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)

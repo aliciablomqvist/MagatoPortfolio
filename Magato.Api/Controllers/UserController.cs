@@ -2,12 +2,12 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.Controllers;
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Services;
 
+using Magato.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Magato.Api.DTO;
+using Magato.Api.Models;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -64,6 +64,13 @@ public class AuthController : ControllerBase
         {
             return this.Unauthorized(ex.Message);
         }
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("admin-only")]
+    public IActionResult AdminSecret()
+    {
+        return this.Ok("🎉 YOU HAVE ACCESS! 🎉");
     }
 
     [HttpPost("refresh")]

@@ -2,8 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Magato.Api.DTO
-{
+namespace Magato.Api.DTO;
     /// <summary>
     /// Represents a color option belonging to a collection.
     /// </summary>
@@ -13,4 +12,4 @@ namespace Magato.Api.DTO
 
         public string Hex { get; set; } = string.Empty;
     }
-}
+

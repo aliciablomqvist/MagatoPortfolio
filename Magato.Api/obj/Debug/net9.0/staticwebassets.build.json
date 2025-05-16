@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/LXPbFbJq6eZ7JXZdM3LhJ+eIS9GGPMzWAyfwbM26zY=",
+  "Hash": "D05+UnXN067IiP1Nlzaqo61fqlqYsKss5xz9Gf9M994=",
   "Source": "Magato.Api",
   "BasePath": "_content/Magato.Api",
   "Mode": "Default",
@@ -62,7 +62,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 03 May 2025 22:41:30 GMT"
+          "Value": "Fri, 16 May 2025 10:11:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -107,7 +107,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 03 May 2025 22:41:30 GMT"
+          "Value": "Fri, 16 May 2025 10:11:33 GMT"
         },
         {
           "Name": "Cache-Control",

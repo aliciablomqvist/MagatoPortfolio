@@ -1,9 +1,9 @@
 // <copyright file="ReshreshTokenRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Repositories;
 using Magato.Api.Data;
-
+using Magato.Api.Models;
 public class RefreshTokenRepository : IRefreshTokenRepository
 {
     private readonly ApplicationDbContext context;

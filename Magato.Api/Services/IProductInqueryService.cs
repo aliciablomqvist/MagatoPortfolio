@@ -1,10 +1,8 @@
 // <copyright file="IProductInqueryService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
-using Magato.Api.DTO;
-
 namespace Magato.Api.Services;
+using Magato.Api.DTO;
 
 public interface IProductInquiryService
 {

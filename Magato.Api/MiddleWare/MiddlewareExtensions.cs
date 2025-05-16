@@ -1,7 +1,7 @@
 // <copyright file="MiddlewareExtensions.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.MiddleWare;
 public static class MiddlewareExtensions
 {
     public static IApplicationBuilder UseRequestLogging(this IApplicationBuilder builder)

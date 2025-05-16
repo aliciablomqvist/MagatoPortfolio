@@ -2,12 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Repositories;
-using Magato.Api.Shared;
-
 namespace Magato.Api.Services;
+using Magato.Api.DTO;
 
 public interface IPageContentService
 {

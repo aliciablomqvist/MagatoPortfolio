@@ -2,9 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using Magato.Api.Models;
-
 namespace Magato.Api.Repositories.Collections;
+using Magato.Api.Models;
 public interface IMaterialRepository
 {
     Task<Material?> GetByIdAsync(int id);

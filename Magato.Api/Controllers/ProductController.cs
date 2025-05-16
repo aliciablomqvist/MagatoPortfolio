@@ -2,6 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.Controllers;
+
 using Magato.Api.DTO;
 using Magato.Api.Services;
 using Microsoft.AspNetCore.Authorization;

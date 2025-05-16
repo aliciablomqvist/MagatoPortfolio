@@ -1,12 +1,10 @@
 // <copyright file="ProductCreate.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.DTO;
 using Magato.Api.Models;
 
-namespace Magato.Api.DTO;
-
-// Används denna?
+// Hur används denna?
 public class ProductCreateDto
 {
     public string Title { get; set; } = default!;

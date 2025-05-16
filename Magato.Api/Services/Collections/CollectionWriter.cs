@@ -45,7 +45,6 @@ public sealed class CollectionWriter : ICollectionWriter
         return true;
     }
 
-    /* ---------- private mapping helpers ---------- */
     private static Collection Map(CollectionCreateDto dto) => new()
     {
         CollectionTitle = dto.CollectionTitle,

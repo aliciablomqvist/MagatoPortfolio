@@ -2,8 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Magato.Api.DTO
-{
+namespace Magato.Api.DTO;
     public class BlogPostDto
     {
         public int Id
@@ -31,4 +30,3 @@ namespace Magato.Api.DTO
 
         public List<string> ImageUrls { get; set; } = new ();
     }
-}

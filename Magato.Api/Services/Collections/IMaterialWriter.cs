@@ -5,7 +5,8 @@
 using Magato.Api.DTO;
 
 public interface IMaterialWriter
-{ // Materials
+{
+    // Materials
     Task<bool> AddAsync(int collectionId, MaterialDto dto);
 
     Task<bool> UpdateAsync(int materialId, MaterialDto dto);

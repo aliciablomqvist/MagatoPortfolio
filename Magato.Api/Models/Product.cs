@@ -2,8 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.Models;
-using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
 
 public class Product
 {

@@ -1,10 +1,9 @@
 // <copyright file="IUserRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Repositories;
 using Magato.Api.Models;
 
-namespace Magato.Api.Repositories;
 public interface IUserRepository
 {
     User? GetByUsername(string username);

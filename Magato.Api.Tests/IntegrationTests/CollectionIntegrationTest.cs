@@ -131,3 +131,4 @@ namespace Magato.Tests.IntegrationTests
         }
     }
 }
+

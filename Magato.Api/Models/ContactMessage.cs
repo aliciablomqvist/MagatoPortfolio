@@ -2,8 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using Microsoft.EntityFrameworkCore;
-
 namespace Magato.Api.Models;
 public class ContactMessage
 {

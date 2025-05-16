@@ -1,13 +1,10 @@
 // <copyright file="ExceptionHandlingMiddleware.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.MiddleWare;
 
 using System.ComponentModel.DataAnnotations;
-using System.Net;
 using System.Text.Json;
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 
 public class ExceptionHandlingMiddleware
 {

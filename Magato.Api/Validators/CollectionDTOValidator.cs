@@ -2,11 +2,9 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Magato.Api.Validators
-{
+namespace Magato.Api.Validators;
     using FluentValidation;
     using FluentValidation.AspNetCore;
-
     using Magato.Api.DTO;
 
     public class CollectionDtoValidator : AbstractValidator<CollectionDto>
@@ -16,4 +14,3 @@ namespace Magato.Api.Validators
             this.RuleFor(x => x.CollectionTitle).NotEmpty().WithMessage("You must specify a title for the collections.");
         }
     }
-}

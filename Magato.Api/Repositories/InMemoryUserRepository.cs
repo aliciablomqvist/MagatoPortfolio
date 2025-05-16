@@ -2,9 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using Magato.Api.Models;
-
 namespace Magato.Api.Repositories;
+using Magato.Api.Models;
 
 public class InMemoryUserRepository : IUserRepository
 {

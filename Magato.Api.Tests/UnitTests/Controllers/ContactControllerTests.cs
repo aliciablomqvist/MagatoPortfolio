@@ -22,7 +22,7 @@ public class ContactControllerTests
     [Fact]
     public async Task Send_ReturnsOk_WhenServiceReturnsSuccess()
     {
-        var dto = new ContactMessageDto
+        var dto = new ContactMessageCreateDto
         {
             Name = "Test",
             Email = "test@mail.com",
@@ -40,7 +40,7 @@ public class ContactControllerTests
     [Fact]
     public async Task Send_ReturnsBadRequest_WhenServiceFails()
     {
-        var dto = new ContactMessageDto
+        var dto = new ContactMessageCreateDto
         {
             Name = "",
             Email = "test@mail.com",

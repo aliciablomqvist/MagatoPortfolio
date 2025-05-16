@@ -2,8 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Magato.Api.DTO
-{
+namespace Magato.Api.DTO;
     /// <summary>
     /// Represents a material used in the collection.
     /// </summary>
@@ -15,6 +14,3 @@ namespace Magato.Api.DTO
 
         //public string Url { get; set; } = string.Empty;
     }
-}
-
-// Lägga till bild

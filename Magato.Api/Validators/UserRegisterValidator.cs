@@ -1,10 +1,9 @@
 // <copyright file="UserRegisterValidator.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
-using FluentValidation;
-
 namespace Magato.Api.Validators;
+using FluentValidation;
+using Magato.Api.DTO;
 public class UserRegisterValidator : AbstractValidator<UserRegisterDto>
 {
     public UserRegisterValidator()

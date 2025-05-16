@@ -1,6 +1,7 @@
 // <copyright file="InputValidationMiddleware.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.MiddleWare;
 
 using System.Text.Json;
 

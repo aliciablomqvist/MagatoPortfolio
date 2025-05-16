@@ -3,6 +3,7 @@
 // </copyright>
 
 using Magato.Api;
+using Magato.Api.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 

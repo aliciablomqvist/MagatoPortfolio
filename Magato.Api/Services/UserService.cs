@@ -1,16 +1,12 @@
 // <copyright file="UserService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Services;
 using System.Security.Cryptography;
 using System.Text;
-
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
-using Magato.Api.Validators;
-
-namespace Magato.Api.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository repo;

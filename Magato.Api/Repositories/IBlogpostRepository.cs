@@ -2,9 +2,9 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace Magato.Api.Repositories;
 using Magato.Api.Models;
 
-namespace Magato.Api.Repositories;
 public interface IBlogPostRepository
 {
     BlogPost? Get(int id);

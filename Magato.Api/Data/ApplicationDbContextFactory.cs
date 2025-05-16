@@ -2,8 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Magato.Api.Data
-{
+namespace Magato.Api.Data;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.Extensions.Configuration;
@@ -25,4 +25,3 @@ namespace Magato.Api.Data
             return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
-}

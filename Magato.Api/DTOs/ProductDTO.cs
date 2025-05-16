@@ -2,6 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.DTO;
+
 using Magato.Api.Models;
 using System.Text.Json.Serialization;
 

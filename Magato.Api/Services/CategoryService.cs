@@ -2,11 +2,10 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace Magato.Api.Services;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
-
-namespace Magato.Api.Services;
 
 public class CategoryService : ICategoryService
 {

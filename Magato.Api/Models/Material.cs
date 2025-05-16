@@ -1,12 +1,9 @@
 // <copyright file="Material.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Models;
 using System.Text.Json.Serialization;
 
-using Microsoft.EntityFrameworkCore;
-
-namespace Magato.Api.Models;
 public class Material
 {
     public int Id

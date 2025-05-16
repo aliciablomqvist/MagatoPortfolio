@@ -2,10 +2,10 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace Magato.Api.Repositories.Collections;
 using Magato.Api.Data;
 using Magato.Api.Models;
 
-namespace Magato.Api.Repositories.Collections;
 public sealed class ColorRepository : IColorRepository
 {
     private readonly ApplicationDbContext db;

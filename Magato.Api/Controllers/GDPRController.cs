@@ -1,11 +1,9 @@
 // <copyright file="GDPRController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-
-namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

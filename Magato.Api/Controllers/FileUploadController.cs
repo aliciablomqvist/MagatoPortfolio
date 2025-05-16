@@ -1,10 +1,9 @@
 // <copyright file="FileUploadController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
-
-namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

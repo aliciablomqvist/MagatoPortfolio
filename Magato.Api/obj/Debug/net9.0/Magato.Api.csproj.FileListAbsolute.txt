@@ -1,3 +1,11 @@
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.csproj.AssemblyReference.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.AssemblyInfoInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.AssemblyInfo.cs
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.sourcelink.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\appsettings.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\stylecop.json
@@ -149,14 +157,6 @@ C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\runti
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.csproj.AssemblyReference.cache
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.AssemblyInfoInputs.cache
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.AssemblyInfo.cs
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.csproj.CoreCompileInputs.cache
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\Magato.Api.sourcelink.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\scopedcss\bundle\Magato.Api.styles.css
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Stefan\Systemutveckling\Examensarbete\Magato.Api\obj\Debug\net9.0\staticwebassets.development.json

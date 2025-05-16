@@ -2,8 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Magato.Api.DTO
-{
+namespace Magato.Api.DTO;
     /// <summary>
     /// Represents the data required to create a new collection.
     /// </summary>
@@ -23,4 +22,3 @@ namespace Magato.Api.DTO
         public List<SketchDto> Sketches { get; set; } = new();
         public List<LookbookImageDto> LookbookImages { get; set; } = new();
     }
-}

@@ -2,10 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using System.Text.Json.Serialization;
-
-using Microsoft.EntityFrameworkCore;
-
 namespace Magato.Api.Models;
 public class User
 {

@@ -1,10 +1,8 @@
 // <copyright file="IProductInqueryRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
-using Magato.Api.Models;
-
 namespace Magato.Api.Repositories;
+using Magato.Api.Models;
 
 public interface IProductInquiryRepository
 {

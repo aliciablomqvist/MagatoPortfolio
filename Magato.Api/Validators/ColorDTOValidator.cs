@@ -2,10 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace ApiTest.Validators
-{
+namespace ApiTest.Validators;
     using FluentValidation;
-
     using Magato.Api.DTO;
 
     public class ColorDtoValidator : AbstractValidator<ColorDto>
@@ -19,4 +17,3 @@ namespace ApiTest.Validators
                 .WithMessage("Have to be in the following format: #RRGGBB.");
         }
     }
-}

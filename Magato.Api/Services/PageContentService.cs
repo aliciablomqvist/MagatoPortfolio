@@ -2,16 +2,10 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using System.Security.Cryptography;
-using System.Text;
-
+namespace Magato.Api.Services;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
-using Magato.Api.Validators;
-
-namespace Magato.Api.Services;
-
 public class PageContentService : IPageContentService
 {
     private readonly IPageContentRepository repo;

@@ -1,6 +1,7 @@
 // <copyright file="ICollectionReader.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Services.Collections;
 
 using Magato.Api.DTO;
 using Magato.Api.Models;

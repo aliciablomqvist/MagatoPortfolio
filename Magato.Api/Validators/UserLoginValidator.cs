@@ -2,12 +2,9 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using FluentValidation;
-using FluentValidation.AspNetCore;
-
-using Magato.Api.DTO;
-
 namespace Magato.Api.Validators;
+using FluentValidation;
+using Magato.Api.DTO;
 public class UserLoginValidator : AbstractValidator<UserLoginDto>
 {
     public UserLoginValidator()

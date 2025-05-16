@@ -1,16 +1,13 @@
 // <copyright file="ApplicationDbContext.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Data;
 
 using System.Text.Json;
-
 using Magato.Api.Models;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
-namespace Magato.Api.Data;
 
 public class ApplicationDbContext : DbContext
 {
@@ -97,7 +94,7 @@ public class ApplicationDbContext : DbContext
             .WithMany(c => c.Products)
             .HasForeignKey(p => p.CollectionId)
             .OnDelete(DeleteBehavior.Cascade);
-            
+
         modelBuilder.Entity<Product>()
     .HasOne(p => p.Category)
     .WithMany(c => c.Products)

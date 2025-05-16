@@ -1,7 +1,7 @@
 // <copyright file="RequestLoggingMiddleware.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.MiddleWare;
 public class RequestLoggingMiddleware
 {
     private readonly RequestDelegate next;

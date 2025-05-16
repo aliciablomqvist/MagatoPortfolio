@@ -2,6 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.Controllers;
+
 using Magato.Api.DTO;
 using Magato.Api.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -66,14 +67,13 @@ public class CmsController : ControllerBase
         return this.NoContent();
     }
 
-    // Enpoint för att ladda upp filer
     [HttpPost("upload")]
     public async Task<IActionResult> UploadImage(IFormFile file, [FromServices] IFileStorageService fileStorage)
     {
         var url = await fileStorage.UploadAsync(file);
         return this.Ok(new
         {
-            mediaUrl = url, // ändra till image url eller lös på annat dätt
+            mediaUrl = url,
         });
     }
 }

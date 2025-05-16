@@ -2,9 +2,9 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace Magato.Api.Services;
 using Magato.Api.DTO;
 
-namespace Magato.Api.Services;
 public interface IBlogPostService
 {
     BlogPostDto? Get(int id);
