@@ -1,13 +1,10 @@
-// <copyright file="ContactMessageDTO.cs" company="PlaceholderCompany">
+// <copyright file="ContactMessageCreateDto.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.DTO;
 using System.ComponentModel.DataAnnotations;
 
-using Magato.Api.Models;
-
-namespace Magato.Api.DTO;
-public class ContactMessageDto
+public class ContactMessageCreateDto
 {
     [Required]
     public string Name { get; set; } = string.Empty;

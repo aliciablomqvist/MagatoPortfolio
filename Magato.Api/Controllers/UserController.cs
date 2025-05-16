@@ -66,14 +66,6 @@ public class AuthController : ControllerBase
         }
     }
 
-    // Testa gömd admin endpoint - ta bort sen
-    [Authorize(Roles = "Admin")]
-    [HttpGet("admin-only")]
-    public IActionResult AdminSecret()
-    {
-        return this.Ok("🎉 DU HAR ÅTKOMST 🎉");
-    }
-
     [HttpPost("refresh")]
     public IActionResult RefreshToken([FromBody] string refreshToken)
     {

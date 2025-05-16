@@ -1,13 +1,12 @@
 // <copyright file="ProductInqueryController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Controllers;
 using Magato.Api.DTO;
 using Magato.Api.Services;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/inquiries")]
@@ -21,9 +20,9 @@ public class ProductInquiryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(ProductInquiryDto dto)  // <-- ändrat till async Task<IActionResult>
+    public async Task<IActionResult> Create(ProductInquiryCreateDto dto)
     {
-        var response = await this.service.AddAsync(dto);   // <-- await och Async
+        var response = await this.service.AddAsync(dto);
         return this.Created(string.Empty, new
         {
             message = "Thank you for your inquiry! We will get back to you as soon as possible.",
@@ -33,25 +32,25 @@ public class ProductInquiryController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<IActionResult> GetAll()  // <-- async
+    public async Task<IActionResult> GetAll()
     {
-        var inquiries = await this.service.GetAllAsync();  // <-- await
+        var inquiries = await this.service.GetAllAsync();
         return this.Ok(inquiries);
     }
 
     [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)   // <-- async
+    public async Task<IActionResult> Get(int id)
     {
-        var inquiry = await this.service.GetByIdAsync(id);  // <-- await
+        var inquiry = await this.service.GetByIdAsync(id);
         return inquiry == null ? this.NotFound() : this.Ok(inquiry);
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPatch("{id}/handle")]
-    public async Task<IActionResult> MarkAsHandled(int id)  // <-- async
+    public async Task<IActionResult> MarkAsHandled(int id)
     {
-        await this.service.MarkAsHandledAsync(id);   // <-- await
+        await this.service.MarkAsHandledAsync(id);
         return this.NoContent();
     }
 }

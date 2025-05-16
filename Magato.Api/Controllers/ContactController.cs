@@ -24,7 +24,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Send([FromBody] ContactMessageDto dto)
+    public async Task<IActionResult> Send([FromBody] ContactMessageCreateDto dto)
     {
         try
         {

@@ -1,17 +1,15 @@
 // <copyright file="ProductInqueryResponseDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
-using Magato.Api.Models;
-
 namespace Magato.Api.DTO;
+using Magato.Api.Models;
 
 public class ProductInquiryResponseDto
 {
     public int Id
     {
         get; set;
-    } // Fundera på om detta ska vara här eller flyttas
+    }
 
     public string ProductTitle { get; set; } = string.Empty;
 

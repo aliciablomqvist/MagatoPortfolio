@@ -8,7 +8,7 @@ namespace Magato.Api.Services;
 
 public interface IProductInquiryService
 {
-    Task<ProductInquiryResponseDto> AddAsync(ProductInquiryDto dto);
+    Task<ProductInquiryResponseDto> AddAsync(ProductInquiryCreateDto dto);
 
     Task<IEnumerable<ProductInquiryResponseDto>> GetAllAsync();
 

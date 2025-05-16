@@ -3,7 +3,7 @@
 // </copyright>
 
 namespace Magato.Api.DTO;
-public class ProductInquiryDto
+public class ProductInquiryCreateDto
 {
     public int ProductId
     {

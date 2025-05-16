@@ -19,7 +19,7 @@ public class ProductInquiryService : IProductInquiryService
         this.productRepo = productRepo;
     }
 
-    public async Task<ProductInquiryResponseDto> AddAsync(ProductInquiryDto dto)
+    public async Task<ProductInquiryResponseDto> AddAsync(ProductInquiryCreateDto dto)
     {
         var product = await this.productRepo.GetByIdAsync(dto.ProductId);
         if (product == null)
@@ -39,13 +39,13 @@ public class ProductInquiryService : IProductInquiryService
 
         return new ProductInquiryResponseDto
         {
-            Id = inquiry.Id,
+            //Id = inquiry.Id,
             ProductTitle = product.Title,
             Email = inquiry.Email,
             Message = inquiry.Message,
             Size = inquiry.Size,
             SentAt = inquiry.SentAt,
-            IsHandled = false,
+            // IsHandled = false,
         };
     }
 

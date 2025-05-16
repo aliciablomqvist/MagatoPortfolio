@@ -1,13 +1,11 @@
 // <copyright file="ProductController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+namespace Magato.Api.Controllers;
 using Magato.Api.DTO;
 using Magato.Api.Services;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/products")]
@@ -45,11 +43,7 @@ public class ProductsController : ControllerBase
 
         await this.service.AddAsync(dto);
 
-        return this.CreatedAtAction(nameof(this.Get), new
-        {
-            id = dto.Id
-        }, dto);
-    }
+        return this.CreatedAtAction(nameof(this.Get), new { id = dto.Id, }, dto); }
 
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]

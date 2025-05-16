@@ -21,7 +21,7 @@ public class ContactService : IContactService
         this.validator = new ContactMessageValidator();
     }
 
-    public async Task<Result> HandleContactAsync(ContactMessageDto dto)
+    public async Task<Result> HandleContactAsync(ContactMessageCreateDto dto)
     {
         var errors = this.validator.ValidateAndExtractErrors(dto);
         if (errors.Any())

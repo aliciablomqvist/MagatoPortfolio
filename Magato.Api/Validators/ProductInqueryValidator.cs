@@ -7,7 +7,7 @@ using FluentValidation;
 using Magato.Api.DTO;
 
 namespace Magato.Api.Validators;
-public class ProductInquiryValidator : AbstractValidator<ProductInquiryDto>
+public class ProductInquiryValidator : AbstractValidator<ProductInquiryCreateDto>
 {
     private const string EmailRegex =
         @"^[^@\s]+@[^@\s]+\.[^@\s]+$";

@@ -8,7 +8,7 @@ using Magato.Api.DTO;
 
 namespace Magato.Api.Validators;
 
-public class ContactMessageValidator : AbstractValidator<ContactMessageDto>
+public class ContactMessageValidator : AbstractValidator<ContactMessageCreateDto>
 {
     private const string EmailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
@@ -36,7 +36,7 @@ public class ContactMessageValidator : AbstractValidator<ContactMessageDto>
             .WithMessage("Potential spam detected.");
     }
 
-    public List<string> ValidateAndExtractErrors(ContactMessageDto dto)
+    public List<string> ValidateAndExtractErrors(ContactMessageCreateDto dto)
     {
         var result = this.Validate(dto);
         return result.IsValid

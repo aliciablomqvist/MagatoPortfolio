@@ -10,7 +10,7 @@ using Magato.Api.Shared;
 namespace Magato.Api.Services;
 public interface IContactService
 {
-    Task<Result> HandleContactAsync(ContactMessageDto dto);
+    Task<Result> HandleContactAsync(ContactMessageCreateDto dto);
 
     Task<IEnumerable<ContactMessage>> GetAllMessagesAsync();
 
