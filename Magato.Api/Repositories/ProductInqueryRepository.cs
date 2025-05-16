@@ -18,30 +18,30 @@ public class ProductInquiryRepository : IProductInquiryRepository
         this.context = context;
     }
 
-    public IEnumerable<ProductInquiry> GetAll()
+    public async Task<IEnumerable<ProductInquiry>> GetAllAsync()
     {
-        return this.context.ProductInquiries
+        return await this.context.ProductInquiries
             .Include(i => i.Product)
             .OrderByDescending(i => i.SentAt)
-            .ToList();
+            .ToListAsync();
     }
 
-    public ProductInquiry? Get(int id)
+    public async Task<ProductInquiry?> GetByIdAsync(int id)
     {
-        return this.context.ProductInquiries
+        return await this.context.ProductInquiries
             .Include(i => i.Product)
-            .FirstOrDefault(i => i.Id == id);
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 
-    public void Add(ProductInquiry inquiry)
+    public async Task AddAsync(ProductInquiry inquiry)
     {
         this.context.ProductInquiries.Add(inquiry);
-        this.context.SaveChanges();
+        await this.context.SaveChangesAsync();
     }
 
-    public void Update(ProductInquiry inquiry)
+    public async Task UpdateAsync(ProductInquiry inquiry)
     {
         this.context.ProductInquiries.Update(inquiry);
-        this.context.SaveChanges();
+        await this.context.SaveChangesAsync();
     }
 }

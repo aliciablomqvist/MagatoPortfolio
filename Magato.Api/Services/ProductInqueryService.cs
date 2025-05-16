@@ -5,9 +5,9 @@
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Repositories;
-using Magato.Api.Shared;
 
 namespace Magato.Api.Services;
+
 public class ProductInquiryService : IProductInquiryService
 {
     private readonly IProductInquiryRepository repo;
@@ -19,8 +19,14 @@ public class ProductInquiryService : IProductInquiryService
         this.productRepo = productRepo;
     }
 
-    public ProductInquiryResponseDto Add(ProductInquiryDto dto)
+    public async Task<ProductInquiryResponseDto> AddAsync(ProductInquiryDto dto)
     {
+        var product = await this.productRepo.GetByIdAsync(dto.ProductId);
+        if (product == null)
+        {
+            throw new InvalidOperationException($"Product with ID {dto.ProductId} was not found.");
+        }
+
         var inquiry = new ProductInquiry
         {
             ProductId = dto.ProductId,
@@ -29,40 +35,39 @@ public class ProductInquiryService : IProductInquiryService
             Size = dto.Size,
         };
 
-        this.repo.Add(inquiry);
+        await this.repo.AddAsync(inquiry);
 
-        var product = this.productRepo.Get(dto.ProductId);
-
-        return new ProductInquiryResponseDto // Anpassa för kund. Vad hen ska se vid bekräftelse.
+        return new ProductInquiryResponseDto
         {
             Id = inquiry.Id,
-            ProductTitle = product?.Title ?? "Unknown",
-            Email = dto.Email,
-            Message = dto.Message,
-            Size = dto.Size,
+            ProductTitle = product.Title,
+            Email = inquiry.Email,
+            Message = inquiry.Message,
+            Size = inquiry.Size,
             SentAt = inquiry.SentAt,
             IsHandled = false,
         };
     }
 
-    public IEnumerable<ProductInquiryResponseDto> GetAll()
+    public async Task<IEnumerable<ProductInquiryResponseDto>> GetAllAsync()
     {
-        return this.repo.GetAll()
-            .Select(i => new ProductInquiryResponseDto
-            {
-                Id = i.Id,
-                ProductTitle = i.Product?.Title ?? "Unknown",
-                Email = i.Email,
-                Message = i.Message,
-                Size = i.Size,
-                SentAt = i.SentAt,
-                IsHandled = i.IsHandled,
-            });
+        var inquiries = await this.repo.GetAllAsync();
+
+        return inquiries.Select(i => new ProductInquiryResponseDto
+        {
+            Id = i.Id,
+            ProductTitle = i.Product?.Title ?? "Unknown",
+            Email = i.Email,
+            Message = i.Message,
+            Size = i.Size,
+            SentAt = i.SentAt,
+            IsHandled = i.IsHandled,
+        });
     }
 
-    public ProductInquiryResponseDto? GetById(int id)
+    public async Task<ProductInquiryResponseDto?> GetByIdAsync(int id)
     {
-        var inquiry = this.repo.Get(id);
+        var inquiry = await this.repo.GetByIdAsync(id);
         if (inquiry == null)
         {
             return null;
@@ -80,13 +85,13 @@ public class ProductInquiryService : IProductInquiryService
         };
     }
 
-    public void MarkAsHandled(int id)
+    public async Task MarkAsHandledAsync(int id)
     {
-        var inquiry = this.repo.Get(id);
+        var inquiry = await this.repo.GetByIdAsync(id);
         if (inquiry != null)
         {
             inquiry.IsHandled = true;
-            this.repo.Update(inquiry);
+            await this.repo.UpdateAsync(inquiry);
         }
     }
 }

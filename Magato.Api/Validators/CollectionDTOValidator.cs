@@ -2,13 +2,13 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using FluentValidation;
-using FluentValidation.AspNetCore;
-
-using Magato.Api.DTO;
-
 namespace Magato.Api.Validators
 {
+    using FluentValidation;
+    using FluentValidation.AspNetCore;
+
+    using Magato.Api.DTO;
+
     public class CollectionDtoValidator : AbstractValidator<CollectionDto>
     {
         public CollectionDtoValidator()

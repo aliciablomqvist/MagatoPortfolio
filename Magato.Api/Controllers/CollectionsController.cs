@@ -1,10 +1,15 @@
+// <copyright file="CollectionsController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Magato.Api.Controllers;
 
 using Magato.Api.DTO;
 using Magato.Api.Models;
+using Magato.Api.Services.Collections;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Magato.Api.Services.Collections;
 
 [ApiController]
 [Route("api/collections")]
@@ -128,4 +133,5 @@ public sealed class CollectionsController : ControllerBase
     [HttpDelete("lookbook/{imageId:int}")]
     public async Task<IActionResult> DeleteLookbookImage(int imageId)
         => await this.lookbooks.DeleteAsync(imageId) ? this.NoContent() : this.NotFound();
+
 }

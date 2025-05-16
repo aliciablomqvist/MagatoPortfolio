@@ -1,15 +1,13 @@
 // <copyright file="UserController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Controllers;
 using Magato.Api.DTO;
 using Magato.Api.Models;
 using Magato.Api.Services;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

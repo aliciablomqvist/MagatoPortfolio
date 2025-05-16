@@ -1,12 +1,10 @@
 // <copyright file="ProductDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.DTO;
+using Magato.Api.Models;
 using System.Text.Json.Serialization;
 
-using Magato.Api.Models;
-
-namespace Magato.Api.DTO;
 public class ProductDto
 {
     public int Id
@@ -37,6 +35,16 @@ public class ProductDto
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ProductStatus Status
+    {
+        get; set;
+    }
+
+    public bool IsForSale
+    {
+        get; set;
+    }
+
+    public int? CollectionId
     {
         get; set;
     }

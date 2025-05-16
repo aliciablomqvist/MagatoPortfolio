@@ -1,19 +1,15 @@
 // <copyright file="IProductRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
+namespace Magato.Api.Repositories;
 using Magato.Api.Models;
 
-namespace Magato.Api.Repositories;
 public interface IProductRepository
 {
-    IEnumerable<Product> GetAll();
-
-    Product? Get(int id);
-
-    void Add(Product product);
-
-    void Update(Product product);
-
-    void Delete(int id);
+    Task<IEnumerable<Product>> GetAllAsync();
+    Task<IEnumerable<Product>> GetForSaleAsync();
+    Task<Product?> GetByIdAsync(int id);
+    Task AddAsync(Product product);
+    Task UpdateAsync(Product product);
+    Task DeleteAsync(int id);
 }

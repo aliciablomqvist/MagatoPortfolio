@@ -2,8 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using Microsoft.EntityFrameworkCore;
-
 namespace Magato.Api.Models;
 
 // Model for Collection
@@ -14,12 +12,12 @@ public class Collection
         get; set;
     }
 
-    public required string CollectionTitle
+    required public string CollectionTitle
     {
         get; set;
     }
 
-    public required string CollectionDescription
+    required public string CollectionDescription
     {
         get; set;
     }
@@ -36,4 +34,7 @@ public class Collection
     public List<Material> Materials { get; set; } = new ();
 
     public List<Sketch> Sketches { get; set; } = new ();
+
+    public ICollection<Product> Products { get; set; } = new List<Product>();
+
 }

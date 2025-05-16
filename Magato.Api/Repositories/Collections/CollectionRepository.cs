@@ -3,9 +3,10 @@
 // </copyright>
 
 namespace Magato.Api.Repositories.Collections;
-using Microsoft.EntityFrameworkCore;
 using Magato.Api.Data;
 using Magato.Api.Models;
+
+using Microsoft.EntityFrameworkCore;
 
 public sealed class CollectionRepository : ICollectionRepository
 {
@@ -21,7 +22,7 @@ public sealed class CollectionRepository : ICollectionRepository
             .Include(c => c.Sketches)
             .Include(c => c.LookbookImages)
             .AsNoTracking()
-            .ToListAsync();          // List<Collection>   ← implicit up‑cast till IEnumerable
+            .ToListAsync(); 
     }
 
     public Task<Collection?> GetByIdAsync(int id) =>

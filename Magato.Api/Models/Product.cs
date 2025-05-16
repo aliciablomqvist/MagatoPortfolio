@@ -1,12 +1,9 @@
 // <copyright file="Product.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
-using System.Text.Json.Serialization;
-
-using Microsoft.EntityFrameworkCore;
-
 namespace Magato.Api.Models;
+using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 public class Product
 {
@@ -39,4 +36,12 @@ public class Product
     }
 
     public Category Category { get; set; } = default!;
+
+    public bool IsForSale { get; set; } = false;
+
+    public int? CollectionId
+    {
+        get; set;
+    }
+    public Collection? Collection { get; set; } = null!;
 }

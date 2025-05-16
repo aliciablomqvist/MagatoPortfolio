@@ -1,9 +1,7 @@
 // <copyright file="ProductController.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-
 using Magato.Api.DTO;
-using Magato.Api.Models;
 using Magato.Api.Services;
 
 using Microsoft.AspNetCore.Authorization;
@@ -23,48 +21,54 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAll() => this.Ok(this.service.GetAll());
+    public async Task<IActionResult> GetAll()
+    {
+        var products = await this.service.GetAllAsync();
+        return this.Ok(products);
+    }
 
     [HttpGet("{id}")]
-    public IActionResult Get(int id) =>
-        this.service.Get(id) is { } product ? this.Ok(product) : this.NotFound();
+    public async Task<IActionResult> Get(int id)
+    {
+        var product = await this.service.GetByIdAsync(id);
+        return product != null ? this.Ok(product) : this.NotFound();
+    }
 
     [Authorize(Roles = "Admin")]
-
     [HttpPost]
-    public IActionResult Create([FromBody] ProductDto dto)
+    public async Task<IActionResult> Create([FromBody] ProductDto dto)
     {
         if (!this.ModelState.IsValid)
         {
             return this.BadRequest(this.ModelState);
         }
 
-        this.service.Add(dto);
+        await this.service.AddAsync(dto);
 
         return this.CreatedAtAction(nameof(this.Get), new
         {
-            id = dto.Id,
+            id = dto.Id
         }, dto);
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
-    public IActionResult Update(int id, ProductDto dto)
+    public async Task<IActionResult> Update(int id, [FromBody] ProductDto dto)
     {
         if (id != dto.Id)
         {
             return this.BadRequest();
         }
 
-        this.service.Update(dto);
+        await this.service.UpdateAsync(dto);
         return this.NoContent();
     }
 
     [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        this.service.Delete(id);
+        await this.service.DeleteAsync(id);
         return this.NoContent();
     }
 
@@ -75,7 +79,7 @@ public class ProductsController : ControllerBase
         var url = await fileStorage.UploadAsync(file);
         return this.Ok(new
         {
-            imageUrls = url,
+            imageUrl = url
         });
     }
 }

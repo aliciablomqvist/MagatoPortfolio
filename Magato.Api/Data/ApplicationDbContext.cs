@@ -93,6 +93,17 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>()
+            .HasOne(p => p.Collection)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CollectionId)
+            .OnDelete(DeleteBehavior.Cascade);
+            
+        modelBuilder.Entity<Product>()
+    .HasOne(p => p.Category)
+    .WithMany(c => c.Products)
+    .HasForeignKey(p => p.CategoryId);
+
+        modelBuilder.Entity<Product>()
             .HasMany(p => p.ProductImages)
             .WithOne(i => i.Product)
             .HasForeignKey(i => i.ProductId);
@@ -113,6 +124,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Product>()
             .Property(p => p.Status)
             .HasConversion<string>();
+
+
 
         modelBuilder.Entity<ProductInquiry>()
          .HasOne(i => i.Product)

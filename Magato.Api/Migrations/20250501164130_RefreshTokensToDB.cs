@@ -2,14 +2,14 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using System;
-
-using Microsoft.EntityFrameworkCore.Migrations;
-
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class RefreshTokensToDB : Migration
     {

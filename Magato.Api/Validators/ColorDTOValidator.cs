@@ -2,12 +2,12 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using FluentValidation;
-
-using Magato.Api.DTO;
-
 namespace ApiTest.Validators
 {
+    using FluentValidation;
+
+    using Magato.Api.DTO;
+
     public class ColorDtoValidator : AbstractValidator<ColorDto>
     {
         public ColorDtoValidator()

@@ -46,7 +46,7 @@ public sealed class CollectionWriter : ICollectionWriter
     }
 
     /* ---------- private mapping helpers ---------- */
-    private static Collection Map(CollectionCreateDto dto) => new ()
+    private static Collection Map(CollectionCreateDto dto) => new()
     {
         CollectionTitle = dto.CollectionTitle,
         CollectionDescription = dto.CollectionDescription,
@@ -54,7 +54,13 @@ public sealed class CollectionWriter : ICollectionWriter
         Colors = dto.Colors.Select(c => new ColorOption { Name = c.Name, Hex = c.Hex }).ToList(),
         Materials = dto.Materials.Select(m => new Material { Name = m.Name, Description = m.Description }).ToList(),
         Sketches = dto.Sketches.Select(s => new Sketch { Url = s.Url }).ToList(),
+        LookbookImages = dto.LookbookImages.Select(l => new LookbookImage
+        {
+            Url = l.Url,
+            Description = l.Description
+        }).ToList()
     };
+
 
     private static void Map(CollectionDto dto, Collection target)
     {
@@ -64,5 +70,10 @@ public sealed class CollectionWriter : ICollectionWriter
         target.Colors = dto.Colors.Select(c => new ColorOption { Name = c.Name, Hex = c.Hex }).ToList();
         target.Materials = dto.Materials.Select(m => new Material { Name = m.Name, Description = m.Description }).ToList();
         target.Sketches = dto.Sketches.Select(s => new Sketch { Url = s.Url }).ToList();
+        target.LookbookImages = dto.LookbookImages.Select(l => new LookbookImage
+        {
+            Url = l.Url,
+            Description = l.Description
+        }).ToList();
     }
 }

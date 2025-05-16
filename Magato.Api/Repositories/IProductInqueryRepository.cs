@@ -8,11 +8,11 @@ namespace Magato.Api.Repositories;
 
 public interface IProductInquiryRepository
 {
-    IEnumerable<ProductInquiry> GetAll();
+    Task<IEnumerable<ProductInquiry>> GetAllAsync();
 
-    ProductInquiry? Get(int id);
+    Task<ProductInquiry?> GetByIdAsync(int id);
 
-    void Add(ProductInquiry inquiry);
+    Task AddAsync(ProductInquiry inquiry);
 
-    void Update(ProductInquiry inquiry);
+    Task UpdateAsync(ProductInquiry inquiry);
 }
