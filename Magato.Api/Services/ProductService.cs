@@ -36,7 +36,7 @@ public class ProductService : IProductService
     public async Task DeleteAsync(int id)
         => await this.repo.DeleteAsync(id);
 
-    private static ProductDto Map(Product p) => new()
+    private static ProductDto Map(Product p) => new ()
     {
         Id = p.Id,
         Title = p.Title,
@@ -49,7 +49,7 @@ public class ProductService : IProductService
         IsForSale = p.IsForSale,
     };
 
-    private static Product Map(ProductDto dto) => new()
+    private static Product Map(ProductDto dto) => new ()
     {
         Id = dto.Id,
         Title = dto.Title,

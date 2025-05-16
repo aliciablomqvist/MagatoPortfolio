@@ -5,6 +5,7 @@
 namespace Magato.Api.Repositories;
 using Magato.Api.Data;
 using Magato.Api.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 public class ContactRepository : IContactRepository

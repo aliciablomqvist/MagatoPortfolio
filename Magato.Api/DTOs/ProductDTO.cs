@@ -3,8 +3,9 @@
 // </copyright>
 namespace Magato.Api.DTO;
 
-using Magato.Api.Models;
 using System.Text.Json.Serialization;
+
+using Magato.Api.Models;
 
 public class ProductDto
 {

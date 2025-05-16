@@ -4,6 +4,7 @@
 
 namespace Magato.Api.Validators;
 using FluentValidation;
+
 using Magato.Api.DTO;
 
 public class SketchDtoValidator : AbstractValidator<SketchDto>

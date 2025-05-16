@@ -41,5 +41,6 @@ public class Product
     {
         get; set;
     }
+
     public Collection? Collection { get; set; } = null!;
 }

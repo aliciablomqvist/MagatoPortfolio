@@ -38,12 +38,13 @@ public class ProductInquiryService : IProductInquiryService
 
         return new ProductInquiryResponseDto
         {
-            //Id = inquiry.Id,
+            // Id = inquiry.Id,
             ProductTitle = product.Title,
             Email = inquiry.Email,
             Message = inquiry.Message,
             Size = inquiry.Size,
             SentAt = inquiry.SentAt,
+
             // IsHandled = false,
         };
     }

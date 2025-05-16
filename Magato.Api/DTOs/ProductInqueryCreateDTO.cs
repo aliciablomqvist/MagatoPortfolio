@@ -1,4 +1,4 @@
-// <copyright file="ProductInqueryDTO.cs" company="PlaceholderCompany">
+// <copyright file="ProductInqueryCreateDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 

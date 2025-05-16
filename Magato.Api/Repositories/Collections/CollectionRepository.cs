@@ -22,7 +22,7 @@ public sealed class CollectionRepository : ICollectionRepository
             .Include(c => c.Sketches)
             .Include(c => c.LookbookImages)
             .AsNoTracking()
-            .ToListAsync(); 
+            .ToListAsync();
     }
 
     public Task<Collection?> GetByIdAsync(int id) =>

@@ -5,6 +5,7 @@ namespace Magato.Api.Controllers;
 
 using Magato.Api.DTO;
 using Magato.Api.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,7 +45,11 @@ public class ProductsController : ControllerBase
 
         await this.service.AddAsync(dto);
 
-        return this.CreatedAtAction(nameof(this.Get), new { id = dto.Id, }, dto); }
+        return this.CreatedAtAction(nameof(this.Get), new
+        {
+            id = dto.Id,
+        }, dto);
+    }
 
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
@@ -74,7 +79,7 @@ public class ProductsController : ControllerBase
         var url = await fileStorage.UploadAsync(file);
         return this.Ok(new
         {
-            imageUrl = url
+            imageUrl = url,
         });
     }
 }

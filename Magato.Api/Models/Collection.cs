@@ -36,5 +36,4 @@ public class Collection
     public List<Sketch> Sketches { get; set; } = new ();
 
     public ICollection<Product> Products { get; set; } = new List<Product>();
-
 }

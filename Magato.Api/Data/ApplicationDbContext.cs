@@ -4,7 +4,9 @@
 namespace Magato.Api.Data;
 
 using System.Text.Json;
+
 using Magato.Api.Models;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -121,8 +123,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Product>()
             .Property(p => p.Status)
             .HasConversion<string>();
-
-
 
         modelBuilder.Entity<ProductInquiry>()
          .HasOne(i => i.Product)

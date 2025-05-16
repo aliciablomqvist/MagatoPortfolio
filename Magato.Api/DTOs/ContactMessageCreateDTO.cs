@@ -1,4 +1,4 @@
-// <copyright file="ContactMessageCreateDto.cs" company="PlaceholderCompany">
+// <copyright file="ContactMessageCreateDTO.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace Magato.Api.DTO;

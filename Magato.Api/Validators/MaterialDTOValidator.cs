@@ -3,6 +3,7 @@
 // </copyright>
 namespace Magato.Api.Validators;
 using FluentValidation;
+
 using Magato.Api.DTO;
 
 public class MaterialDtoValidator : AbstractValidator<MaterialDto>

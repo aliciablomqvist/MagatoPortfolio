@@ -45,7 +45,7 @@ public sealed class CollectionWriter : ICollectionWriter
         return true;
     }
 
-    private static Collection Map(CollectionCreateDto dto) => new()
+    private static Collection Map(CollectionCreateDto dto) => new ()
     {
         CollectionTitle = dto.CollectionTitle,
         CollectionDescription = dto.CollectionDescription,
@@ -56,10 +56,9 @@ public sealed class CollectionWriter : ICollectionWriter
         LookbookImages = dto.LookbookImages.Select(l => new LookbookImage
         {
             Url = l.Url,
-            Description = l.Description
-        }).ToList()
+            Description = l.Description,
+        }).ToList(),
     };
-
 
     private static void Map(CollectionDto dto, Collection target)
     {
@@ -72,7 +71,7 @@ public sealed class CollectionWriter : ICollectionWriter
         target.LookbookImages = dto.LookbookImages.Select(l => new LookbookImage
         {
             Url = l.Url,
-            Description = l.Description
+            Description = l.Description,
         }).ToList();
     }
 }
