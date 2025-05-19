@@ -12,54 +12,54 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
     builder.UseSetting("environment", "Testing");
     builder.ConfigureServices(services =>
 {
-var descriptor = services.SingleOrDefault(
-        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-if (descriptor != null)
-services.Remove(descriptor);
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+        services.Remove(descriptor);
 
-services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("InquiryTestDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("InquiryTestDb"));
 
-var sp = services.BuildServiceProvider();
-using var scope = sp.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.EnsureCreated();
+    var sp = services.BuildServiceProvider();
+    using var scope = sp.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
 
-db.Users.RemoveRange(db.Users);
-db.Users.Add(new User
-{
-Username = "admin",
-PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
-IsAdmin = true
-});
+    db.Users.RemoveRange(db.Users);
+    db.Users.Add(new User
+    {
+        Username = "admin",
+        PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
+        IsAdmin = true
+    });
 
-db.Categories.RemoveRange(db.Categories);
-var category = new Category { Id = 1, Name = "Shoes" };
-db.Categories.Add(category);
+    db.Categories.RemoveRange(db.Categories);
+    var category = new Category { Id = 1, Name = "Shoes" };
+    db.Categories.Add(category);
 
-db.Products.RemoveRange(db.Products);
+    db.Products.RemoveRange(db.Products);
 
-db.Products.Add(new Product
-{
-Id = 1,
-Title = "Sneakers",
-Price = 799,
-Category = category,
-CategoryId = category.Id,
-Description = "Test product"
-});
+    db.Products.Add(new Product
+    {
+        Id = 1,
+        Title = "Sneakers",
+        Price = 799,
+        Category = category,
+        CategoryId = category.Id,
+        Description = "Test product"
+    });
 
-db.ProductInquiries.RemoveRange(db.ProductInquiries);
-db.ProductInquiries.Add(new ProductInquiry
-{
-Id = 1,
-ProductId = 1,
-Email = "existing@user.com",
-Message = "Do you have size 42?",
-SentAt = DateTime.UtcNow
-});
+    db.ProductInquiries.RemoveRange(db.ProductInquiries);
+    db.ProductInquiries.Add(new ProductInquiry
+    {
+        Id = 1,
+        ProductId = 1,
+        Email = "existing@user.com",
+        Message = "Do you have size 42?",
+        SentAt = DateTime.UtcNow
+    });
 
-db.SaveChanges();
+    db.SaveChanges();
 });
 }).CreateClient();
     }

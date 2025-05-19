@@ -10,18 +10,18 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     builder.UseSetting("environment", "Testing");
     builder.ConfigureServices(services =>
 {
-var descriptor = services.SingleOrDefault(
-        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-if (descriptor != null)
-services.Remove(descriptor);
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+        services.Remove(descriptor);
 
-services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("AuthTestDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("AuthTestDb"));
 
-var sp = services.BuildServiceProvider();
-using var scope = sp.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.EnsureCreated();
+    var sp = services.BuildServiceProvider();
+    using var scope = sp.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
 });
 }).CreateClient();
     }

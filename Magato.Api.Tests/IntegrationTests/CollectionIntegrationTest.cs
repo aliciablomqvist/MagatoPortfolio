@@ -14,21 +14,21 @@ namespace Magato.Tests.IntegrationTests
 
     builder.ConfigureServices(services =>
 {
-var dbDescriptor = services.SingleOrDefault(
-        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-if (dbDescriptor != null)
-services.Remove(dbDescriptor);
+    var dbDescriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (dbDescriptor != null)
+        services.Remove(dbDescriptor);
 
-services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("TestDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("TestDb"));
 
 
-var provider = services.BuildServiceProvider();
-using var scope = provider.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.EnsureCreated();
-db.Users.RemoveRange(db.Users);
-db.SaveChanges();
+    var provider = services.BuildServiceProvider();
+    using var scope = provider.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
+    db.Users.RemoveRange(db.Users);
+    db.SaveChanges();
 });
 }).CreateClient();
         }

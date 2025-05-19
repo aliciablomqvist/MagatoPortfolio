@@ -12,29 +12,29 @@ public class BlogIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     builder.UseSetting("environment", "Testing");
     builder.ConfigureServices(services =>
 {
-var descriptor = services.SingleOrDefault(
-        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-if (descriptor != null)
-services.Remove(descriptor);
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+        services.Remove(descriptor);
 
-services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("BlogTestDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("BlogTestDb"));
 
-var sp = services.BuildServiceProvider();
-using var scope = sp.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.EnsureCreated();
+    var sp = services.BuildServiceProvider();
+    using var scope = sp.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
 
-db.Users.RemoveRange(db.Users);
-db.BlogPosts.RemoveRange(db.BlogPosts);
-db.Users.Add(new User
-{
-Username = "admin",
-PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
-IsAdmin = true
-});
-db.BlogPosts.Add(new BlogPost { Id = 1, Title = "First", Content = "Hello world" });
-db.SaveChanges();
+    db.Users.RemoveRange(db.Users);
+    db.BlogPosts.RemoveRange(db.BlogPosts);
+    db.Users.Add(new User
+    {
+        Username = "admin",
+        PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
+        IsAdmin = true
+    });
+    db.BlogPosts.Add(new BlogPost { Id = 1, Title = "First", Content = "Hello world" });
+    db.SaveChanges();
 });
 }).CreateClient();
     }

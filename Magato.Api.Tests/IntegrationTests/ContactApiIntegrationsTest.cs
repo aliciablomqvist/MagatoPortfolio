@@ -13,19 +13,19 @@ public class ContactApiIntegrationTests : IClassFixture<WebApplicationFactory<Pr
     builder.UseSetting("environment", "Testing");
     builder.ConfigureServices(services =>
 {
-var descriptor = services.SingleOrDefault(
-        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-if (descriptor != null)
-{
-services.Remove(descriptor);
-}
-services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("TestDb"));
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+    {
+        services.Remove(descriptor);
+    }
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("TestDb"));
 
-var serviceProvider = services.BuildServiceProvider();
-using var scope = serviceProvider.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-db.Database.EnsureCreated();
+    var serviceProvider = services.BuildServiceProvider();
+    using var scope = serviceProvider.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
 });
 }).CreateClient();
     }
