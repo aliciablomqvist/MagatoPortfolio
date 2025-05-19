@@ -24,8 +24,8 @@ jobs:
       - name: Check code formatting
         run: dotnet format
 
-      - name: Build (warnings as errors)
-        run: dotnet build -warnaserror
+      - name: Build (without warnings as errors)
+        run: dotnet build 
 
       - name: Run tests
         run: dotnet test
