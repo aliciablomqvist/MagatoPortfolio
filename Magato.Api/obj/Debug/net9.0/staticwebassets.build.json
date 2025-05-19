@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1fprKtKpAHN4oOHd6MAMYno+gsfteVzEFTrArT8FXt0=",
+  "Hash": "OzIyzws8k0ZBFQ+EBunwR56bfYiX8TtTVTGbiQN7uts=",
   "Source": "Magato.Api",
   "BasePath": "_content/Magato.Api",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Magato.Api\\wwwroot",
       "Source": "Magato.Api",
-      "ContentRoot": "C:\\Users\\Stefan\\Systemutveckling\\examensarbete\\Magato.Api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\",
       "BasePath": "_content/Magato.Api",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Stefan\\Systemutveckling\\examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
+      "Identity": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
       "SourceId": "Magato.Api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Stefan\\Systemutveckling\\examensarbete\\Magato.Api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\",
       "BasePath": "_content/Magato.Api",
       "RelativePath": "uploads/test#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -41,7 +41,7 @@
   "Endpoints": [
     {
       "Route": "uploads/test.c0sjjcprmr.png",
-      "AssetFile": "C:\\Users\\Stefan\\Systemutveckling\\examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
+      "AssetFile": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -62,7 +62,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 13:33:36 GMT"
+          "Value": "Fri, 16 May 2025 13:46:11 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -86,7 +86,7 @@
     },
     {
       "Route": "uploads/test.png",
-      "AssetFile": "C:\\Users\\Stefan\\Systemutveckling\\examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
+      "AssetFile": "C:\\Users\\Stefan\\Systemutveckling\\Examensarbete\\Magato.Api\\wwwroot\\uploads\\test.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -107,7 +107,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 16 May 2025 13:33:36 GMT"
+          "Value": "Fri, 16 May 2025 13:46:11 GMT"
         },
         {
           "Name": "Cache-Control",

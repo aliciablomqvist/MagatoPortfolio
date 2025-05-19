@@ -7,15 +7,15 @@ public class ContactServiceTests
     private readonly ContactService _service;
 
     public ContactServiceTests()
-{
+    {
         _service = new ContactService(_repoMock.Object);
     }
 
     [Fact]
     public async Task HandleContactAsync_ReturnsSuccess_WhenInputIsValid()
-{
+    {
         var dto = new ContactMessageCreateDto
-{
+        {
             Name = "Test",
             Email = "test@mail.com",
             Message = "Hejsvejs!",
@@ -31,9 +31,9 @@ public class ContactServiceTests
 
     [Fact]
     public async Task HandleContactAsync_ReturnsFailure_WhenValidationFails()
-{
+    {
         var dto = new ContactMessageCreateDto
-{
+        {
             Name = "",
             Email = "felaktigmail",
             Message = ""

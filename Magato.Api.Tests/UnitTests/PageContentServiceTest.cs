@@ -7,23 +7,23 @@ public class PageContentServiceTests
     private readonly Mock<IPageContentRepository> _repoMock;
 
     public PageContentServiceTests()
-{
+    {
         _repoMock = new Mock<IPageContentRepository>();
         _service = new PageContentService(_repoMock.Object);
     }
 
     [Fact]
     public void Get_Returns_Content_When_Found()
-{
+    {
         var content = new PageContent
-{
+        {
             Key = "AboutMe",
             Title = "About Me Title",
             MainText = "Main Text",
             ExtraText = "Additional",
             Published = true,
             LastModified = DateTime.UtcNow,
-            ImageUrls = new List<string>{ "url1.jpg" }
+            ImageUrls = new List<string> { "url1.jpg" }
         };
 
         _repoMock.Setup(r => r.Get("AboutMe")).Returns(content);
@@ -41,7 +41,7 @@ public class PageContentServiceTests
 
     [Fact]
     public void Get_Returns_Null_When_Not_Found()
-{
+    {
         _repoMock.Setup(r => r.Get("Missing")).Returns((PageContent?)null);
 
         var result = _service.Get("Missing");
@@ -51,7 +51,7 @@ public class PageContentServiceTests
 
     [Fact]
     public void GetAll_Returns_All_Content()
-{
+    {
         var list = new List<PageContent>
 {
             new PageContent{ Key = "AboutMe", Title = "A", MainText = "Text A" },
@@ -68,19 +68,19 @@ public class PageContentServiceTests
 
     [Fact]
     public void Update_Calls_Repo_Update()
-{
+    {
         var dto = new PageContentDto
-{
+        {
             Key = "AboutMe",
             Title = "New Title",
             MainText = "Updated",
             ExtraText = "Extra",
             Published = true,
-            ImageUrls = new List<string>{ "img1.jpg" }
+            ImageUrls = new List<string> { "img1.jpg" }
         };
 
         _repoMock.Setup(r => r.Get(dto.Key))
-            .Returns(new PageContent{ Key = "AboutMe", MainText = "Old" });
+            .Returns(new PageContent { Key = "AboutMe", MainText = "Old" });
 
         _service.Update(dto);
 
@@ -96,15 +96,15 @@ public class PageContentServiceTests
 
     [Fact]
     public void Create_Calls_Repo_Add()
-{
+    {
         var dto = new PageContentDto
-{
+        {
             Key = "NewPage",
             Title = "Title",
             MainText = "Text",
             ExtraText = "Extra",
             Published = true,
-            ImageUrls = new List<string>{ "img.jpg" }
+            ImageUrls = new List<string> { "img.jpg" }
         };
 
         _service.Add(dto);
@@ -121,7 +121,7 @@ public class PageContentServiceTests
 
     [Fact]
     public void Delete_Calls_Repo_Delete()
-{
+    {
         _service.Delete("AboutMe");
 
         _repoMock.Verify(r => r.Delete("AboutMe"), Times.Once);

@@ -4,7 +4,7 @@ public class ContactCleanupTests
 {
     [Fact]
     public async Task CleanupOldMessagesAsync_RemovesMessagesOlderThan90Days()
-{
+    {
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
@@ -12,14 +12,14 @@ public class ContactCleanupTests
         using var context = new ApplicationDbContext(options);
         context.ContactMessages.AddRange(
             new ContactMessage
-{
+            {
                 Name = "Gammal",
                 Email = "gammal@example.com",
                 Message = "Detta är gammalt",
                 CreatedAt = DateTime.UtcNow.AddDays(-91)
             },
             new ContactMessage
-{
+            {
                 Name = "Ny",
                 Email = "ny@example.com",
                 Message = "Detta ska inte tas bort",

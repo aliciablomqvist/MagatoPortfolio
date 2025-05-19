@@ -6,68 +6,68 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
     private readonly HttpClient _client;
 
     public ProductInquiryIntegrationTests(WebApplicationFactory<Program> factory)
-{
+    {
         _client = factory.WithWebHostBuilder(builder =>
 {
-            builder.UseSetting("environment", "Testing");
-            builder.ConfigureServices(services =>
+    builder.UseSetting("environment", "Testing");
+    builder.ConfigureServices(services =>
 {
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                if (descriptor != null)
-                    services.Remove(descriptor);
+var descriptor = services.SingleOrDefault(
+        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+if (descriptor != null)
+services.Remove(descriptor);
 
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("InquiryTestDb"));
+services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseInMemoryDatabase("InquiryTestDb"));
 
-                var sp = services.BuildServiceProvider();
-                using var scope = sp.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                db.Database.EnsureCreated();
+var sp = services.BuildServiceProvider();
+using var scope = sp.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+db.Database.EnsureCreated();
 
-                db.Users.RemoveRange(db.Users);
-                db.Users.Add(new User
+db.Users.RemoveRange(db.Users);
+db.Users.Add(new User
 {
-                    Username = "admin",
-                    PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
-                    IsAdmin = true
-                });
+Username = "admin",
+PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
+IsAdmin = true
+});
 
-                db.Categories.RemoveRange(db.Categories);
-                var category = new Category{ Id = 1, Name = "Shoes" };
-                db.Categories.Add(category);
+db.Categories.RemoveRange(db.Categories);
+var category = new Category { Id = 1, Name = "Shoes" };
+db.Categories.Add(category);
 
-                db.Products.RemoveRange(db.Products);
+db.Products.RemoveRange(db.Products);
 
-                db.Products.Add(new Product
+db.Products.Add(new Product
 {
-                    Id = 1,
-                    Title = "Sneakers",
-                    Price = 799,
-                    Category = category,
-                    CategoryId = category.Id,
-                    Description = "Test product"
-                });
+Id = 1,
+Title = "Sneakers",
+Price = 799,
+Category = category,
+CategoryId = category.Id,
+Description = "Test product"
+});
 
-                db.ProductInquiries.RemoveRange(db.ProductInquiries);
-                db.ProductInquiries.Add(new ProductInquiry
+db.ProductInquiries.RemoveRange(db.ProductInquiries);
+db.ProductInquiries.Add(new ProductInquiry
 {
-                    Id = 1,
-                    ProductId = 1,
-                    Email = "existing@user.com",
-                    Message = "Do you have size 42?",
-                    SentAt = DateTime.UtcNow
-                });
+Id = 1,
+ProductId = 1,
+Email = "existing@user.com",
+Message = "Do you have size 42?",
+SentAt = DateTime.UtcNow
+});
 
-                db.SaveChanges();
-            });
-        }).CreateClient();
+db.SaveChanges();
+});
+}).CreateClient();
     }
 
     private async Task AuthenticateAsync()
-{
+    {
         var login = new UserLoginDto
-{
+        {
             Username = "admin",
             Password = "admin123"
         };
@@ -79,9 +79,9 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
 
     [Fact]
     public async Task Create_Inquiry_Returns_Created()
-{
+    {
         var dto = new ProductInquiryCreateDto
-{
+        {
             ProductId = 1,
             Email = "customer@example.com",
             Message = "Is it available in black?"
@@ -94,7 +94,7 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
 
     [Fact]
     public async Task GetAll_Returns_List()
-{
+    {
         await AuthenticateAsync();
 
         var response = await _client.GetAsync("/api/inquiries");
@@ -108,7 +108,7 @@ public class ProductInquiryIntegrationTests : IClassFixture<WebApplicationFactor
 
     [Fact]
     public async Task Get_By_Id_Returns_Inquiry()
-{
+    {
         await AuthenticateAsync();
 
         var response = await _client.GetAsync("/api/inquiries/1");
