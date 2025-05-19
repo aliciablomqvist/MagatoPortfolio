@@ -1,50 +1,51 @@
-using Microsoft.AspNetCore.Mvc;
-using Magato.Api.DTO;
-using Magato.Api.Services;
-using Microsoft.AspNetCore.Authorization;
-
+// <copyright file="ProductInqueryController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 namespace Magato.Api.Controllers;
 
 [ApiController]
 [Route("api/inquiries")]
 public class ProductInquiryController : ControllerBase
 {
-    private readonly IProductInquiryService _service;
+    private readonly IProductInquiryService service;
 
     public ProductInquiryController(IProductInquiryService service)
-    {
-        _service = service;
+{
+        this.service = service;
     }
 
     [HttpPost]
-    public IActionResult Create(ProductInquiryDto dto)
-    {
-        var response = _service.Add(dto);
-        return Created("", new
-        {
+    public async Task<IActionResult> Create(ProductInquiryCreateDto dto)
+{
+        var response = await this.service.AddAsync(dto);
+        return this.Created(string.Empty, new
+{
             message = "Thank you for your inquiry! We will get back to you as soon as possible.",
-            inquiry = response
+            inquiry = response,
         });
     }
 
-
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public IActionResult GetAll() => Ok(_service.GetAll());
+    public async Task<IActionResult> GetAll()
+{
+        var inquiries = await this.service.GetAllAsync();
+        return this.Ok(inquiries);
+    }
 
     [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
-    public IActionResult Get(int id)
-    {
-        var inquiry = _service.GetById(id);
-        return inquiry == null ? NotFound() : Ok(inquiry);
+    public async Task<IActionResult> Get(int id)
+{
+        var inquiry = await this.service.GetByIdAsync(id);
+        return inquiry == null ? this.NotFound() : this.Ok(inquiry);
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPatch("{id}/handle")]
-    public IActionResult MarkAsHandled(int id)
-    {
-        _service.MarkAsHandled(id);
-        return NoContent();
+    public async Task<IActionResult> MarkAsHandled(int id)
+{
+        await this.service.MarkAsHandledAsync(id);
+        return this.NoContent();
     }
 }

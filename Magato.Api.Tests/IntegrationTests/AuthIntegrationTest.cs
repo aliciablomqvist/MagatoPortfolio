@@ -1,12 +1,3 @@
-using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using FluentAssertions;
-using Magato.Api.Data;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-
 
 public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -15,24 +6,24 @@ public class AuthIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     public AuthIntegrationTests(WebApplicationFactory<Program> factory)
     {
         _client = factory.WithWebHostBuilder(builder =>
-        {
-            builder.UseSetting("environment", "Testing");
-            builder.ConfigureServices(services =>
-            {
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                if (descriptor != null)
-                    services.Remove(descriptor);
+{
+    builder.UseSetting("environment", "Testing");
+    builder.ConfigureServices(services =>
+{
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+        services.Remove(descriptor);
 
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("AuthTestDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("AuthTestDb"));
 
-                var sp = services.BuildServiceProvider();
-                using var scope = sp.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                db.Database.EnsureCreated();
-            });
-        }).CreateClient();
+    var sp = services.BuildServiceProvider();
+    using var scope = sp.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
+});
+}).CreateClient();
     }
 
     [Fact]
@@ -128,5 +119,8 @@ public class LoginResponseDto
 {
     public string Token { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
-    public bool IsAdmin { get; set; }
+    public bool IsAdmin
+    {
+        get; set;
+    }
 }

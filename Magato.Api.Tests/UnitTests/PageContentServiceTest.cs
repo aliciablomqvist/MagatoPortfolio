@@ -1,9 +1,3 @@
-using FluentAssertions;
-using Magato.Api.Models;
-using Magato.Api.Repositories;
-using Magato.Api.Services;
-using Moq;
-using Magato.Api.DTO;
 
 namespace Magato.Api.Tests.UnitTests;
 
@@ -59,9 +53,9 @@ public class PageContentServiceTests
     public void GetAll_Returns_All_Content()
     {
         var list = new List<PageContent>
-        {
-            new PageContent { Key = "AboutMe", Title = "A", MainText = "Text A" },
-            new PageContent { Key = "StartPage", Title = "B", MainText = "Text B" }
+{
+            new PageContent{ Key = "AboutMe", Title = "A", MainText = "Text A" },
+            new PageContent{ Key = "StartPage", Title = "B", MainText = "Text B" }
         };
         _repoMock.Setup(r => r.GetAll()).Returns(list);
 

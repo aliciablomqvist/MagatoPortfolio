@@ -1,17 +1,28 @@
-namespace Magato.Api.DTO
+// <copyright file="CollectionCreateDTO.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Magato.Api.DTO;
+
+/// <summary>
+/// Represents the data required to create a new collection.
+/// </summary>
+public class CollectionCreateDto
 {
+    public string CollectionTitle{ get; set; } = string.Empty;
 
-    /// <summary>
-    /// Represents the data required to create a new collection.
-    /// </summary>
-    public class CollectionCreateDto
-    {
-        public string CollectionTitle { get; set; } = "";
-        public string CollectionDescription { get; set; } = "";
-        public DateTime ReleaseDate { get; set; }
+    public string CollectionDescription{ get; set; } = string.Empty;
 
-        public List<ColorDto> Colors { get; set; } = new();
-        public List<MaterialDto> Materials { get; set; } = new();
-        public List<SketchDto> Sketches { get; set; } = new();
+    public DateTime ReleaseDate
+{
+        get; set;
     }
+
+    public List<ColorDto> Colors{ get; set; } = new ();
+
+    public List<MaterialDto> Materials{ get; set; } = new ();
+
+    public List<SketchDto> Sketches{ get; set; } = new ();
+
+    public List<LookbookImageDto> LookbookImages{ get; set; } = new ();
 }

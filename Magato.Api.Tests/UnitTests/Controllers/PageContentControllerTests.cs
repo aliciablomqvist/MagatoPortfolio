@@ -1,9 +1,3 @@
-using FluentAssertions;
-using Magato.Api.Controllers;
-using Magato.Api.Services;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using Magato.Api.DTO;
 
 namespace Magato.Api.Tests.UnitTests;
 
@@ -78,9 +72,9 @@ public class CmsControllerTests
     public void GetAll_Returns_Ok_With_List()
     {
         var list = new List<PageContentDto>
-        {
-            new PageContentDto { Key = "One", Title = "Ett", MainText = "A", ImageUrls = new(), LastModified = DateTime.UtcNow },
-            new PageContentDto { Key = "Two", Title = "Två", MainText = "B", ImageUrls = new(), LastModified = DateTime.UtcNow }
+{
+            new PageContentDto{ Key = "One", Title = "Ett", MainText = "A", ImageUrls = new(), LastModified = DateTime.UtcNow },
+            new PageContentDto{ Key = "Two", Title = "Två", MainText = "B", ImageUrls = new(), LastModified = DateTime.UtcNow }
         };
 
         _serviceMock.Setup(s => s.GetAll()).Returns(list);

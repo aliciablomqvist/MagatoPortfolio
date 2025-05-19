@@ -1,15 +1,23 @@
-using Magato.Api.Models;
+// <copyright file="IBlogpostRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Magato.Api.Repositories;
-    public interface IBlogPostRepository
-    {
-        BlogPost? Get(int id);
+using Magato.Api.Models;
+
+public interface IBlogPostRepository
+{
+    BlogPost? Get(int id);
 
     BlogPost? GetBySlug(string slug);
+
     IEnumerable<BlogPost> GetAll();
-        void Add(BlogPost post);
-        void Update(BlogPost post);
-        void Delete(int id);
+
+    void Add(BlogPost post);
+
+    void Update(BlogPost post);
+
+    void Delete(int id);
 
     IEnumerable<BlogPost> GetByTag(string tag);
 }

@@ -1,14 +1,4 @@
-using System.Net.Http.Headers;
-using System.Net;
-using System.Net.Http.Json;
-using FluentAssertions;
-using Magato.Api.Data;
-using Magato.Api.DTO;
-using Magato.Api.Services;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
+
 
 namespace Magato.Tests.IntegrationTests
 {
@@ -19,28 +9,28 @@ namespace Magato.Tests.IntegrationTests
         public CollectionsApiTests(WebApplicationFactory<Program> factory)
         {
             _client = factory.WithWebHostBuilder(builder =>
-            {
-                builder.UseSetting("environment", "Testing");
+{
+    builder.UseSetting("environment", "Testing");
 
-                builder.ConfigureServices(services =>
-                {
-                    var dbDescriptor = services.SingleOrDefault(
-                        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                    if (dbDescriptor != null)
-                        services.Remove(dbDescriptor);
+    builder.ConfigureServices(services =>
+{
+    var dbDescriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (dbDescriptor != null)
+        services.Remove(dbDescriptor);
 
-                    services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseInMemoryDatabase("TestDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("TestDb"));
 
-                
-                    var provider = services.BuildServiceProvider();
-                    using var scope = provider.CreateScope();
-                    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                    db.Database.EnsureCreated();
-                    db.Users.RemoveRange(db.Users);
-                    db.SaveChanges();
-                });
-            }).CreateClient();
+
+    var provider = services.BuildServiceProvider();
+    using var scope = provider.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
+    db.Users.RemoveRange(db.Users);
+    db.SaveChanges();
+});
+}).CreateClient();
         }
 
         private async Task EnsureAdminExistsAsync()
@@ -127,3 +117,4 @@ namespace Magato.Tests.IntegrationTests
         }
     }
 }
+

@@ -1,9 +1,3 @@
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Repositories;
-using Magato.Api.Services;
-using Moq;
-
 
 namespace Magato.Tests.UnitTests.Services;
 
@@ -20,7 +14,7 @@ public class ContactServiceTests
     [Fact]
     public async Task HandleContactAsync_ReturnsSuccess_WhenInputIsValid()
     {
-        var dto = new ContactMessageDto
+        var dto = new ContactMessageCreateDto
         {
             Name = "Test",
             Email = "test@mail.com",
@@ -38,7 +32,7 @@ public class ContactServiceTests
     [Fact]
     public async Task HandleContactAsync_ReturnsFailure_WhenValidationFails()
     {
-        var dto = new ContactMessageDto
+        var dto = new ContactMessageCreateDto
         {
             Name = "",
             Email = "felaktigmail",

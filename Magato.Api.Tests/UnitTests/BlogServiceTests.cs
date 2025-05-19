@@ -1,13 +1,4 @@
 
-using System.Collections.Generic;
-using FluentAssertions;
-using Moq;
-using Xunit;
-using Magato.Api.Models;
-using Magato.Api.DTO;
-using Magato.Api.Repositories;
-using Magato.Api.Services;
-
 namespace Magato.Api.Tests.UnitTests;
 
 public class BlogServiceTests
@@ -25,9 +16,9 @@ public class BlogServiceTests
     public void GetAll_Returns_All_Blogs()
     {
         var blogs = new List<BlogPost>
-        {
-            new BlogPost { Id = 1, Title = "First", Content = "Hello" },
-            new BlogPost { Id = 2, Title = "Second", Content = "World" }
+{
+            new BlogPost{ Id = 1, Title = "First", Content = "Hello" },
+            new BlogPost{ Id = 2, Title = "Second", Content = "World" }
         };
         _repoMock.Setup(r => r.GetAll()).Returns(blogs);
 

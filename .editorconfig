@@ -37,7 +37,7 @@ csharp_style_expression_bodied_constructors = when_possible:suggestion
 # prefer using directive inside/outside namespace
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = true
-csharp_using_directive_placement = outside_namespace:warning
+sharp_using_directive_placement = inside_namespace:warning
 
 # prefer pattern matching
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
@@ -65,3 +65,20 @@ csharp_preserve_single_line_blocks = false
 csharp_preserve_single_line_statements = false
 
 csharp_style_namespace_declarations = file_scoped:suggestion
+
+##########################
+# XML-dokumentation
+##########################
+
+# Inga obligatoriska kommentarer
+dotnet_diagnostic.SA1600.severity = none   # element must be documented
+dotnet_diagnostic.SA1601.severity = none   # partial element doc
+dotnet_diagnostic.SA1604.severity = none   # file header summary
+dotnet_diagnostic.SA1611.severity = none   # param must be documented
+dotnet_diagnostic.SA1615.severity = none   # return must be documented
+dotnet_diagnostic.SA1618.severity = none   # generic type params
+
+[*]
+end_of_line = crlf
+charset = utf-8
+insert_final_newline = true

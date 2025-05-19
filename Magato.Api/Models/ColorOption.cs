@@ -1,16 +1,34 @@
-using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-
+// <copyright file="ColorOption.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 namespace Magato.Api.Models;
 
 public class ColorOption
 {
-    public int Id { get; set; }
-    public required string Name { get; set; }
-    public required string Hex { get; set; }
-    public int CollectionId { get; set; }
+    public int Id
+{
+        get; set;
+    }
 
-    //Koppling till collection
+    public required string Name
+{
+        get; set;
+    }
+
+    public required string Hex
+{
+        get; set;
+    }
+
+    public int CollectionId
+{
+        get; set;
+    }
+
+    // Koppling till collection
     [JsonIgnore]
-    public Collection? Collection { get; set; }
+    public Collection? Collection
+{
+        get; set;
+    }
 }

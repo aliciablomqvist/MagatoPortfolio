@@ -1,45 +1,45 @@
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Validators;
-using Magato.Api.Repositories;
-using System.Security.Cryptography;
-using System.Text;
-
+// <copyright file="PageContentService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Magato.Api.Services;
-
+using Magato.Api.DTO;
+using Magato.Api.Models;
+using Magato.Api.Repositories;
 public class PageContentService : IPageContentService
 {
-    private readonly IPageContentRepository _repo;
+    private readonly IPageContentRepository repo;
 
     public PageContentService(IPageContentRepository repo)
-    {
-        _repo = repo;
+{
+        this.repo = repo;
     }
 
     public PageContentDto? Get(string key)
-    {
-        var content = _repo.Get(key);
+{
+        var content = this.repo.Get(key);
         return content == null ? null : MapToDto(content);
     }
 
     public IEnumerable<PageContentDto> GetAll()
-    {
-        return _repo.GetAll().Select(MapToDto);
+{
+        return this.repo.GetAll().Select(MapToDto);
     }
 
     public void Add(PageContentDto dto)
-    {
+{
         var content = MapToEntity(dto);
         content.LastModified = DateTime.UtcNow;
-        _repo.Add(content);
+        this.repo.Add(content);
     }
 
     public void Update(PageContentDto dto)
-    {
-        var existing = _repo.Get(dto.Key);
+{
+        var existing = this.repo.Get(dto.Key);
         if (existing == null)
+{
             return;
+        }
 
         existing.Title = dto.Title;
         existing.MainText = dto.MainText;
@@ -49,18 +49,18 @@ public class PageContentService : IPageContentService
         existing.ImageUrls = dto.ImageUrls;
         existing.LastModified = DateTime.UtcNow;
 
-        _repo.Update(existing);
+        this.repo.Update(existing);
     }
 
     public void Delete(string key)
-    {
-        _repo.Delete(key);
+{
+        this.repo.Delete(key);
     }
 
     private static PageContentDto MapToDto(PageContent entity)
-    {
+{
         return new PageContentDto
-        {
+{
             Key = entity.Key,
             Title = entity.Title,
             MainText = entity.MainText,
@@ -71,17 +71,17 @@ public class PageContentService : IPageContentService
             ImageUrls = entity.ImageUrls,
             SocialMediaLinks = entity.SocialMediaLinks
             .Select(link => new SocialMediaLinkDto
-            {
+{
                 Platform = link.Platform,
-                Url = link.Url
-            }).ToList()
+                Url = link.Url,
+            }).ToList(),
         };
     }
 
     private static PageContent MapToEntity(PageContentDto dto)
-    {
+{
         return new PageContent
-        {
+{
             Key = dto.Key,
             Title = dto.Title,
             MainText = dto.MainText,
@@ -92,11 +92,10 @@ public class PageContentService : IPageContentService
             ImageUrls = dto.ImageUrls,
             SocialMediaLinks = dto.SocialMediaLinks
             .Select(link => new SocialMediaLink
-            {
+{
                 Platform = link.Platform,
-                Url = link.Url
-            }).ToList()
-
+                Url = link.Url,
+            }).ToList(),
         };
     }
 }

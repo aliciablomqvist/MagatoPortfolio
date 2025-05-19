@@ -1,15 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+// <copyright file="20250422133424_AddCategoryAndProductStatus.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 #nullable disable
 
 namespace Magato.Api.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class AddCategoryAndProductStatus : Migration
-    {
+{
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.DropColumn(
                 name: "Category",
                 table: "Products");
@@ -29,27 +33,27 @@ namespace Magato.Api.Migrations
             migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ProductImages",
                 columns: table => new
-                {
+{
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
-                {
+{
                     table.PrimaryKey("PK_ProductImages", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ProductImages_Products_ProductId",
@@ -80,7 +84,7 @@ namespace Magato.Api.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+{
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_Category_CategoryId",
                 table: "Products");
@@ -109,7 +113,7 @@ namespace Magato.Api.Migrations
                 table: "Products",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
         }
     }
 }

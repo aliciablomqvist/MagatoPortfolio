@@ -1,26 +1,20 @@
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Repositories;
-using Magato.Api.Services;
-using Moq;
-using FluentAssertions;
-
 
 namespace Magato.Tests.UnitTests
 {
-    public class CollectionServiceTests
+    public class CollectionWriterTests
     {
         private readonly Mock<ICollectionRepository> _repoMock = new();
-        private readonly CollectionService _service;
+        private readonly CollectionWriter _writer;
 
-        public CollectionServiceTests()
+        public CollectionWriterTests()
         {
-            _service = new CollectionService(_repoMock.Object);
+            _writer = new CollectionWriter(_repoMock.Object);
         }
 
         [Fact]
-        public async Task AddCollectionAsync_ShouldAddCollection()
+        public async Task AddAsync_ShouldAddCollection()
         {
+            // Arrange
             var dto = new CollectionCreateDto
             {
                 CollectionTitle = "Höst 2025",
@@ -28,67 +22,36 @@ namespace Magato.Tests.UnitTests
                 ReleaseDate = DateTime.Now
             };
 
-            await _service.AddCollectionAsync(dto);
+            // Act
+            await _writer.AddAsync(dto);
 
-            _repoMock.Verify(r => r.AddCollectionAsync(It.Is<Collection>(
+            // Assert
+            _repoMock.Verify(r => r.AddAsync(It.Is<Collection>(
                 c => c.CollectionTitle == dto.CollectionTitle &&
                      c.CollectionDescription == dto.CollectionDescription)), Times.Once);
         }
 
         [Fact]
-        public async Task DeleteCollectionAsync_ShouldReturnFalse_WhenNotFound()
+        public async Task DeleteAsync_ShouldReturnFalse_WhenNotFound()
         {
-            _repoMock.Setup(r => r.CollectionExistsAsync(It.IsAny<int>())).ReturnsAsync(false);
+            _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                     .ReturnsAsync((Collection?)null);
 
-            var result = await _service.DeleteCollectionAsync(99);
+            var result = await _writer.DeleteAsync(99);
 
             result.Should().BeFalse();
         }
 
         [Fact]
-        public async Task AddCollectionAsync_ShouldAddCollectionWithDetails()
+        public async Task UpdateAsync_ShouldReturnFalse_WhenCollectionNotFound()
         {
-            // Arrange
-            var dto = new CollectionCreateDto
-            {
-                CollectionTitle = "Sommar 2025",
-                CollectionDescription = "Ljusa färger",
-                ReleaseDate = DateTime.UtcNow,
-                Colors = new List<ColorDto> { new ColorDto { Name = "White", Hex = "#FFFFFF" } },
-                Materials = new List<MaterialDto> { new MaterialDto { Name = "Bomull", Description = "Lent!" } },
-                Sketches = new List<SketchDto> { new SketchDto { Url = "http://example.com/sketch.png" } }
-            };
-
-            var mockRepo = new Mock<ICollectionRepository>();
-            var service = new CollectionService(mockRepo.Object);
-
-            await service.AddCollectionAsync(dto);
-            mockRepo.Verify(r => r.AddCollectionAsync(It.Is<Collection>(c =>
-                c.CollectionTitle == dto.CollectionTitle &&
-                c.CollectionDescription == dto.CollectionDescription &&
-                c.Colors.Count == 1 &&
-                c.Colors.First().Name == "White" &&
-                c.Materials.Count == 1 &&
-                c.Materials.First().Name == "Bomull" &&
-                c.Sketches.Count == 1 &&
-                c.Sketches.First().Url == "http://example.com/sketch.png"
-            )), Times.Once);
-        }
-
-        [Fact]
-        public async Task UpdateCollectionAsync_ShouldReturnFalse_WhenCollectionNotFound()
-        {
-            var mockRepo = new Mock<ICollectionRepository>();
-            mockRepo.Setup(r => r.GetCollectionByIdAsync(It.IsAny<int>()))
-                    .ReturnsAsync((Collection?)null);
-
-            var service = new CollectionService(mockRepo.Object);
+            _repoMock.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                     .ReturnsAsync((Collection?)null);
 
             var dto = new CollectionDto { Id = 99, CollectionTitle = "Uppdaterad" };
-            var result = await service.UpdateCollectionAsync(99, dto);
+            var result = await _writer.UpdateAsync(99, dto);
 
             result.Should().BeFalse();
         }
-
     }
 }

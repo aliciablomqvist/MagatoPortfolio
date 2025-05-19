@@ -1,25 +1,28 @@
-using Magato.Api.Models;
+// <copyright file="InMemoryUserRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Magato.Api.Repositories;
+using Magato.Api.Models;
 
 public class InMemoryUserRepository : IUserRepository
 {
-    private readonly List<User> _users = new();
+    private readonly List<User> users = new ();
 
     public void Add(User user)
-    {
-        user.Id = _users.Count + 1;
-        _users.Add(user);
+{
+        user.Id = this.users.Count + 1;
+        this.users.Add(user);
     }
 
     public User? GetByUsername(string username)
-        => _users.FirstOrDefault(u => u.Username == username);
+        => this.users.FirstOrDefault(u => u.Username == username);
 
     public User? GetAdmin()
-        => _users.FirstOrDefault(u => u.IsAdmin);
+        => this.users.FirstOrDefault(u => u.IsAdmin);
 
     public bool AdminExists()
-        => _users.Any(u => u.IsAdmin);
+        => this.users.Any(u => u.IsAdmin);
 
-    public IEnumerable<User> GetAll() => _users;
+    public IEnumerable<User> GetAll() => this.users;
 }

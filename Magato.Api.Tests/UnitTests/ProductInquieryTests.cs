@@ -1,12 +1,3 @@
-using Xunit;
-using Moq;
-using FluentAssertions;
-using Magato.Api.Services;
-using Magato.Api.Repositories;
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Magato.Api.Tests.UnitTests;
 
@@ -24,36 +15,46 @@ public class ProductInquiryServiceTests
     }
 
     [Fact]
-    public void Add_Calls_Repository_Add()
+    public async Task AddAsync_Calls_Repository_AddAsync()
     {
-        var dto = new ProductInquiryDto
+        var dto = new ProductInquiryCreateDto
         {
             ProductId = 1,
             Email = "mail@example.com",
             Message = "Do you have this product in size 42?"
         };
-        _service.Add(dto);
 
-        _inquiryRepoMock.Verify(r => r.Add(It.IsAny<ProductInquiry>()), Times.Once);
+
+        _productRepoMock.Setup(r => r.GetByIdAsync(dto.ProductId))
+            .ReturnsAsync(new Product { Id = 1, Title = "Sneakers" });
+
+        _inquiryRepoMock.Setup(r => r.AddAsync(It.IsAny<ProductInquiry>()))
+            .Returns(Task.CompletedTask);
+
+        await _service.AddAsync(dto);
+
+        _inquiryRepoMock.Verify(r => r.AddAsync(It.IsAny<ProductInquiry>()), Times.Once);
     }
 
     [Fact]
-    public void GetAll_Returns_Mapped_Dtos()
+    public async Task GetAllAsync_Returns_Mapped_Dtos()
     {
         var mockData = new List<ProductInquiry>
-        {
+{
             new ProductInquiry
-            {
-                Product = new Product { Title = "Sneakers" },
+{
+                Id = 1,
+                Product = new Product{ Title = "Sneakers" },
                 Email = "mail@example.com",
                 Message = "Do you have this product in size 42?",
                 SentAt = System.DateTime.UtcNow
             }
         };
 
-        _inquiryRepoMock.Setup(r => r.GetAll()).Returns(mockData);
+        _inquiryRepoMock.Setup(r => r.GetAllAsync())
+            .ReturnsAsync(mockData);
 
-        var result = _service.GetAll();
+        var result = await _service.GetAllAsync();
 
         result.Should().HaveCount(1);
         result.First().ProductTitle.Should().Be("Sneakers");

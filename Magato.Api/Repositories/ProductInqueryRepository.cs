@@ -1,43 +1,45 @@
+// <copyright file="ProductInqueryRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+namespace Magato.Api.Repositories;
 using Magato.Api.Data;
 using Magato.Api.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Magato.Api.Repositories;
-
 public class ProductInquiryRepository : IProductInquiryRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public ProductInquiryRepository(ApplicationDbContext context)
-    {
-        _context = context;
+{
+        this.context = context;
     }
 
-    public IEnumerable<ProductInquiry> GetAll()
-    {
-        return _context.ProductInquiries
+    public async Task<IEnumerable<ProductInquiry>> GetAllAsync()
+{
+        return await this.context.ProductInquiries
             .Include(i => i.Product)
             .OrderByDescending(i => i.SentAt)
-            .ToList();
+            .ToListAsync();
     }
 
-    public ProductInquiry? Get(int id)
-    {
-        return _context.ProductInquiries
+    public async Task<ProductInquiry?> GetByIdAsync(int id)
+{
+        return await this.context.ProductInquiries
             .Include(i => i.Product)
-            .FirstOrDefault(i => i.Id == id);
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 
-    public void Add(ProductInquiry inquiry)
-    {
-        _context.ProductInquiries.Add(inquiry);
-        _context.SaveChanges();
+    public async Task AddAsync(ProductInquiry inquiry)
+{
+        this.context.ProductInquiries.Add(inquiry);
+        await this.context.SaveChangesAsync();
     }
 
-    public void Update(ProductInquiry inquiry)
-    {
-        _context.ProductInquiries.Update(inquiry);
-        _context.SaveChanges();
+    public async Task UpdateAsync(ProductInquiry inquiry)
+{
+        this.context.ProductInquiries.Update(inquiry);
+        await this.context.SaveChangesAsync();
     }
 }

@@ -1,16 +1,3 @@
-using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using FluentAssertions;
-using Magato.Api.Data;
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Xunit;
 
 namespace Magato.Api.Tests.IntegrationTests
 {
@@ -22,19 +9,19 @@ namespace Magato.Api.Tests.IntegrationTests
         public ProductIntegrationTests(WebApplicationFactory<Program> factory)
         {
             _factory = factory.WithWebHostBuilder(builder =>
-            {
-                builder.UseSetting("environment", "Testing");
-                builder.ConfigureServices(services =>
-                {
-                    var descriptor = services.SingleOrDefault(
-                        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                    if (descriptor != null)
-                        services.Remove(descriptor);
+{
+    builder.UseSetting("environment", "Testing");
+    builder.ConfigureServices(services =>
+{
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+        services.Remove(descriptor);
 
-                    services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseInMemoryDatabase("ProductTestDb"));
-                });
-            });
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("ProductTestDb"));
+});
+});
 
             _client = _factory.CreateClient();
         }
@@ -65,8 +52,8 @@ namespace Magato.Api.Tests.IntegrationTests
                 Description = "Running sneakers",
                 Status = ProductStatus.InStock,
                 ProductImages = new List<ProductImage>
-        {
-            new ProductImage { ImageUrl = "https://pic.com/sneakers1.jpg" }
+{
+            new ProductImage{ ImageUrl = "https://pic.com/sneakers1.jpg" }
         }
             });
 
@@ -127,7 +114,7 @@ namespace Magato.Api.Tests.IntegrationTests
                 description = "Amazing shoes",
                 categoryId = 1,
                 imageUrls = new List<string>
-                {
+{
                     "https://pic.com/dress1.jpg",
                     "https://pic.com/dress2.jpg"
                 },

@@ -1,5 +1,4 @@
-using Magato.Api.Repositories;
-using Magato.Api.Services;
+
 public class AuthUnitTests
 {
     private readonly IUserService _service;

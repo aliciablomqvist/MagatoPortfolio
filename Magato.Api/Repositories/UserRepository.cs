@@ -1,39 +1,43 @@
-using Magato.Api.Models;
-using Magato.Api.Data;
+// <copyright file="UserRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Magato.Api.Repositories;
+using Magato.Api.Data;
+using Magato.Api.Models;
+
 public class UserRepository : IUserRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public UserRepository(ApplicationDbContext context)
-    {
-        _context = context;
+{
+        this.context = context;
     }
 
     public void Add(User user)
-    {
-        _context.Users.Add(user);
-        _context.SaveChanges();
+{
+        this.context.Users.Add(user);
+        this.context.SaveChanges();
     }
 
     public User? GetByUsername(string username)
-    {
-        return _context.Users.FirstOrDefault(u => u.Username == username);
+{
+        return this.context.Users.FirstOrDefault(u => u.Username == username);
     }
 
     public User? GetAdmin()
-    {
-        return _context.Users.FirstOrDefault(u => u.IsAdmin);
+{
+        return this.context.Users.FirstOrDefault(u => u.IsAdmin);
     }
 
     public bool AdminExists()
-    {
-        return _context.Users.Any(u => u.IsAdmin);
+{
+        return this.context.Users.Any(u => u.IsAdmin);
     }
 
     public IEnumerable<User> GetAll()
-    {
-        return _context.Users.ToList();
+{
+        return this.context.Users.ToList();
     }
 }

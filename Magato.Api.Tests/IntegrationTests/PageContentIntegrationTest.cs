@@ -1,15 +1,3 @@
-using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using FluentAssertions;
-using Magato.Api.DTO;
-using Magato.Api.Models;
-using Magato.Api.Services;
-using Magato.Api.Data;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
 
 namespace Magato.Api.Tests.IntegrationTests;
 
@@ -20,44 +8,44 @@ public class CmsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     public CmsIntegrationTests(WebApplicationFactory<Program> factory)
     {
         _client = factory.WithWebHostBuilder(builder =>
-        {
-            builder.UseSetting("environment", "Testing");
-            builder.ConfigureServices(services =>
-            {
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-                if (descriptor != null)
-                    services.Remove(descriptor);
+{
+    builder.UseSetting("environment", "Testing");
+    builder.ConfigureServices(services =>
+{
+    var descriptor = services.SingleOrDefault(
+            d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+    if (descriptor != null)
+        services.Remove(descriptor);
 
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("TestCmsDb"));
+    services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("TestCmsDb"));
 
-                var provider = services.BuildServiceProvider();
-                using var scope = provider.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                db.Database.EnsureCreated();
+    var provider = services.BuildServiceProvider();
+    using var scope = provider.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
 
-                db.Users.RemoveRange(db.Users);
-                db.PageContents.RemoveRange(db.PageContents);
-                db.Users.Add(new User
-                {
-                    Username = "admin",
-                    PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
-                    IsAdmin = true
-                });
-                db.PageContents.Add(new PageContent
-                {
-                    Key = "AboutMe",
-                    Title = "About Me",
-                    MainText = "Initial content",
-                    ExtraText = "Extra info",
-                    ImageUrls = new List<string> { "https://example.com/image1.jpg" },
-                    Published = true,
-                    LastModified = DateTime.UtcNow
-                });
-                db.SaveChanges();
-            });
-        }).CreateClient();
+    db.Users.RemoveRange(db.Users);
+    db.PageContents.RemoveRange(db.PageContents);
+    db.Users.Add(new User
+    {
+        Username = "admin",
+        PasswordHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("admin123"))),
+        IsAdmin = true
+    });
+    db.PageContents.Add(new PageContent
+    {
+        Key = "AboutMe",
+        Title = "About Me",
+        MainText = "Initial content",
+        ExtraText = "Extra info",
+        ImageUrls = new List<string> { "https://example.com/image1.jpg" },
+        Published = true,
+        LastModified = DateTime.UtcNow
+    });
+    db.SaveChanges();
+});
+}).CreateClient();
     }
 
     private async Task<string> LoginAndGetTokenAsync()
