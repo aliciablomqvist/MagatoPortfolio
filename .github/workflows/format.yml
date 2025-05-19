@@ -10,19 +10,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 9.0.x
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Restore
-      run: dotnet restore
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
 
-    - name: dotnet format (check only)
-      run: dotnet format --verify-no-changes
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: Build (warnings as errors)
-      run: dotnet build -warnaserror
+      - name: Check code formatting
+        run: dotnet format
 
-    - name: Test
-      run: dotnet test
+      - name: Build (warnings as errors)
+        run: dotnet build -warnaserror
+
+      - name: Run tests
+        run: dotnet test
