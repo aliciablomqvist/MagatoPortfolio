@@ -1,5 +1,5 @@
-// <copyright file="SketchDTO.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="SketchDTO.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.DTO;
@@ -9,5 +9,5 @@ namespace Magato.Api.DTO;
 /// </summary>
 public class SketchDto
 {
-    public string Url{ get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
 }

@@ -1,5 +1,5 @@
-// <copyright file="GlobalUsings.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="GlobalUsings.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 global using System.IdentityModel.Tokens.Jwt;

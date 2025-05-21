@@ -1,5 +1,5 @@
-// <copyright file="LookbookImageDTOValidator.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="LookbookImageDTOValidator.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Validators;
 using FluentValidation;
@@ -9,7 +9,7 @@ using Magato.Api.DTO;
 public class LookbookImageDtoValidator : AbstractValidator<LookbookImageDto>
 {
     public LookbookImageDtoValidator()
-{
+    {
         this.RuleFor(i => i.Url)
             .NotEmpty().WithMessage("Image URL is required.")
             .Must(uri => Uri.IsWellFormedUriString(uri, UriKind.Absolute))

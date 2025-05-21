@@ -1,5 +1,5 @@
-// <copyright file="IProductService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="IProductService.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Services;
 using Magato.Api.DTO;

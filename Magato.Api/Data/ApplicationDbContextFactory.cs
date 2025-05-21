@@ -1,5 +1,5 @@
-// <copyright file="ApplicationDbContextFactory.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ApplicationDbContextFactory.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Data;
@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
 {
     public ApplicationDbContext CreateDbContext(string[] args)
-{
+    {
         var configuration = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: true)
             .AddEnvironmentVariables()

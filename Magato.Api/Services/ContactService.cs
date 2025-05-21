@@ -1,5 +1,5 @@
-// <copyright file="ContactService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ContactService.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Services;
@@ -15,21 +15,21 @@ public class ContactService : IContactService
     private readonly ContactMessageValidator validator;
 
     public ContactService(IContactRepository repo)
-{
+    {
         this.repo = repo;
         this.validator = new ContactMessageValidator();
     }
 
     public async Task<Result> HandleContactAsync(ContactMessageCreateDto dto)
-{
+    {
         var errors = this.validator.ValidateAndExtractErrors(dto);
         if (errors.Any())
-{
+        {
             return Result.Failure(errors);
         }
 
         var message = new ContactMessage
-{
+        {
             Name = dto.Name,
             Email = dto.Email,
             Message = dto.Message,
@@ -42,12 +42,12 @@ public class ContactService : IContactService
     }
 
     public async Task<IEnumerable<ContactMessage>> GetAllMessagesAsync()
-{
+    {
         return await this.repo.GetAllAsync();
     }
 
     public async Task<bool> DeleteMessageAsync(int id)
-{
+    {
         return await this.repo.DeleteAsync(id);
     }
 }

@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Magato.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Magato.Api.DTO.CollectionCreateDto">
+            <summary>
+            Represents the data required to create a new collection.
+            </summary>
+        </member>
+        <member name="T:Magato.Api.DTO.CollectionDto">
+            <summary>
+            Represents a collection with full details.
+            </summary>
+        </member>
+        <member name="T:Magato.Api.DTO.ColorDto">
+            <summary>
+            Represents a color option belonging to a collection.
+            </summary>
+        </member>
+        <member name="T:Magato.Api.DTO.LookbookImageDto">
+            <summary>
+            Represents an image in the collection's lookbook.
+            </summary>
+        </member>
+        <member name="T:Magato.Api.DTO.MaterialDto">
+            <summary>
+            Represents a material used in the collection.
+            </summary>
+        </member>
+        <member name="T:Magato.Api.DTO.SketchDto">
+            <summary>
+            Represents a sketch belonging to a collection.
+            </summary>
+        </member>
+        <member name="T:Magato.Api.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddDescriptionToLookbookImage">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddDescriptionToLookbookImage.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddDescriptionToLookbookImage.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddDescriptionToLookbookImage.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddContactMessages">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddContactMessages.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddContactMessages.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddContactMessages.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddUserToDatabase">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddUserToDatabase.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddUserToDatabase.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddUserToDatabase.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.PageContentAddedToDb">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.PageContentAddedToDb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.PageContentAddedToDb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.PageContentAddedToDb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddMediaUrlsToPageContent">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddMediaUrlsToPageContent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddMediaUrlsToPageContent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddMediaUrlsToPageContent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddBlogPostsToDb">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddBlogPostsToDb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddBlogPostsToDb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddBlogPostsToDb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddSlugTagsImageUrlsToBlogPost">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddSlugTagsImageUrlsToBlogPost.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddSlugTagsImageUrlsToBlogPost.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddSlugTagsImageUrlsToBlogPost.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddedProductsToDb">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddedProductsToDb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddedProductsToDb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddedProductsToDb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.ProductInqueryToDb">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ProductInqueryToDb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ProductInqueryToDb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ProductInqueryToDb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.ChangesInProductInquieryModel">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ChangesInProductInquieryModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ChangesInProductInquieryModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ChangesInProductInquieryModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddCategoryAndProductStatus">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCategoryAndProductStatus.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCategoryAndProductStatus.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCategoryAndProductStatus.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddMissingChanges">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddMissingChanges.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddMissingChanges.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddMissingChanges.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.SocialMediaLinksAddedToDB">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.SocialMediaLinksAddedToDB.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.SocialMediaLinksAddedToDB.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.SocialMediaLinksAddedToDB.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.RefreshTokensToDB">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.RefreshTokensToDB.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.RefreshTokensToDB.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.RefreshTokensToDB.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.ChangedMediaUrlsToImageUrls">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ChangedMediaUrlsToImageUrls.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ChangedMediaUrlsToImageUrls.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.ChangedMediaUrlsToImageUrls.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddIsForSaleToProducts">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddIsForSaleToProducts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddIsForSaleToProducts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddIsForSaleToProducts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddCollectionToProductsProperly">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionToProductsProperly.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionToProductsProperly.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionToProductsProperly.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddCollectionIdToProducts">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionIdToProducts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionIdToProducts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionIdToProducts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.AddCollectionIdToProductsUpdate">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionIdToProductsUpdate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionIdToProductsUpdate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.AddCollectionIdToProductsUpdate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Magato.Api.Migrations.MakeCollectionIdNullableOnProducts">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.MakeCollectionIdNullableOnProducts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.MakeCollectionIdNullableOnProducts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Magato.Api.Migrations.MakeCollectionIdNullableOnProducts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

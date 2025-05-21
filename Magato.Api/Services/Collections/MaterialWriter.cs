@@ -1,5 +1,5 @@
-// <copyright file="MaterialWriter.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="MaterialWriter.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Services.Collections;
 
@@ -15,21 +15,21 @@ public sealed class MaterialWriter : IMaterialWriter
     public MaterialWriter(
         IMaterialRepository materials,
         ICollectionRepository collections)
-{
+    {
         this.materials = materials;
         this.collections = collections;
     }
 
     public async Task<bool> AddAsync(int collectionId, MaterialDto dto)
-{
+    {
         var col = await this.collections.GetByIdAsync(collectionId);
         if (col is null)
-{
+        {
             return false;
         }
 
         var material = new Material
-{
+        {
             Name = dto.Name,
             Description = dto.Description,
             CollectionId = collectionId,
@@ -40,10 +40,10 @@ public sealed class MaterialWriter : IMaterialWriter
     }
 
     public async Task<bool> UpdateAsync(int materialId, MaterialDto dto)
-{
+    {
         var material = await this.materials.GetByIdAsync(materialId);
         if (material is null)
-{
+        {
             return false;
         }
 
@@ -55,10 +55,10 @@ public sealed class MaterialWriter : IMaterialWriter
     }
 
     public async Task<bool> DeleteAsync(int materialId)
-{
+    {
         var material = await this.materials.GetByIdAsync(materialId);
         if (material is null)
-{
+        {
             return false;
         }
 

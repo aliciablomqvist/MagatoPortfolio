@@ -1,5 +1,5 @@
-// <copyright file="TokenService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="TokenService.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Services;
 
@@ -8,19 +8,19 @@ public class TokenService : ITokenService
     private readonly IConfiguration config;
 
     public TokenService(IConfiguration config)
-{
+    {
         this.config = config;
     }
 
     public string GenerateToken(User user)
-{
+    {
         var claims = new List<Claim>
 {
             new Claim(ClaimTypes.Name, user.Username),
         };
 
         if (user.IsAdmin)
-{
+        {
             claims.Add(new Claim(ClaimTypes.Role, "Admin"));
         }
 

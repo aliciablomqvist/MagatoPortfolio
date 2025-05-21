@@ -1,5 +1,5 @@
-// <copyright file="PageContentValidator.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="PageContentValidator.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Validators;
@@ -10,7 +10,7 @@ using Magato.Api.DTO;
 public class PageContentValidator : AbstractValidator<PageContentDto>
 {
     public PageContentValidator()
-{
+    {
         this.RuleFor(x => x.Key)
             .NotEmpty().WithMessage("Key måste anges.")
             .MaximumLength(100).WithMessage("Key has to be max 100 characters long");

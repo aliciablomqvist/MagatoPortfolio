@@ -1,5 +1,5 @@
-// <copyright file="CategoryController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="CategoryController.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Controllers;
 
@@ -10,20 +10,20 @@ public class CategoriesController : ControllerBase
     private readonly ICategoryService service;
 
     public CategoriesController(ICategoryService service)
-{
+    {
         this.service = service;
     }
 
     [HttpGet]
     public IActionResult GetAll()
-{
+    {
         return this.Ok(this.service.GetAll());
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
     public IActionResult Create(CategoryDto dto)
-{
+    {
         this.service.Add(dto);
         return this.CreatedAtAction(nameof(this.GetAll), null);
     }
@@ -31,12 +31,12 @@ public class CategoriesController : ControllerBase
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public IActionResult Update(int id, CategoryDto dto)
-{
+    {
         var existing = this.service.GetById(id);
         if (existing == null)
-{
+        {
             return this.NotFound(new
-{
+            {
                 message = $"Category with ID{id} not found.",
             });
         }
@@ -48,12 +48,12 @@ public class CategoriesController : ControllerBase
     [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
-{
+    {
         var existing = this.service.GetById(id);
         if (existing == null)
-{
+        {
             return this.NotFound(new
-{
+            {
                 message = $"Category with ID{id} not found.",
             });
         }

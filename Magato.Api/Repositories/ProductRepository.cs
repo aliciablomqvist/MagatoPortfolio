@@ -1,5 +1,5 @@
-// <copyright file="ProductRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ProductRepository.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Repositories;
 using Magato.Api.Data;
@@ -12,7 +12,7 @@ public class ProductRepository : IProductRepository
     private readonly ApplicationDbContext context;
 
     public ProductRepository(ApplicationDbContext context)
-{
+    {
         this.context = context;
     }
 
@@ -26,22 +26,22 @@ public class ProductRepository : IProductRepository
         => await this.Query().FirstOrDefaultAsync(p => p.Id == id);
 
     public async Task AddAsync(Product product)
-{
+    {
         this.context.Products.Add(product);
         await this.context.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(Product product)
-{
+    {
         this.context.Products.Update(product);
         await this.context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
-{
+    {
         var product = await this.context.Products.FindAsync(id);
         if (product != null)
-{
+        {
             this.context.Products.Remove(product);
             await this.context.SaveChangesAsync();
         }

@@ -1,5 +1,5 @@
-// <copyright file="IMaterialWriter.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="IMaterialWriter.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 using Magato.Api.DTO;
