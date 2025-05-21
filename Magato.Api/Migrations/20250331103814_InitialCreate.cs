@@ -1,5 +1,5 @@
-// <copyright file="20250331103814_InitialCreate.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="20250331103814_InitialCreate.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 #nullable disable
@@ -12,14 +12,14 @@ namespace Magato.Api.Migrations
 
     /// <inheritdoc />
     public partial class InitialCreate : Migration
-{
+    {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-{
+        {
             migrationBuilder.CreateTable(
                 name: "Collections",
                 columns: table => new
-{
+                {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CollectionTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -28,13 +28,13 @@ namespace Magato.Api.Migrations
                 },
                 constraints: table =>
 {
-                    table.PrimaryKey("PK_Collections", x => x.Id);
-                });
+    table.PrimaryKey("PK_Collections", x => x.Id);
+});
 
             migrationBuilder.CreateTable(
                 name: "Colors",
                 columns: table => new
-{
+                {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -43,19 +43,19 @@ namespace Magato.Api.Migrations
                 },
                 constraints: table =>
 {
-                    table.PrimaryKey("PK_Colors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Colors_Collections_CollectionId",
-                        column: x => x.CollectionId,
-                        principalTable: "Collections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+    table.PrimaryKey("PK_Colors", x => x.Id);
+    table.ForeignKey(
+        name: "FK_Colors_Collections_CollectionId",
+        column: x => x.CollectionId,
+        principalTable: "Collections",
+        principalColumn: "Id",
+        onDelete: ReferentialAction.Cascade);
+});
 
             migrationBuilder.CreateTable(
                 name: "Materials",
                 columns: table => new
-{
+                {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -64,19 +64,19 @@ namespace Magato.Api.Migrations
                 },
                 constraints: table =>
 {
-                    table.PrimaryKey("PK_Materials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Materials_Collections_CollectionId",
-                        column: x => x.CollectionId,
-                        principalTable: "Collections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+    table.PrimaryKey("PK_Materials", x => x.Id);
+    table.ForeignKey(
+        name: "FK_Materials_Collections_CollectionId",
+        column: x => x.CollectionId,
+        principalTable: "Collections",
+        principalColumn: "Id",
+        onDelete: ReferentialAction.Cascade);
+});
 
             migrationBuilder.CreateTable(
                 name: "Sketches",
                 columns: table => new
-{
+                {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -84,14 +84,14 @@ namespace Magato.Api.Migrations
                 },
                 constraints: table =>
 {
-                    table.PrimaryKey("PK_Sketches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sketches_Collections_CollectionId",
-                        column: x => x.CollectionId,
-                        principalTable: "Collections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+    table.PrimaryKey("PK_Sketches", x => x.Id);
+    table.ForeignKey(
+        name: "FK_Sketches_Collections_CollectionId",
+        column: x => x.CollectionId,
+        principalTable: "Collections",
+        principalColumn: "Id",
+        onDelete: ReferentialAction.Cascade);
+});
 
             migrationBuilder.CreateIndex(
                 name: "IX_Colors_CollectionId",
@@ -111,7 +111,7 @@ namespace Magato.Api.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-{
+        {
             migrationBuilder.DropTable(
                 name: "Colors");
 

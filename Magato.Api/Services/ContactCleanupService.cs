@@ -1,5 +1,5 @@
-// <copyright file="ContactCleanupService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ContactCleanupService.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Services;
@@ -15,14 +15,14 @@ public class ContactCleanupService : BackgroundService
     private readonly TimeSpan cleanupInterval = TimeSpan.FromDays(1); // körs varje dag
 
     public ContactCleanupService(IServiceProvider services)
-{
+    {
         this.services = services;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-{
+    {
         while (!stoppingToken.IsCancellationRequested)
-{
+        {
             using var scope = this.services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
@@ -32,7 +32,7 @@ public class ContactCleanupService : BackgroundService
                 .ToListAsync();
 
             if (oldMessages.Any())
-{
+            {
                 db.ContactMessages.RemoveRange(oldMessages);
                 await db.SaveChangesAsync();
             }

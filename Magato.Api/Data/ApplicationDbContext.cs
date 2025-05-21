@@ -1,5 +1,5 @@
-// <copyright file="ApplicationDbContext.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ApplicationDbContext.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Data;
 
@@ -15,82 +15,82 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
-{
+    {
     }
 
     // Content
     public DbSet<PageContent> PageContents
-{
+    {
         get; set;
     }
 
     public DbSet<BlogPost> BlogPosts
-{
+    {
         get; set;
     }
 
     public DbSet<ContactMessage> ContactMessages
-{
+    {
         get; set;
     }
 
     // Product-related
     public DbSet<Product> Products
-{
+    {
         get; set;
     }
 
     public DbSet<ProductInquiry> ProductInquiries
-{
+    {
         get; set;
     }
 
     public DbSet<ProductImage> ProductImages
-{
+    {
         get; set;
     }
 
     public DbSet<Category> Categories
-{
+    {
         get; set;
     }
 
     // Collection-related
     public DbSet<Collection> Collections
-{
+    {
         get; set;
     }
 
     public DbSet<ColorOption> Colors
-{
+    {
         get; set;
     }
 
     public DbSet<Material> Materials
-{
+    {
         get; set;
     }
 
     public DbSet<Sketch> Sketches
-{
+    {
         get; set;
     }
 
     public DbSet<LookbookImage> LookbookImages
-{
+    {
         get; set;
     }
 
     // Auth
     public DbSet<User> Users
-{
+    {
         get; set;
     }
 
-    public DbSet<RefreshToken> RefreshTokens{ get; set; } = default!;
+    public DbSet<RefreshToken> RefreshTokens { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
+    {
         modelBuilder.Entity<Product>()
             .HasOne(p => p.Collection)
             .WithMany(c => c.Products)

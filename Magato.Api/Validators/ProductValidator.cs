@@ -1,5 +1,5 @@
-// <copyright file="ProductValidator.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ProductValidator.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Validators;
 using FluentValidation;
@@ -9,7 +9,7 @@ using Magato.Api.DTO;
 public class ProductValidator : AbstractValidator<ProductDto>
 {
     public ProductValidator()
-{
+    {
         this.RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
         this.RuleFor(x => x.Description).NotEmpty();
         this.RuleFor(x => x.Price).GreaterThanOrEqualTo(0);

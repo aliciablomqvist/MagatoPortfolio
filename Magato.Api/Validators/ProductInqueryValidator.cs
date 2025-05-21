@@ -1,5 +1,5 @@
-// <copyright file="ProductInqueryValidator.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ProductInqueryValidator.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Validators;
@@ -13,7 +13,7 @@ public class ProductInquiryValidator : AbstractValidator<ProductInquiryCreateDto
         @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
     public ProductInquiryValidator()
-{
+    {
         this.RuleFor(x => x.ProductId)
             .GreaterThan(0)
             .WithMessage("Invalid product.");

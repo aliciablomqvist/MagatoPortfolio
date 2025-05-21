@@ -1,5 +1,5 @@
-// <copyright file="ColorDTOValidator.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ColorDTOValidator.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace ApiTest.Validators;
@@ -10,7 +10,7 @@ using Magato.Api.DTO;
 public class ColorDtoValidator : AbstractValidator<ColorDto>
 {
     public ColorDtoValidator()
-{
+    {
         this.RuleFor(x => x.Name).NotEmpty();
         this.RuleFor(x => x.Hex)
             .NotEmpty()

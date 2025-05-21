@@ -1,5 +1,5 @@
-// <copyright file="InMemoryUserRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="InMemoryUserRepository.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Repositories;
@@ -7,10 +7,10 @@ using Magato.Api.Models;
 
 public class InMemoryUserRepository : IUserRepository
 {
-    private readonly List<User> users = new ();
+    private readonly List<User> users = new();
 
     public void Add(User user)
-{
+    {
         user.Id = this.users.Count + 1;
         this.users.Add(user);
     }

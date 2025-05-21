@@ -1,5 +1,5 @@
-// <copyright file="ICollectionRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="ICollectionRepository.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Repositories.Collections;
 

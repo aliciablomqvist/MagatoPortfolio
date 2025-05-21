@@ -1,5 +1,5 @@
-// <copyright file="RefreshTokenService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="RefreshTokenService.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api.Services;
 using Magato.Api.Models;
@@ -9,16 +9,16 @@ public class RefreshTokenService : IRefreshTokenService
     private readonly IRefreshTokenRepository repo;
 
     public RefreshTokenService(IRefreshTokenRepository repo)
-{
+    {
         this.repo = repo;
     }
 
     public RefreshToken CreateAndStore(string username)
-{
+    {
         var token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
 
         var refresh = new RefreshToken
-{
+        {
             Token = token,
             Username = username,
             Expires = DateTime.UtcNow.AddDays(7),

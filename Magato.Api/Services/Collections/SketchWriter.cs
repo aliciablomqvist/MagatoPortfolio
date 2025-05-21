@@ -1,5 +1,5 @@
-// <copyright file="SketchWriter.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="SketchWriter.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Services.Collections;
@@ -16,21 +16,21 @@ public sealed class SketchWriter : ISketchWriter
     public SketchWriter(
         ISketchRepository sketches,
         ICollectionRepository collections)
-{
+    {
         this.sketches = sketches;
         this.collections = collections;
     }
 
     public async Task<bool> AddAsync(int collectionId, SketchDto dto)
-{
+    {
         var col = await this.collections.GetByIdAsync(collectionId);
         if (col is null)
-{
+        {
             return false;
         }
 
         var sketch = new Sketch
-{
+        {
             Url = dto.Url,
             CollectionId = collectionId,
         };
@@ -40,10 +40,10 @@ public sealed class SketchWriter : ISketchWriter
     }
 
     public async Task<bool> UpdateAsync(int sketchId, SketchDto dto)
-{
+    {
         var sketch = await this.sketches.GetByIdAsync(sketchId);
         if (sketch is null)
-{
+        {
             return false;
         }
 
@@ -53,10 +53,10 @@ public sealed class SketchWriter : ISketchWriter
     }
 
     public async Task<bool> DeleteAsync(int sketchId)
-{
+    {
         var sketch = await this.sketches.GetByIdAsync(sketchId);
         if (sketch is null)
-{
+        {
             return false;
         }
 

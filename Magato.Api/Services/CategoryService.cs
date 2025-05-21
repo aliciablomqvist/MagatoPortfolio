@@ -1,5 +1,5 @@
-// <copyright file="CategoryService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="CategoryService.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 
 namespace Magato.Api.Services;
@@ -12,36 +12,36 @@ public class CategoryService : ICategoryService
     private readonly ICategoryRepository repo;
 
     public CategoryService(ICategoryRepository repo)
-{
+    {
         this.repo = repo;
     }
 
     public IEnumerable<CategoryDto> GetAll()
         => this.repo.GetAll().Select(c => new CategoryDto
-{
+        {
             Id = c.Id,
             Name = c.Name,
         });
 
     public CategoryDto? GetById(int id)
-{
+    {
         var category = this.repo.GetById(id);
         if (category == null)
-{
+        {
             return null;
         }
 
         return new CategoryDto
-{
+        {
             Id = category.Id,
             Name = category.Name,
         };
     }
 
     public void Add(CategoryDto dto)
-{
+    {
         var category = new Category
-{
+        {
             Name = dto.Name,
         };
 
@@ -49,10 +49,10 @@ public class CategoryService : ICategoryService
     }
 
     public void Update(int id, CategoryDto dto)
-{
+    {
         var category = this.repo.GetById(id);
         if (category == null)
-{
+        {
             return;
         }
 
@@ -61,10 +61,10 @@ public class CategoryService : ICategoryService
     }
 
     public void Delete(int id)
-{
+    {
         var category = this.repo.GetById(id);
         if (category == null)
-{
+        {
             return;
         }
 

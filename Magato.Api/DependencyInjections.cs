@@ -1,5 +1,5 @@
-// <copyright file="DependencyInjections.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="DependencyInjections.cs" company="Magato">
+// Copyright (c) Magato. All rights reserved.
 // </copyright>
 namespace Magato.Api;
 
@@ -9,9 +9,9 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration cfg,
         IWebHostEnvironment env)
-{
+    {
         if (!env.IsEnvironment("Testing"))
-{
+        {
             services.AddDbContext<ApplicationDbContext>(o =>
                 o.UseSqlServer(cfg.GetConnectionString("DefaultConnection")));
         }
@@ -77,38 +77,38 @@ public static class DependencyInjection
         services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", o =>
 {
-                    o.TokenValidationParameters = new TokenValidationParameters
-{
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(cfg["Jwt:Key"] ?? "supersecretkey123")),
-                    };
-                });
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(cfg["Jwt:Key"] ?? "supersecretkey123")),
+    };
+});
 
         services.AddAuthorization(o =>
 {
-            o.AddPolicy("Admin", p => p.RequireRole("Admin"));
-        });
+    o.AddPolicy("Admin", p => p.RequireRole("Admin"));
+});
 
         // ---------- Swagger ----------
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(c =>
 {
-            c.SwaggerDoc("v1", new OpenApiInfo{ Title = "Magato API", Version = "v1" });
-            c.UseInlineDefinitionsForEnums();
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-{
-                Description = "JWT Authorization header using the Bearer scheme.\r\n\r\n" +
-                              "Skriv 'Bearer{token}' i fältet nedan.\r\n\r\nExempel: 'Bearer abc123xyz'",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
-                Scheme = "Bearer",
-            });
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magato API", Version = "v1" });
+    c.UseInlineDefinitionsForEnums();
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme.\r\n\r\n" +
+                      "Skriv 'Bearer{token}' i fältet nedan.\r\n\r\nExempel: 'Bearer abc123xyz'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
 {
 {
                     new OpenApiSecurityScheme
@@ -122,19 +122,19 @@ public static class DependencyInjection
                     new List<string>()
                 },
             });
-        });
+});
 
         // ---------- CORS ----------
         services.AddCors(o =>
 {
-            o.AddPolicy("AllowFrontend", p =>
+    o.AddPolicy("AllowFrontend", p =>
 {
-                p.WithOrigins("http://localhost:3000")
-                 .AllowAnyHeader()
-                 .AllowAnyMethod()
-                 .AllowCredentials();
-            });
-        });
+p.WithOrigins("http://localhost:3000")
+     .AllowAnyHeader()
+     .AllowAnyMethod()
+     .AllowCredentials();
+});
+});
 
         // ---------- OpenAPI helper ----------
         services.AddOpenApi();
